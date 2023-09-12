@@ -1,5 +1,5 @@
-#include <Novice.h>
 #include "Enemy.h"
+#include <Novice.h>
 
 const char kWindowTitle[] = "GJ1";
 
@@ -13,21 +13,14 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	char keys[256] = {0};
 	char preKeys[256] = {0};
 
-	enum Scene {
-		TITLE,
-		GAME,
-		GAMEOVER,
-		GAMECLEAR,
-		EXPLANATION
-	};
+	enum Scene { TITLE, GAME, GAMEOVER, EXPLANATION };
 
 	// 最初のシーン
 	Scene scene = TITLE;
-	
-	// クリアフラグ
-	//int success = false;
-	// ゲームオーバーフラグ
-	//int failure = false;
+
+	int title = Novice::LoadTexture("bombseparation.png");
+	int game = Novice::LoadTexture("BG.png");
+	int gameOver = Novice::LoadTexture("GAMEOVER.png");
 
 	// 初期化
 	Enemy* enemy = new Enemy();
@@ -45,21 +38,27 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		///
 		/// ↓更新処理ここから
 		///
-		
+
 		// タイトルからゲーム
 		if (keys[DIK_SPACE] && preKeys[DIK_SPACE] == false && scene == TITLE) {
 			scene = GAME;
-
 		}
-		
+
+		if (keys[DIK_SPACE] && preKeys[DIK_SPACE] == false && scene == GAMEOVER) {
+			enemy->Initialize();
+			scene = TITLE;
+		}
+
 		switch (scene) {
 
-		// ゲーム
+			// ゲーム
 		case GAME:
 			enemy->Update();
+			if (enemy->Life_ <= 0) {
+				scene = GAMEOVER;
+			}
 			break;
 		}
-
 
 		///
 		/// ↑更新処理ここまで
@@ -71,32 +70,31 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 		switch (scene) {
 
-		// タイトル
+			// タイトル
 		case TITLE:
-			Novice::DrawBox(0, 0, 1280, 720, 0.0f, WHITE, kFillModeSolid);
+			Novice::DrawSprite(0, 0, game, 1.0f, 1.0f, 0.0f, WHITE);
+			Novice::DrawSprite(40,70, title, 1.0f, 1.0f, 0.0f, WHITE);
 			break;
 
-		// 説明画面
+			// 説明画面
 		case EXPLANATION:
 
 			break;
 
-		// ゲーム
+			// ゲーム
 		case GAME:
 			enemy->Draw();
+			enemy->DrawUI();
 			break;
 
-		// ゲームクリア
-		case GAMECLEAR:
-
 			break;
 
-		// ゲームオーバー
+			// ゲームオーバー
 		case GAMEOVER:
-
+			Novice::DrawBox(0, 0, 1280, 720, 0.0f, RED, kFillModeSolid);
+			Novice::DrawSprite(280,100, gameOver, 2.0f, 2.0f, 0.0f, WHITE);
 			break;
 		}
-		
 
 		///
 		/// ↑描画処理ここまで
