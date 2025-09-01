@@ -1,0 +1,20 @@
+{
+    "GameSprite": {
+        "spriteContinuePosition": [
+            640.0,
+            250.0
+        ],
+        "spriteNoPosition": [
+            780.0,
+            450.0
+        ],
+        "spriteSelectPosition": [
+            380.0,
+            450.0
+        ],
+        "spriteYesPosition": [
+            480.0,
+            450.0
+        ]
+    }
+}
