@@ -19,7 +19,7 @@ void Framework::Initialize()
 	computePipeline_ = ComputePipeline::GetInstance();
 
 	// ウィンドウの作成
-	win_->CreateGameWindow(L"空駆");
+	win_->CreateGameWindow(L"GJ1");
 	// DirectX初期化
 	dxCommon_->Initialize(win_);
 	
