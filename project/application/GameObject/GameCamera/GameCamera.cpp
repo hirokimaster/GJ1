@@ -2,7 +2,7 @@
 
 void GameCamera::Init()
 {
-	
+	camera_.Initialize();
 }
 
 void GameCamera::Update()

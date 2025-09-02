@@ -8,6 +8,8 @@
 #include "engine/2d/Sprite/Sprite.h"
 #include "engine/Input/Input.h"
 #include "application/GameManager/GameManager.h"
+#include "GameOverSprite.h"
+#include "ClearSprite.h"
 
 class GameScene;
 
@@ -28,6 +30,16 @@ public:
 	/// </summary>
 	void Draw();
 
+	/// <summary>
+	/// クリア描画
+	/// </summary>
+	void ClearDraw();
+
+	/// <summary>
+	/// ゲームオーバー描画
+	/// </summary>
+	void GameOverDraw();
+
 private:
 
 	/// <summary>
@@ -41,5 +53,7 @@ private:
 	void ApplyAdjustmentVariables();
 
 private:
+	std::unique_ptr<GameOverSprite> gameOverSprite_ = nullptr;
+	std::unique_ptr<ClearSprite> gameClearSprite_ = nullptr;
 };
 

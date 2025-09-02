@@ -113,6 +113,7 @@ copy "$(WindowsSdkdir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="application\AdjustmentVariables\AdjustmentVariables.cpp" />
     <ClCompile Include="application\GameManager\GameManager.cpp" />
     <ClCompile Include="application\SceneSprite\ClearSprite.cpp" />
+    <ClCompile Include="application\SceneSprite\GameOverSprite.cpp" />
     <ClCompile Include="application\SceneSprite\GameSprite.cpp" />
     <ClCompile Include="application\SceneSprite\SelectSprite.cpp" />
     <ClCompile Include="application\SceneSprite\TitleSprite.cpp" />
@@ -178,6 +179,7 @@ copy "$(WindowsSdkdir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="application\AdjustmentVariables\AdjustmentVariables.h" />
     <ClInclude Include="application\GameManager\GameManager.h" />
     <ClInclude Include="application\SceneSprite\ClearSprite.h" />
+    <ClInclude Include="application\SceneSprite\GameOverSprite.h" />
     <ClInclude Include="application\SceneSprite\GameSprite.h" />
     <ClInclude Include="application\SceneSprite\SelectSprite.h" />
     <ClInclude Include="application\SceneSprite\TitleSprite.h" />

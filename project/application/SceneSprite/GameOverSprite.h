@@ -1,13 +1,9 @@
-/**
-* @file ClaerSprite.h
-* @brief クリアシーンのスプライト
-* @author 仁平 琉乃
-*/
 #pragma once
+
 #include "engine/2d/Sprite/Sprite.h"
 #include "application/AdjustmentVariables/AdjustmentVariables.h"
 
-class ClearSprite {
+class GameOverSprite {
 public:
 	/// <summary>
 	/// 初期化
@@ -40,6 +36,6 @@ private:
 	std::unique_ptr<Sprite> spriteReturnSelect_ = nullptr;
 	Vector2 spritePositionSelect_{};
 
-	std::unique_ptr<Sprite> spriteNextStage_ = nullptr;
-	Vector2 spritePositionNextStage_{};
+	std::unique_ptr<Sprite> spriteRetry_ = nullptr;
+	Vector2 spritePositionRetry_{};
 };

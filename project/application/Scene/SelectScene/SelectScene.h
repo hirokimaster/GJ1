@@ -5,6 +5,7 @@
 #include "application/SceneTransition/FadeIn/FadeIn.h"
 #include "application/SceneTransition/FadeOut/FadeOut.h"
 #include "application/GameManager/GameManager.h"
+#include <application/SceneSprite/SelectSprite.h>
 
 class SelectScene : public IScene {
 public:
@@ -39,4 +40,11 @@ public:
 	void PostProcessDraw()override;
 
 private:
+	/// <summary>
+	/// textureはここに書く
+	/// </summary>
+	void LoadTextureFile();
+private:
+	std::unique_ptr<PostProcess> postEffect_ = nullptr;
+	std::unique_ptr<SelectSprite> selectSprite_ = nullptr;
 };

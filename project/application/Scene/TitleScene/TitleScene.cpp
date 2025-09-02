@@ -28,7 +28,7 @@ void TitleScene::Initialize()
 
 void TitleScene::Update()
 {
-	if (Input::GetInstance()->PushKey(DIK_S)) {
+	if (Input::GetInstance()->PressedKey(DIK_SPACE)) {
 		GameManager::GetInstance()->ChangeScene("SELECT");
 	}
 }
@@ -36,7 +36,6 @@ void TitleScene::Update()
 void TitleScene::Draw()
 {
 	postEffect_->Draw();
-
 }
 
 void TitleScene::PostProcessDraw()
@@ -44,7 +43,6 @@ void TitleScene::PostProcessDraw()
 	postEffect_->PreDraw();
 	titleSprite_->Draw();
 	postEffect_->PostDraw();
-
 }
 
 void TitleScene::LoadTextureFile()
