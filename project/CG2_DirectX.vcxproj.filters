@@ -280,6 +280,9 @@
     <ClCompile Include="engine\3d\ObjectManager\ObjectManager.cpp">
       <Filter>engine\3d\ObjectManager</Filter>
     </ClCompile>
+    <ClCompile Include="SelectScene.cpp">
+      <Filter>application\Scene\SelectScene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="application\AdjustmentVariables\AdjustmentVariables.h">
@@ -492,6 +495,9 @@
     <ClInclude Include="engine\3d\ObjectManager\ObjectManager.h">
       <Filter>engine\3d\ObjectManager</Filter>
     </ClInclude>
+    <ClInclude Include="SelectScene.h">
+      <Filter>application\Scene\SelectScene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\ShaderFile\SkyBox.VS.hlsl">
@@ -675,6 +681,9 @@
     </Filter>
     <Filter Include="engine\3d\ObjectManager">
       <UniqueIdentifier>{53ee06ec-d4f5-456a-9691-9e34ce694889}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="application\Scene\SelectScene">
+      <UniqueIdentifier>{3d86e032-646b-46e0-8d6f-c2cd7de62901}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
