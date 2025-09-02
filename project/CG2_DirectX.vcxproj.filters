@@ -280,6 +280,10 @@
     <ClCompile Include="engine\3d\ObjectManager\ObjectManager.cpp">
       <Filter>engine\3d\ObjectManager</Filter>
     </ClCompile>
+    <ClCompile Include="application\GameObject\GameCamera\GameCamera.cpp">
+      <Filter>application\GameObject\GameCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="application\GameObject\TeamTile\TeamTile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="application\AdjustmentVariables\AdjustmentVariables.h">
@@ -492,6 +496,10 @@
     <ClInclude Include="engine\3d\ObjectManager\ObjectManager.h">
       <Filter>engine\3d\ObjectManager</Filter>
     </ClInclude>
+    <ClInclude Include="application\GameObject\GameCamera\GameCamera.h">
+      <Filter>application\GameObject\GameCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="application\GameObject\TeamTile\TeamTile.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\ShaderFile\SkyBox.VS.hlsl">
@@ -675,6 +683,12 @@
     </Filter>
     <Filter Include="engine\3d\ObjectManager">
       <UniqueIdentifier>{53ee06ec-d4f5-456a-9691-9e34ce694889}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="application\GameObject">
+      <UniqueIdentifier>{814c0489-0580-40ed-837a-ef9b36a63a77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="application\GameObject\GameCamera">
+      <UniqueIdentifier>{e5888ce2-2879-46e7-9f87-f377fc8aaf35}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

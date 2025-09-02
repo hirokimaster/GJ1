@@ -14,6 +14,8 @@
 #include "engine/Graphics/Effects/Particle/ParticleManager.h"
 #include "engine/3d/ObjectManager/ObjectManager.h"
 
+#include "application/GameObject/GameCamera/GameCamera.h"
+
 class GameScene : public IScene {
 public: // メンバ関数
 	/// <summary>
@@ -59,4 +61,6 @@ private:
 	void LoadTextureFile();
 
 private:
+
+	std::unique_ptr<GameCamera> gameCamera_; // ゲームカメラ
 };

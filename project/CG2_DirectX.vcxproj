@@ -157,6 +157,7 @@ copy "$(WindowsSdkdir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Engine\Utility\ImGuiManager\ImGuiManager.cpp" />
     <ClCompile Include="Engine\Input\Input.cpp" />
     <ClCompile Include="application\SceneTransition\FadeIn\FadeIn.cpp" />
+    <ClCompile Include="application\GameObject\GameCamera\GameCamera.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Engine\Math\Mathfunction.cpp" />
     <ClCompile Include="engine\Graphics\CreateResource\CreateResource.cpp" />
@@ -169,6 +170,7 @@ copy "$(WindowsSdkdir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Engine\Base\WinApp\WinApp.cpp" />
     <ClCompile Include="engine\Graphics\Transform\WorldTransform.cpp" />
     <ClCompile Include="engine\3d\PlaneProjectionShadow\PlaneProjectionShadow.cpp" />
+    <ClCompile Include="application\GameObject\TeamTile\TeamTile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="application\AdjustmentVariables\AdjustmentVariables.h" />
@@ -241,6 +243,8 @@ copy "$(WindowsSdkdir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="engine\Graphics\Transform\WorldTransform.h" />
     <ClInclude Include="application\SceneTransition\FadeIn\FadeIn.h" />
     <ClInclude Include="engine\3d\PlaneProjectionShadow\PlaneProjectionShadow.h" />
+    <ClInclude Include="application\GameObject\GameCamera\GameCamera.h" />
+    <ClInclude Include="application\GameObject\TeamTile\TeamTile.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="engine\3d\BaseObject\BaseIndividualObject.cpp" />
