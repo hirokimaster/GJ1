@@ -63,5 +63,13 @@ private:
 private:
 
 	std::unique_ptr<GameCamera> gameCamera_; // ゲームカメラ
+
+	std::unique_ptr<PostProcess> postEffect_ = nullptr;
+
+	std::unique_ptr<GameSprite> gameSprite_ = nullptr;
+
+	bool isGameOver;
+	bool isGameClear;
+  
 	std::vector<std::unique_ptr<TeamTile>> teamTiles_; // ゲームカメラ
 };

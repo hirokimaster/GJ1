@@ -99,6 +99,8 @@
     <ClCompile Include="application\Scene\SelectScene\SelectScene.cpp" />
     <ClCompile Include="application\GameObject\TeamTile\TeamTile.cpp" />
     <ClCompile Include="engine\3d\BaseObject\BaseIndividualObject.cpp" />
+    <ClCompile Include="application\SceneSprite\SelectSprite.cpp" />
+    <ClCompile Include="application\SceneSprite\GameOverSprite.cpp" />
     <ClCompile Include="application\GameObject\TileMap\TileMap.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -175,6 +177,8 @@
     <ClInclude Include="application\Scene\SelectScene\SelectScene.h" />
     <ClInclude Include="application\GameObject\GameCamera\GameCamera.h" />
     <ClInclude Include="application\GameObject\TeamTile\TeamTile.h" />
+    <ClInclude Include="application\SceneSprite\SelectSprite.h" />
+    <ClInclude Include="application\SceneSprite\GameOverSprite.h" />
     <ClInclude Include="application\GameObject\TileMap\TileMap.h" />
   </ItemGroup>
   <ItemGroup>
