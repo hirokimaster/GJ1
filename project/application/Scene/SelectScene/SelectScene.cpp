@@ -33,14 +33,14 @@ void SelectScene::Update()
 
 void SelectScene::Draw()
 {
-	postEffect_->Draw();
+	selectSprite_->Draw();
+	//postEffect_->Draw();
 }
 
 void SelectScene::PostProcessDraw()
 {
-	postEffect_->PreDraw();
-	selectSprite_->Draw();
-	postEffect_->PostDraw();
+	/*postEffect_->PreDraw();
+	postEffect_->PostDraw();*/
 }
 
 void SelectScene::LoadTextureFile()

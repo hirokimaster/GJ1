@@ -65,13 +65,7 @@ void GameScene::Update()
 
 void GameScene::Draw()
 {
-	postEffect_->Draw();
 	ObjectManager::GetInstance()->Draw(gameCamera_->GetCamera());
-}
-
-void GameScene::PostProcessDraw()
-{
-	postEffect_->PreDraw();
 
 	if (isGameClear) {
 		gameSprite_->ClearDraw();
@@ -82,8 +76,14 @@ void GameScene::PostProcessDraw()
 	else if (!isGameClear && !isGameOver) {
 		gameSprite_->Draw();
 	}
-	
-	postEffect_->PostDraw();
+
+	//postEffect_->Draw();
+}
+
+void GameScene::PostProcessDraw()
+{
+	/*postEffect_->PreDraw();
+	postEffect_->PostDraw();*/
 }
 
 void GameScene::Collision()

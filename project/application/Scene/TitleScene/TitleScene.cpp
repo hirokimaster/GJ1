@@ -35,14 +35,14 @@ void TitleScene::Update()
 
 void TitleScene::Draw()
 {
-	postEffect_->Draw();
+	titleSprite_->Draw();
+	//postEffect_->Draw();
 }
 
 void TitleScene::PostProcessDraw()
 {
-	postEffect_->PreDraw();
-	titleSprite_->Draw();
-	postEffect_->PostDraw();
+	/*postEffect_->PreDraw();
+	postEffect_->PostDraw();*/
 }
 
 void TitleScene::LoadTextureFile()
