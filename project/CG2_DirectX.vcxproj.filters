@@ -99,6 +99,9 @@
     <ClCompile Include="application\Scene\SelectScene\SelectScene.cpp" />
     <ClCompile Include="application\GameObject\TeamTile\TeamTile.cpp" />
     <ClCompile Include="engine\3d\BaseObject\BaseIndividualObject.cpp" />
+    <ClCompile Include="application\GameObject\Unit\Warrior\Warrior.cpp" />
+    <ClCompile Include="application\GameObject\Unit\BaseUnit.cpp" />
+    <ClCompile Include="application\GameObject\Unit\Archer\Archer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="application\AdjustmentVariables\AdjustmentVariables.h" />
@@ -174,6 +177,9 @@
     <ClInclude Include="application\Scene\SelectScene\SelectScene.h" />
     <ClInclude Include="application\GameObject\GameCamera\GameCamera.h" />
     <ClInclude Include="application\GameObject\TeamTile\TeamTile.h" />
+    <ClInclude Include="application\GameObject\Unit\BaseUnit.h" />
+    <ClInclude Include="application\GameObject\Unit\Warrior\Warrior.h" />
+    <ClInclude Include="application\GameObject\Unit\Archer\Archer.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\ShaderFile\Object3d.hlsli" />

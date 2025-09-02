@@ -112,6 +112,9 @@ copy "$(WindowsSdkdir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
   <ItemGroup>
     <ClCompile Include="application\AdjustmentVariables\AdjustmentVariables.cpp" />
     <ClCompile Include="application\GameManager\GameManager.cpp" />
+    <ClCompile Include="application\GameObject\Unit\Archer\Archer.cpp" />
+    <ClCompile Include="application\GameObject\Unit\BaseUnit.cpp" />
+    <ClCompile Include="application\GameObject\Unit\Warrior\Warrior.cpp" />
     <ClCompile Include="application\SceneSprite\ClearSprite.cpp" />
     <ClCompile Include="application\SceneSprite\GameSprite.cpp" />
     <ClCompile Include="application\SceneSprite\TitleSprite.cpp" />
@@ -176,6 +179,9 @@ copy "$(WindowsSdkdir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
   <ItemGroup>
     <ClInclude Include="application\AdjustmentVariables\AdjustmentVariables.h" />
     <ClInclude Include="application\GameManager\GameManager.h" />
+    <ClInclude Include="application\GameObject\Unit\Archer\Archer.h" />
+    <ClInclude Include="application\GameObject\Unit\BaseUnit.h" />
+    <ClInclude Include="application\GameObject\Unit\Warrior\Warrior.h" />
     <ClInclude Include="application\SceneSprite\ClearSprite.h" />
     <ClInclude Include="application\SceneSprite\GameSprite.h" />
     <ClInclude Include="application\SceneSprite\TitleSprite.h" />
