@@ -15,7 +15,6 @@ void BaseInstancingObject::Initialize(const std::string& modelName, const std::s
 {
 	objectManager_ = ObjectManager::GetInstance();
 	object_ = objectManager_->CreateInstancingObject(modelName, TextureManager::GetTexHandle(textureName), shadow);
-
 	// 形状だけ設定する
 	// 形状を指定しなかったら作らない
 	if (type != ColliderType::None) {

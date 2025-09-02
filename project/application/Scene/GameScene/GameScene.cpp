@@ -5,7 +5,8 @@
 */
 
 #include "GameScene.h"
-
+#include "engine/3d/ObjectManager/ObjectManager.h"
+#include "application/GameObject/TileMap/TileMap.h"
 GameScene::GameScene()
 {
 }
@@ -30,6 +31,8 @@ void GameScene::Initialize()
 
 	isGameOver = false;
 	isGameClear = false;
+  
+	TileMap::LoadTile(teamTiles_);
 }
 
 void GameScene::Update()
@@ -53,11 +56,17 @@ void GameScene::Update()
 			GameManager::GetInstance()->ChangeScene("SELECT");
 		}
 	}
+
+	for (auto& tile : teamTiles_) {
+		tile->Update();
+	}
+	ObjectManager::GetInstance()->Update();
 }
 
 void GameScene::Draw()
 {
 	postEffect_->Draw();
+	ObjectManager::GetInstance()->Draw(gameCamera_->GetCamera());
 }
 
 void GameScene::PostProcessDraw()
