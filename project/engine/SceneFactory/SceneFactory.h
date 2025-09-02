@@ -10,6 +10,8 @@
 #include "application/Scene/Demo/Demo.h"
 #include "application/Scene/TitleScene/TitleScene.h"
 #include "application/Scene/ClearScene/ClearScene.h"
+#include <SelectScene.h>
+
 
 class SceneFactory : public AbstractSceneFactory {
 public:

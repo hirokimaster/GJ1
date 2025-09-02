@@ -280,6 +280,9 @@
     <ClCompile Include="engine\3d\ObjectManager\ObjectManager.cpp">
       <Filter>engine\3d\ObjectManager</Filter>
     </ClCompile>
+    <ClCompile Include="SelectScene.cpp">
+      <Filter>application\Scene\SelectScene</Filter>
+    </ClCompile>
     <ClCompile Include="application\GameObject\GameCamera\GameCamera.cpp">
       <Filter>application\GameObject\GameCamera</Filter>
     </ClCompile>
@@ -496,6 +499,9 @@
     <ClInclude Include="engine\3d\ObjectManager\ObjectManager.h">
       <Filter>engine\3d\ObjectManager</Filter>
     </ClInclude>
+    <ClInclude Include="SelectScene.h">
+      <Filter>application\Scene\SelectScene</Filter>
+    </ClInclude>
     <ClInclude Include="application\GameObject\GameCamera\GameCamera.h">
       <Filter>application\GameObject\GameCamera</Filter>
     </ClInclude>
@@ -684,6 +690,8 @@
     <Filter Include="engine\3d\ObjectManager">
       <UniqueIdentifier>{53ee06ec-d4f5-456a-9691-9e34ce694889}</UniqueIdentifier>
     </Filter>
+    <Filter Include="application\Scene\SelectScene">
+      <UniqueIdentifier>{3d86e032-646b-46e0-8d6f-c2cd7de62901}</UniqueIdentifier>
     <Filter Include="application\GameObject">
       <UniqueIdentifier>{814c0489-0580-40ed-837a-ef9b36a63a77}</UniqueIdentifier>
     </Filter>

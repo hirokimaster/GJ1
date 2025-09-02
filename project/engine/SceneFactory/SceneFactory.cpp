@@ -22,6 +22,9 @@ std::unique_ptr<IScene> SceneFactory::CreateScene(const std::string& sceneName)
 	else if (sceneName == "CLEAR") {
 		newScene = std::make_unique<ClearScene>();
 	}
+	else if (sceneName == "SELECT") {
+		newScene = std::make_unique<SelectScene>();
+	}
 
 	return	newScene;
 }
