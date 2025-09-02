@@ -41,4 +41,7 @@ private:
 private:
 	std::unique_ptr<Sprite> spriteTitle_ = nullptr; // Titleのsprite
 	Vector2 spriteTitlePosition_{};
+
+	std::unique_ptr<Sprite> spriteSpace_ = nullptr;
+	Vector2 spriteSpacePosition_{};
 };

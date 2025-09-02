@@ -70,6 +70,9 @@ void GameScene::PostProcessDraw()
 	else if (isGameOver) {
 		gameSprite_->GameOverDraw();
 	}
+	else if (!isGameClear && !isGameOver) {
+		gameSprite_->Draw();
+	}
 	
 	postEffect_->PostDraw();
 }
@@ -81,5 +84,7 @@ void GameScene::Collision()
 void GameScene::LoadTextureFile()
 {
 	TextureManager::Load("resources/TempTexture/white.png");
+	TextureManager::Load("resources/UI/ui.png");
+	TextureManager::Load("resources/UI/s.png");
 }
 

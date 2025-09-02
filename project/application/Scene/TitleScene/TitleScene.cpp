@@ -48,4 +48,6 @@ void TitleScene::PostProcessDraw()
 void TitleScene::LoadTextureFile()
 {
 	TextureManager::Load("resources/TempTexture/white.png");
+	TextureManager::Load("resources/UI/space.png");
+	TextureManager::Load("resources/UI/title.png");
 }

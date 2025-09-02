@@ -9,10 +9,9 @@ void GameOverSprite::Initialize()
 
 	// セレクトのスプライト
 	spritePositionSelect_ = { 320, 540 };
-	spriteReturnSelect_.reset(Sprite::Create(TextureManager::GetTexHandle("TempTexture/white.png"), spritePositionSelect_));
+	spriteReturnSelect_.reset(Sprite::Create(TextureManager::GetTexHandle("UI/s.png"), spritePositionSelect_));
 	spriteReturnSelect_->SetAnchorPoint({ 0.5f,0.5f });
 	spriteReturnSelect_->SetColor({ 0.3f,1.0f,1.0f,1.0f });
-	spriteReturnSelect_->SetScale({ 30.0f, 5.0f });
 
 	// リトライのスプライト
 	spritePositionRetry_ = { 960, 540 };

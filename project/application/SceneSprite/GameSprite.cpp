@@ -18,6 +18,11 @@ void GameSprite::Initialize()
 
 	gameClearSprite_ = std::make_unique<ClearSprite>();
 	gameClearSprite_->Initialize();
+
+	spritePositionGame_ = { 320, 540 };
+	spriteGame_.reset(Sprite::Create(TextureManager::GetTexHandle("UI/ui.png"), spritePositionGame_));
+	spriteGame_->SetAnchorPoint({ 0.5f,0.5f });
+	spriteGame_->SetColor({ 1.0f,1.0f,1.0f,1.0f });
 }
 
 void GameSprite::Update()
@@ -26,6 +31,7 @@ void GameSprite::Update()
 
 void GameSprite::Draw()
 {
+	spriteGame_->Draw();
 }
 
 void GameSprite::ClearDraw()

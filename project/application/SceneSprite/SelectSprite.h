@@ -32,6 +32,9 @@ private:
 	void ApplyAdjustmentVariables();
 
 private:
-	std::unique_ptr<Sprite> spriteSelect_ = nullptr; // Titleのsprite
+	std::unique_ptr<Sprite> spriteSelect_ = nullptr;
 	Vector2 spriteSelectPosition_{};
+
+	std::unique_ptr<Sprite> spriteSpace_ = nullptr;
+	Vector2 spriteSpacePosition_{};
 };

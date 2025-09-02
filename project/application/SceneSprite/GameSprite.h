@@ -55,5 +55,8 @@ private:
 private:
 	std::unique_ptr<GameOverSprite> gameOverSprite_ = nullptr;
 	std::unique_ptr<ClearSprite> gameClearSprite_ = nullptr;
+
+	std::unique_ptr<Sprite> spriteGame_ = nullptr;
+	Vector2 spritePositionGame_{};
 };
 

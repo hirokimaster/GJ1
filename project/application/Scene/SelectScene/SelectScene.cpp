@@ -46,4 +46,6 @@ void SelectScene::PostProcessDraw()
 void SelectScene::LoadTextureFile()
 {
 	TextureManager::Load("resources/TempTexture/white.png");
+	TextureManager::Load("resources/UI/select.png");
+	TextureManager::Load("resources/UI/selectUI.png");
 }
