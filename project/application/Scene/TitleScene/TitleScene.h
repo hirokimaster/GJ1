@@ -50,4 +50,6 @@ private:
 	void LoadTextureFile();
 
 private:
+	std::unique_ptr<PostProcess> postEffect_ = nullptr;
+	std::unique_ptr<TitleSprite> titleSprite_ = nullptr;
 };

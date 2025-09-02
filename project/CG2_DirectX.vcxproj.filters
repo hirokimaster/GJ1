@@ -99,6 +99,7 @@
     <ClCompile Include="application\Scene\SelectScene\SelectScene.cpp" />
     <ClCompile Include="application\GameObject\TeamTile\TeamTile.cpp" />
     <ClCompile Include="engine\3d\BaseObject\BaseIndividualObject.cpp" />
+    <ClCompile Include="application\SceneSprite\SelectSprite.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="application\AdjustmentVariables\AdjustmentVariables.h" />
@@ -174,6 +175,7 @@
     <ClInclude Include="application\Scene\SelectScene\SelectScene.h" />
     <ClInclude Include="application\GameObject\GameCamera\GameCamera.h" />
     <ClInclude Include="application\GameObject\TeamTile\TeamTile.h" />
+    <ClInclude Include="application\SceneSprite\SelectSprite.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\ShaderFile\Object3d.hlsli" />
