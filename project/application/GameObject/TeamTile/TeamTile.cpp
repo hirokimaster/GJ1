@@ -1,13 +1,14 @@
 #include "TeamTile.h"
 #include "engine/Graphics/TextureManager/TextureManager.h" 
 #include "engine/3d/Model/ModelManager.h" 
-void TeamTile::Initialize()
+void TeamTile::Initialize(Vector2 mapPos)
 {
-	TextureManager::Load("Stage/block.png");
-	ModelManager::LoadObjModel("Stage/wall.obj");
+	TextureManager::Load("resources/TempTexture/white2.png");
+	ModelManager::LoadObjModel("TempModel/cube.obj");
 	// object共通の初期化
-	BaseInstancingObject::Initialize("Stage/wall.obj", "Stage/block.png", ColliderType::AABB);
+	BaseInstancingObject::Initialize("TempModel/cube.obj", "TempTexture/white2.png", ColliderType::AABB);
 	
+	BaseInstancingObject::SetPosition({ mapPos.x, 0.0f,mapPos.y});
 	// colliderの属性
 	collider_->SetCollosionAttribute(kCollisionAttributeEnemyBullet);
 	collider_->SetCollisionMask(kCollisionAttributePlayer); // 当たる対象

@@ -172,6 +172,7 @@ copy "$(WindowsSdkdir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="engine\3d\PlaneProjectionShadow\PlaneProjectionShadow.cpp" />
     <ClCompile Include="application\Scene\SelectScene\SelectScene.cpp" />
     <ClCompile Include="application\GameObject\TeamTile\TeamTile.cpp" />
+    <ClCompile Include="application\GameObject\TileMap\TileMap.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="application\AdjustmentVariables\AdjustmentVariables.h" />
@@ -247,6 +248,7 @@ copy "$(WindowsSdkdir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="application\Scene\SelectScene\SelectScene.h" />
     <ClInclude Include="application\GameObject\GameCamera\GameCamera.h" />
     <ClInclude Include="application\GameObject\TeamTile\TeamTile.h" />
+    <ClInclude Include="application\GameObject\TileMap\TileMap.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="engine\3d\BaseObject\BaseIndividualObject.cpp" />
@@ -274,6 +276,8 @@ copy "$(WindowsSdkdir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </None>
+    <None Include="resources\Stage\rensyu.csv" />
+    <None Include="resources\Stage\stage1.csv" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="resources\ShaderFile\EmitParticle.CS.hlsl">
