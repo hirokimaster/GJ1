@@ -6,12 +6,15 @@ public:
 	/// <summary>
 	/// 初期化
 	/// </summary>
-	void Initialize(Vector2 mapPos);
+	void Initialize(Vector2 mapPos, int tileMode);
 
 	/// <summary>
 	/// 更新
 	/// </summary>
 	void Update();
+
+
+	void ColorChange();
 
 #pragma region getter
 
@@ -21,6 +24,8 @@ public:
 
 	Collider* GetCollider() { return BaseInstancingObject::GetCollider(); }
 
+	int GetTileMode()const { return tileMode_; }
+
 #pragma endregion
 
 #pragma region setter
@@ -29,10 +34,13 @@ public:
 
 	void SetScale(const Vector3& scale) { BaseInstancingObject::SetScale(scale); }
 
+	void SetTileMode(int mode) { tileMode_ = mode; }
+
 #pragma endregion
 
 
 private:
 	bool isHit_ = false;
+	int tileMode_ = 0; // 0:通常 1:味方 2:敵
 };
 

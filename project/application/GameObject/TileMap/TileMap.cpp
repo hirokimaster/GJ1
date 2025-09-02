@@ -4,7 +4,7 @@
 #include <sstream>
 void TileMap::LoadTile(std::vector<std::unique_ptr<TeamTile>>& teamTiles)
 {
-    std::ifstream file("resources/Stage/rensyu.csv");
+    std::ifstream file("resources/Stage/stage1.csv");
     if (!file.is_open()) {
 		assert(false && "Failed to open CSV file");
     };
@@ -39,12 +39,17 @@ void TileMap::LoadTile(std::vector<std::unique_ptr<TeamTile>>& teamTiles)
         for (int colIndex = 0; colIndex < totalCols; ++colIndex) {
             std::unique_ptr<TeamTile> teamTile = std::make_unique<TeamTile>();
 
+            int value = std::stoi(rawCells[rowIndex][colIndex]); // CSV値取得
+
+            // 行を逆にして手前から奥に配置
+            int reversedRow = totalRows - 1 - rowIndex;
+
             Vector2 position{
                 (colIndex - centerX) * tileSize,
-                startZ + (rowIndex * tileSize)  // 手前から奥に向かって増加
+                startZ + (reversedRow * tileSize)
             };
 
-            teamTile->Initialize(position);
+            teamTile->Initialize(position, value);
             teamTiles.push_back(std::move(teamTile));
         }
     }
