@@ -16,10 +16,13 @@ GameScene::~GameScene()
 
 void GameScene::Initialize()
 {
+	gameCamera_ = std::make_unique<GameCamera>();
+	gameCamera_->Init();
 }
 
 void GameScene::Update()
 {
+	gameCamera_->Update();
 }
 
 void GameScene::Draw()
