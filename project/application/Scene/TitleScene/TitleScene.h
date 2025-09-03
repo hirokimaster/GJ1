@@ -11,6 +11,8 @@
 #include "application/SceneSprite/TitleSprite.h"
 #include "application/GameManager/GameManager.h"
 
+#include "application/GameObject/Skydome/Skydome.h"
+
 class TitleScene : public IScene {
 public:
 	/// <summary>
@@ -52,4 +54,7 @@ private:
 private:
 	std::unique_ptr<PostProcess> postEffect_ = nullptr;
 	std::unique_ptr<TitleSprite> titleSprite_ = nullptr;
+
+	// スカイドーム
+	std::unique_ptr<Skydome> skydome_;
 };

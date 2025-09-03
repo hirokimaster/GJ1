@@ -23,10 +23,10 @@ void TileMap::LoadTile(std::vector<std::unique_ptr<TeamTile>>& teamTiles)
         rawCells.push_back(row);
     }
 
-    int totalRows = static_cast<int>(rawCells.size());
-    int totalCols = rawCells.empty() ? 0 : static_cast<int>(rawCells[0].size());
+    maxRow_ = static_cast<int>(rawCells.size());
+    maxCol_ = rawCells.empty() ? 0 : static_cast<int>(rawCells[0].size());
 
-    float centerX = (totalCols - 1) / 2.0f;
+    float centerX = (maxCol_ - 1) / 2.0f;
    // float centerY = (totalRows - 1) / 2.0f;
     float tileSize = 2.0f;
 
@@ -35,21 +35,21 @@ void TileMap::LoadTile(std::vector<std::unique_ptr<TeamTile>>& teamTiles)
     // 最前列のZ位置を固定（例：0.0f に固定）
     float startZ = 0.0f;
 
-    for (int rowIndex = 0; rowIndex < totalRows; ++rowIndex) {
-        for (int colIndex = 0; colIndex < totalCols; ++colIndex) {
+    for (int rowIndex = 0; rowIndex < maxRow_; ++rowIndex) {
+        for (int colIndex = 0; colIndex < maxCol_; ++colIndex) {
             std::unique_ptr<TeamTile> teamTile = std::make_unique<TeamTile>();
 
             int value = std::stoi(rawCells[rowIndex][colIndex]); // CSV値取得
 
             // 行を逆にして手前から奥に配置
-            int reversedRow = totalRows - 1 - rowIndex;
+            int reversedRow = maxRow_ - 1 - rowIndex;
 
             Vector2 position{
                 (colIndex - centerX) * tileSize,
                 startZ + (reversedRow * tileSize)
             };
 
-            teamTile->Initialize(position, value);
+            teamTile->Initialize(position, value,rowIndex);
             teamTiles.push_back(std::move(teamTile));
         }
     }

@@ -6,7 +6,7 @@
 
 #include "GameScene.h"
 #include "engine/3d/ObjectManager/ObjectManager.h"
-#include "application/GameObject/TileMap/TileMap.h"
+
 GameScene::GameScene()
 {
 }
@@ -42,6 +42,14 @@ void GameScene::Initialize()
 	archer_ = std::make_unique<Archer>("Archer");
 	archer_->Initialize();
 	archer_->SetProjectile(projectilePool_.get());
+
+	tileMap_ = std::make_unique<TileMap>();
+	tileMap_->LoadTile(teamTiles_);
+
+	// スカイドーム
+	skydome_ = std::make_unique<Skydome>();
+	skydome_->Init();
+
 }
 
 void GameScene::Update()
@@ -75,6 +83,8 @@ void GameScene::Update()
 	// ユニット
 	archer_->Update();
 
+	skydome_->Update();
+  
 	ObjectManager::GetInstance()->Update();
 }
 

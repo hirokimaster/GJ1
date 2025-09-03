@@ -5,7 +5,7 @@
 */
 
 #include "TitleScene.h"
-
+#include "engine/3d/ObjectManager/ObjectManager.h"
 TitleScene::TitleScene()
 {
 }
@@ -24,6 +24,10 @@ void TitleScene::Initialize()
 
 	titleSprite_ = std::make_unique<TitleSprite>();
 	titleSprite_->Initialize();
+
+	// スカイドーム
+	skydome_ = std::make_unique<Skydome>();
+	skydome_->Init();
 }
 
 void TitleScene::Update()
@@ -31,11 +35,15 @@ void TitleScene::Update()
 	if (Input::GetInstance()->PressedKey(DIK_SPACE)) {
 		GameManager::GetInstance()->ChangeScene("SELECT");
 	}
+
+	ObjectManager::GetInstance()->Update();
 }
 
 void TitleScene::Draw()
 {
+
 	titleSprite_->Draw();
+	//ObjectManager::GetInstance()->Draw();
 	//postEffect_->Draw();
 }
 
