@@ -8,7 +8,7 @@ public:
 	/// <summary>
 	/// 初期化
 	/// </summary>
-	void Initialize(Vector2 mapPos, int tileMode);
+	void Initialize(Vector2 mapPos, int tileMode, int rowNum);
 
 	/// <summary>
 	/// 更新

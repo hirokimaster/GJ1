@@ -49,7 +49,7 @@ void TileMap::LoadTile(std::vector<std::unique_ptr<TeamTile>>& teamTiles)
                 startZ + (reversedRow * tileSize)
             };
 
-            teamTile->Initialize(position, value);
+            teamTile->Initialize(position, value,rowIndex);
             teamTiles.push_back(std::move(teamTile));
         }
     }
