@@ -31,7 +31,7 @@ void GameScene::Initialize()
 
 	isGameOver = false;
 	isGameClear = false;
-  
+	tileMap_ = std::make_unique<TileMap>();
 	tileMap_->LoadTile(teamTiles_);
 }
 
