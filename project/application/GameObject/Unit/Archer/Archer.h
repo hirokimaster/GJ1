@@ -1,5 +1,6 @@
 #pragma once
 #include <application/GameObject/Unit/BaseUnit.h>
+#include <engine/Input/Input.h>
 
 class Archer : public BaseUnit {
 public:
@@ -27,7 +28,20 @@ public:
 	/// </summary>
 	void Attack()override;
 
-private:
+	/// <summary>
+	/// アクション範囲
+	/// </summary>
+	/// <param name="targetPosition"></param>
+	/// <returns></returns>
+	bool IsInActionRange(const GridPosition& targetPosition)const;
 
+#pragma region setter
+
+
+#pragma endregion
+
+private:
+	int32_t minRange_;
+	int32_t maxRange_;
 };
 

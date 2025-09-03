@@ -15,6 +15,8 @@
 
 #include "application/GameObject/GameCamera/GameCamera.h"
 #include "application/GameObject/TeamTile/TeamTile.h"
+#include <application/GameObject/Unit/Projectile/ProjectilePool.h>
+#include <application/GameObject/Unit/Archer/Archer.h>
 
 class GameScene : public IScene {
 public: // メンバ関数
@@ -72,4 +74,7 @@ private:
 	bool isGameClear;
   
 	std::vector<std::unique_ptr<TeamTile>> teamTiles_; // ゲームカメラ
+
+	std::unique_ptr<BaseUnit> archer_;
+	std::unique_ptr<ProjectilePool> projectilePool_;
 };

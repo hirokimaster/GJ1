@@ -1,6 +1,12 @@
 #pragma once
 #include "engine/3d/BaseObject/BaseInstancingObject.h"
 #include <string>
+#include <application/GameObject/Unit/Projectile/ProjectilePool.h>
+
+struct GridPosition {
+	int32_t x; // 横
+	int32_t z;	// 奥行
+};
 
 class BaseUnit : public BaseInstancingObject {
 public:
@@ -28,7 +34,7 @@ public:
 	/// <summary>
 	/// 初期化
 	/// </summary>
-	virtual void Initialize();
+	virtual void Initialize() = 0;
 
 	/// <summary>
 	/// 更新
@@ -48,11 +54,28 @@ public:
 		hp_ = hp_ - damage;
 	}
 
+	/// <summary>
+	/// アクションを起こす範囲
+	/// </summary>
+	/// <param name="targetPosition"></param>
+	/// <returns></returns>
+	virtual bool IsInActionRange(const GridPosition& targetPosition) const = 0;
+
 #pragma region getter
 	
 	bool GetIsAlive() const { return hp_ > 0; }
 
 	const std::string GetName() const { return name_; }
+
+	const GridPosition GetPosition() const { return gridPosition_; }
+
+#pragma endregion
+
+#pragma region setter
+
+	void SetGridPosition(int32_t x, int32_t z) { gridPosition_ = { x,z }; }
+
+	void SetProjectile(ProjectilePool* ptr) { projectilePool_ = ptr; }
 
 #pragma endregion
 
@@ -60,4 +83,6 @@ protected:
 	std::string name_; // 役職の名前
 	uint32_t hp_; // ライフ
 	uint32_t attack_; // 攻撃力
+	GridPosition gridPosition_{}; // 位置
+	ProjectilePool* projectilePool_ = nullptr;
 };

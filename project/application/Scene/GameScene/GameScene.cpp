@@ -33,6 +33,15 @@ void GameScene::Initialize()
 	isGameClear = false;
   
 	TileMap::LoadTile(teamTiles_);
+
+	// プール
+	projectilePool_ = std::make_unique<ProjectilePool>();
+	projectilePool_->Initialize();
+
+	// ユニット
+	archer_ = std::make_unique<Archer>("Archer");
+	archer_->Initialize();
+	archer_->SetProjectile(projectilePool_.get());
 }
 
 void GameScene::Update()
@@ -60,6 +69,12 @@ void GameScene::Update()
 	for (auto& tile : teamTiles_) {
 		tile->Update();
 	}
+
+	// プール
+	projectilePool_->Update();
+	// ユニット
+	archer_->Update();
+
 	ObjectManager::GetInstance()->Update();
 }
 
