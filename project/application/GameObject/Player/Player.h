@@ -1,0 +1,30 @@
+#pragma once
+#include "engine/3d/BaseObject/BaseIndividualObject.h"
+#include "application/GameObject/TileMap/TileMap.h"
+#include "application/GameObject/Unit/BaseUnit.h"
+class Player : BaseIndividualObject
+{
+public:
+	void Init();
+	void Update();
+	void SelectTile(); // 選択
+
+	void MoveSelectTile(); // タイル移動
+	void SpawnUnit(); // ユニット出現
+
+	void DebugDraw(); // デバッグ描画
+public:
+	bool CanSpawnHere(int x, int y);
+
+public: // Setter
+	void SetTileMap(TileMap* tileMap) { tileMap_ = tileMap; }
+private:
+	int teamId_ = TileMode::BLUE;        
+	TileMap* tileMap_;    // マップ参照
+	Vector2 selectedTile_; // 現在選択中タイル
+
+	// 後で書き換えて
+	std::vector<std::unique_ptr<BaseUnit>> units_;
+	std::unique_ptr<ProjectilePool> projectilePool_;
+};
+

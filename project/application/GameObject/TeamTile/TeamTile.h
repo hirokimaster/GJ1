@@ -2,8 +2,8 @@
 #include "engine/3d/BaseObject/BaseInstancingObject.h"
 enum TileMode {
 	NORMAL,
+	BLUE,
 	RED,
-	BLUE
 };
 
 class TeamTile : public BaseInstancingObject

@@ -19,6 +19,7 @@
 #include <application/GameObject/Unit/Archer/Archer.h>
 #include "application/GameObject/TileMap/TileMap.h"
 #include "application/GameObject/Skydome/Skydome.h"
+#include "application/GameObject/player/Player.h"
 
 class GameScene : public IScene {
 public: // メンバ関数
@@ -78,7 +79,8 @@ private:
 	// タイルマップ管理クラス
 	std::unique_ptr<TileMap> tileMap_;
 
-	
+	// プレイヤー（ユニット操作）
+	std::unique_ptr<Player> player_;
 
 	std::unique_ptr<BaseUnit> archer_;
 	std::unique_ptr<ProjectilePool> projectilePool_;

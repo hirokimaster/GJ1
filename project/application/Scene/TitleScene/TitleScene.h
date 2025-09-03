@@ -12,6 +12,7 @@
 #include "application/GameManager/GameManager.h"
 
 #include "application/GameObject/Skydome/Skydome.h"
+#include "application/GameObject/GameCamera/GameCamera.h"
 
 class TitleScene : public IScene {
 public:
@@ -54,7 +55,7 @@ private:
 private:
 	std::unique_ptr<PostProcess> postEffect_ = nullptr;
 	std::unique_ptr<TitleSprite> titleSprite_ = nullptr;
-
+	std::unique_ptr<GameCamera> gameCamera_; // ゲームカメラ
 	// スカイドーム
 	std::unique_ptr<Skydome> skydome_;
 };

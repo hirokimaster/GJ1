@@ -8,6 +8,8 @@ void Arrow::Initialize()
 	// object生成
 	Projectile::CreateObject("TempModel/cube.obj", "TempTexture/white.png");
 
+	object_.lock()->worldTransform.translate.y = 1.0f;
+	object_.lock()->worldTransform.scale = { 0.2f,0.2f,0.2f };
 	active_ = false; // 非アクティブ
 }
 

@@ -4,7 +4,7 @@
 #include <sstream>
 void TileMap::LoadTile()
 {
-    std::ifstream file("resources/Stage/stage1.csv");
+    std::ifstream file("resources/Stage/rensyu.csv");
     if (!file.is_open()) {
         assert(false && "Failed to open CSV file");
     };
@@ -26,7 +26,7 @@ void TileMap::LoadTile()
     maxRow_ = static_cast<int>(rawCells.size());
     maxCol_ = rawCells.empty() ? 0 : static_cast<int>(rawCells[0].size());
 
-    float centerX = (maxCol_ - 1) / 2.0f;
+
     float tileSize = 2.0f;
     float startZ = 0.0f;
 
@@ -43,7 +43,7 @@ void TileMap::LoadTile()
             int reversedRow = maxRow_ - 1 - rowIndex;
 
             Vector2 position{
-                (colIndex - centerX) * tileSize,
+                colIndex * tileSize,
                 startZ + (reversedRow * tileSize)
             };
 
