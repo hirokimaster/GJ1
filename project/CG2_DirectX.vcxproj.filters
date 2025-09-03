@@ -105,6 +105,9 @@
     <ClCompile Include="application\SceneSprite\SelectSprite.cpp" />
     <ClCompile Include="application\SceneSprite\GameOverSprite.cpp" />
     <ClCompile Include="application\GameObject\TileMap\TileMap.cpp" />
+    <ClCompile Include="application\GameObject\Unit\Projectile\Arrow\Arrow.cpp" />
+    <ClCompile Include="application\GameObject\Unit\Projectile\Projectile.cpp" />
+    <ClCompile Include="application\GameObject\Unit\Projectile\ProjectilePool.cpp" />
     <ClCompile Include="application\GameObject\Skydome\Skydome.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -187,6 +190,9 @@
     <ClInclude Include="application\SceneSprite\SelectSprite.h" />
     <ClInclude Include="application\SceneSprite\GameOverSprite.h" />
     <ClInclude Include="application\GameObject\TileMap\TileMap.h" />
+    <ClInclude Include="application\GameObject\Unit\Projectile\Projectile.h" />
+    <ClInclude Include="application\GameObject\Unit\Projectile\Arrow\Arrow.h" />
+    <ClInclude Include="application\GameObject\Unit\Projectile\ProjectilePool.h" />
     <ClInclude Include="application\GameObject\Skydome\Skydome.h" />
   </ItemGroup>
   <ItemGroup>
