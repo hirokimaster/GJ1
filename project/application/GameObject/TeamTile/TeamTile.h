@@ -1,12 +1,14 @@
 #pragma once
 #include "engine/3d/BaseObject/BaseInstancingObject.h"
+
+
 class TeamTile : public BaseInstancingObject
 {
 public:
 	/// <summary>
 	/// 初期化
 	/// </summary>
-	void Initialize(Vector2 mapPos, int tileMode);
+	void Initialize(Vector2 mapPos, int tileMode, int rowNum);
 
 	/// <summary>
 	/// 更新

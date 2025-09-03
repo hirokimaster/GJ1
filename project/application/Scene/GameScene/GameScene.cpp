@@ -6,7 +6,7 @@
 
 #include "GameScene.h"
 #include "engine/3d/ObjectManager/ObjectManager.h"
-#include "application/GameObject/TileMap/TileMap.h"
+
 GameScene::GameScene()
 {
 }
@@ -32,7 +32,7 @@ void GameScene::Initialize()
 	isGameOver = false;
 	isGameClear = false;
   
-	TileMap::LoadTile(teamTiles_);
+	tileMap_->LoadTile(teamTiles_);
 }
 
 void GameScene::Update()

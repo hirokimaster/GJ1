@@ -1,7 +1,7 @@
 #include "TeamTile.h"
 #include "engine/Graphics/TextureManager/TextureManager.h" 
 #include "engine/3d/Model/ModelManager.h" 
-void TeamTile::Initialize(Vector2 mapPos, int tileMode)
+void TeamTile::Initialize(Vector2 mapPos, int tileMode, int rowNum)
 {
 	TextureManager::Load("resources/TempTexture/white2.png");
 	ModelManager::LoadObjModel("TempModel/cube.obj");
@@ -10,7 +10,10 @@ void TeamTile::Initialize(Vector2 mapPos, int tileMode)
 	
 	BaseInstancingObject::SetPosition({ mapPos.x, 0.0f,mapPos.y});
 
+	// タイルモード
 	tileMode_ = tileMode;
+	// 何行目か
+	rowNum_ = rowNum;
 	ColorChange();
 
 	// colliderの属性

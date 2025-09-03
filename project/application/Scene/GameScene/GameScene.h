@@ -15,7 +15,7 @@
 
 #include "application/GameObject/GameCamera/GameCamera.h"
 #include "application/GameObject/TeamTile/TeamTile.h"
-
+#include "application/GameObject/TileMap/TileMap.h"
 class GameScene : public IScene {
 public: // メンバ関数
 	/// <summary>
@@ -71,5 +71,8 @@ private:
 	bool isGameOver;
 	bool isGameClear;
   
+	// タイルマップ管理クラス
+	std::unique_ptr<TileMap> tileMap_;
+
 	std::vector<std::unique_ptr<TeamTile>> teamTiles_; // ゲームカメラ
 };
