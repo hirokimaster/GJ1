@@ -102,6 +102,9 @@
     <ClCompile Include="application\GameObject\Unit\Warrior\Warrior.cpp" />
     <ClCompile Include="application\GameObject\Unit\BaseUnit.cpp" />
     <ClCompile Include="application\GameObject\Unit\Archer\Archer.cpp" />
+    <ClCompile Include="application\SceneSprite\SelectSprite.cpp" />
+    <ClCompile Include="application\SceneSprite\GameOverSprite.cpp" />
+    <ClCompile Include="application\GameObject\TileMap\TileMap.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="application\AdjustmentVariables\AdjustmentVariables.h" />
@@ -180,6 +183,9 @@
     <ClInclude Include="application\GameObject\Unit\BaseUnit.h" />
     <ClInclude Include="application\GameObject\Unit\Warrior\Warrior.h" />
     <ClInclude Include="application\GameObject\Unit\Archer\Archer.h" />
+    <ClInclude Include="application\SceneSprite\SelectSprite.h" />
+    <ClInclude Include="application\SceneSprite\GameOverSprite.h" />
+    <ClInclude Include="application\GameObject\TileMap\TileMap.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\ShaderFile\Object3d.hlsli" />
@@ -188,6 +194,8 @@
     <None Include="resources\ShaderFile\PostProcess.hlsli" />
     <None Include="resources\ShaderFile\SkyBox.hlsli" />
     <None Include="resources\ShaderFile\SkyBox.VS.hlsl" />
+    <None Include="resources\Stage\rensyu.csv" />
+    <None Include="resources\Stage\stage1.csv" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="externals\imgui\LICENSE.txt" />

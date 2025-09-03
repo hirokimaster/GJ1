@@ -37,4 +37,9 @@ private:
 	void ApplyAdjustmentVariables();
 
 private:
+	std::unique_ptr<Sprite> spriteReturnSelect_ = nullptr;
+	Vector2 spritePositionSelect_{};
+
+	std::unique_ptr<Sprite> spriteNextStage_ = nullptr;
+	Vector2 spritePositionNextStage_{};
 };

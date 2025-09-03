@@ -8,6 +8,22 @@
 
 void TitleSprite::Initialize()
 {
+	// 調整項目追加
+	AddAdjustmentVariables();
+	// 調整項目適用
+	ApplyAdjustmentVariables();
+	// タイトルのスプライト
+	spriteTitlePosition_ = { 640, 360 };
+	spriteTitle_.reset(Sprite::Create(TextureManager::GetTexHandle("UI/title.png"), spriteTitlePosition_));
+	spriteTitle_->SetAnchorPoint({ 0.5f,0.5f });
+	spriteTitle_->SetColor({ 1.0f,1.0f,1.0f,1.0f });
+	spriteTitle_->SetScale({ 3.0f, 3.0f });
+
+	spriteSpacePosition_ = { 640, 500 };
+	spriteSpace_.reset(Sprite::Create(TextureManager::GetTexHandle("UI/space.png"), spriteSpacePosition_));
+	spriteSpace_->SetAnchorPoint({ 0.5f,0.5f });
+	spriteSpace_->SetColor({ 1.0f,1.0f,1.0f,1.0f });
+
 }
 
 void TitleSprite::Update()
@@ -16,12 +32,16 @@ void TitleSprite::Update()
 
 void TitleSprite::Draw()
 {
+	spriteTitle_->Draw();
+	spriteSpace_->Draw();
 }
 
 void TitleSprite::AddAdjustmentVariables()
 {
+	
 }
 
 void TitleSprite::ApplyAdjustmentVariables()
 {
+	
 }

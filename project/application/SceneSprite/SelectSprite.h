@@ -1,16 +1,9 @@
-/**
-* @file TitleSprite.h
-* @brief タイトルシーンで表示するスプライトの生成
-* @author 仁平 琉乃
-*/
-
 #pragma once
 #include "engine/2d/Sprite/Sprite.h"
 #include "application/AdjustmentVariables/AdjustmentVariables.h"
 
-class TitleSprite {
+class SelectSprite {
 public:
-
 	/// <summary>
 	/// 初期化
 	/// </summary>
@@ -39,8 +32,8 @@ private:
 	void ApplyAdjustmentVariables();
 
 private:
-	std::unique_ptr<Sprite> spriteTitle_ = nullptr; // Titleのsprite
-	Vector2 spriteTitlePosition_{};
+	std::unique_ptr<Sprite> spriteSelect_ = nullptr;
+	Vector2 spriteSelectPosition_{};
 
 	std::unique_ptr<Sprite> spriteSpace_ = nullptr;
 	Vector2 spriteSpacePosition_{};
