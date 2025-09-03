@@ -2,7 +2,7 @@
 #include "engine/3d/BaseObject/BaseInstancingObject.h"
 #include <string>
 #include <application/GameObject/Unit/Projectile/ProjectilePool.h>
-
+#include "application/GameObject/TileMap/TileMap.h"
 struct GridPosition {
 	int32_t x; // 横
 	int32_t z;	// 奥行
@@ -34,7 +34,7 @@ public:
 	/// <summary>
 	/// 初期化
 	/// </summary>
-	virtual void Initialize() = 0;
+	virtual void Initialize(Vector2 pos) = 0;
 
 	/// <summary>
 	/// 更新
@@ -61,6 +61,8 @@ public:
 	/// <returns></returns>
 	virtual bool IsInActionRange(const GridPosition& targetPosition) const = 0;
 
+	virtual bool CanAttackInFront() = 0;
+
 #pragma region getter
 	
 	bool GetIsAlive() const { return hp_ > 0; }
@@ -77,6 +79,8 @@ public:
 
 	void SetProjectile(ProjectilePool* ptr) { projectilePool_ = ptr; }
 
+	void SetTileMap(TileMap* tileMap) { tileMap_ = tileMap; }
+
 #pragma endregion
 
 protected:
@@ -85,4 +89,6 @@ protected:
 	uint32_t attack_; // 攻撃力
 	GridPosition gridPosition_{}; // 位置
 	ProjectilePool* projectilePool_ = nullptr;
+
+	TileMap* tileMap_ = nullptr;
 };

@@ -16,7 +16,7 @@ public:
 	/// <summary>
 	/// 初期化
 	/// </summary>
-	void Initialize();
+	void Initialize(Vector2 pos);
 
 	/// <summary>
 	/// 更新
@@ -39,9 +39,11 @@ public:
 
 
 #pragma endregion
-
+	bool CanAttackInFront();
 private:
 	int32_t minRange_;
 	int32_t maxRange_;
+
+	int shotTimer_ = 0;
 };
 

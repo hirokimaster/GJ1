@@ -16,6 +16,10 @@ TitleScene::~TitleScene()
 
 void TitleScene::Initialize()
 {
+
+	gameCamera_ = std::make_unique<GameCamera>();
+	gameCamera_->Init();
+
 	// ポストエフェクト初期化
 	postEffect_ = std::make_unique<PostProcess>();
 	postEffect_->Initialize();
@@ -35,7 +39,7 @@ void TitleScene::Update()
 	if (Input::GetInstance()->PressedKey(DIK_SPACE)) {
 		GameManager::GetInstance()->ChangeScene("SELECT");
 	}
-
+	skydome_->Update();
 	ObjectManager::GetInstance()->Update();
 }
 
@@ -43,7 +47,7 @@ void TitleScene::Draw()
 {
 
 	titleSprite_->Draw();
-	//ObjectManager::GetInstance()->Draw();
+	ObjectManager::GetInstance()->Draw(gameCamera_->GetCamera());
 	//postEffect_->Draw();
 }
 

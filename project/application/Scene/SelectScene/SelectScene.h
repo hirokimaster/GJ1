@@ -5,7 +5,10 @@
 #include "application/SceneTransition/FadeIn/FadeIn.h"
 #include "application/SceneTransition/FadeOut/FadeOut.h"
 #include "application/GameManager/GameManager.h"
+#include "engine/Graphics/Camera/Camera.h"
 #include <application/SceneSprite/SelectSprite.h>
+
+#include "application/GameObject/Skydome/Skydome.h"
 
 class SelectScene : public IScene {
 public:
@@ -47,4 +50,8 @@ private:
 private:
 	std::unique_ptr<PostProcess> postEffect_ = nullptr;
 	std::unique_ptr<SelectSprite> selectSprite_ = nullptr;
+
+	Camera camera_; // ゲームカメラ
+	// スカイドーム
+	std::unique_ptr<Skydome> skydome_;
 };

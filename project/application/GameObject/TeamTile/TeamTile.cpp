@@ -24,7 +24,7 @@ void TeamTile::Initialize(Vector2 mapPos, int tileMode, int rowNum)
 void TeamTile::Update()
 {
 
-	ColorChange();
+	//ColorChange();
 	BaseInstancingObject::Update(); // object共通の更新処理
 	collider_->SetWorldPosition(GetWorldPosition());
 	collider_->SetScale(object_.lock()->worldTransform.scale);

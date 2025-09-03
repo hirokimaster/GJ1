@@ -13,7 +13,8 @@ void GameCamera::Update()
 
 	DebugCamera();
 
-
+	float centerPosX = tileMap_->GetMaxCol() * 2.0f / 2.0f -1.0f;
+	camera_.translate.x = centerPosX;
 	camera_.UpdateMatrix();
 }
 
