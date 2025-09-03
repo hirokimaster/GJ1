@@ -10,18 +10,20 @@ void GameCamera::Init()
 void GameCamera::Update()
 {
 	// デバッグカメラ
-#ifdef _DEBUG
+
 	DebugCamera();
-#endif // _DEBUG
+
 
 	camera_.UpdateMatrix();
 }
 
 void GameCamera::DebugCamera()
 {
+#ifdef _DEBUG
 	ImGui::Begin("DebugCamera");
 	ImGui::DragFloat3("CameraPos", &camera_.translate.x, 0.1f);
 	ImGui::DragFloat3("CameraRot", &camera_.rotate.x, 0.1f);
 
 	ImGui::End();
+#endif // _DEBUG
 }
