@@ -32,8 +32,6 @@ void GameScene::Initialize()
 	isGameOver = false;
 	isGameClear = false;
   
-	TileMap::LoadTile(teamTiles_);
-
 	// プール
 	projectilePool_ = std::make_unique<ProjectilePool>();
 	projectilePool_->Initialize();
