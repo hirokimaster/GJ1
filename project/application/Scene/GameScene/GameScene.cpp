@@ -33,6 +33,10 @@ void GameScene::Initialize()
 	isGameClear = false;
 	tileMap_ = std::make_unique<TileMap>();
 	tileMap_->LoadTile(teamTiles_);
+
+	// スカイドーム
+	skydome_ = std::make_unique<Skydome>();
+	skydome_->Init();
 }
 
 void GameScene::Update()
@@ -60,6 +64,7 @@ void GameScene::Update()
 	for (auto& tile : teamTiles_) {
 		tile->Update();
 	}
+	skydome_->Update();
 	ObjectManager::GetInstance()->Update();
 }
 

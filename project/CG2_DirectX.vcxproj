@@ -178,6 +178,7 @@ copy "$(WindowsSdkdir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="application\Scene\SelectScene\SelectScene.cpp" />
     <ClCompile Include="application\GameObject\TeamTile\TeamTile.cpp" />
     <ClCompile Include="application\GameObject\TileMap\TileMap.cpp" />
+    <ClCompile Include="application\GameObject\Skydome\Skydome.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="application\AdjustmentVariables\AdjustmentVariables.h" />
@@ -259,6 +260,7 @@ copy "$(WindowsSdkdir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="application\GameObject\GameCamera\GameCamera.h" />
     <ClInclude Include="application\GameObject\TeamTile\TeamTile.h" />
     <ClInclude Include="application\GameObject\TileMap\TileMap.h" />
+    <ClInclude Include="application\GameObject\Skydome\Skydome.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="engine\3d\BaseObject\BaseIndividualObject.cpp" />

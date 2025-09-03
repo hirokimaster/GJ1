@@ -16,6 +16,7 @@
 #include "application/GameObject/GameCamera/GameCamera.h"
 #include "application/GameObject/TeamTile/TeamTile.h"
 #include "application/GameObject/TileMap/TileMap.h"
+#include "application/GameObject/Skydome/Skydome.h"
 class GameScene : public IScene {
 public: // メンバ関数
 	/// <summary>
@@ -75,4 +76,7 @@ private:
 	std::unique_ptr<TileMap> tileMap_;
 
 	std::vector<std::unique_ptr<TeamTile>> teamTiles_; // ゲームカメラ
+	// スカイドーム
+	std::unique_ptr<Skydome> skydome_;
+
 };
