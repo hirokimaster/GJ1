@@ -2,23 +2,23 @@
 #include <string>
 #include <fstream>
 #include <sstream>
-void TileMap::LoadTile(std::vector<std::unique_ptr<TeamTile>>& teamTiles)
+void TileMap::LoadTile()
 {
     std::ifstream file("resources/Stage/stage1.csv");
     if (!file.is_open()) {
-		assert(false && "Failed to open CSV file");
+        assert(false && "Failed to open CSV file");
     };
 
-    std::vector<std::vector<std::string>> rawCells;
+    std::vector<std::vector<int>> rawCells;
     std::string line;
 
     while (std::getline(file, line)) {
         std::stringstream ss(line);
         std::string cell;
-        std::vector<std::string> row;
+        std::vector<int> row;
 
         while (std::getline(ss, cell, ',')) {
-            row.push_back(cell);
+            row.push_back(std::stoi(cell));
         }
         rawCells.push_back(row);
     }
@@ -27,21 +27,19 @@ void TileMap::LoadTile(std::vector<std::unique_ptr<TeamTile>>& teamTiles)
     maxCol_ = rawCells.empty() ? 0 : static_cast<int>(rawCells[0].size());
 
     float centerX = (maxCol_ - 1) / 2.0f;
-   // float centerY = (totalRows - 1) / 2.0f;
     float tileSize = 2.0f;
-
- 
-
-    // 最前列のZ位置を固定（例：0.0f に固定）
     float startZ = 0.0f;
 
+    // 保持
+    map_ = rawCells;
+    tiles_.resize(maxRow_);
+
     for (int rowIndex = 0; rowIndex < maxRow_; ++rowIndex) {
+        tiles_[rowIndex].resize(maxCol_);
         for (int colIndex = 0; colIndex < maxCol_; ++colIndex) {
-            std::unique_ptr<TeamTile> teamTile = std::make_unique<TeamTile>();
+            auto teamTile = std::make_unique<TeamTile>();
 
-            int value = std::stoi(rawCells[rowIndex][colIndex]); // CSV値取得
-
-            // 行を逆にして手前から奥に配置
+            int value = map_[rowIndex][colIndex];
             int reversedRow = maxRow_ - 1 - rowIndex;
 
             Vector2 position{
@@ -49,11 +47,37 @@ void TileMap::LoadTile(std::vector<std::unique_ptr<TeamTile>>& teamTiles)
                 startZ + (reversedRow * tileSize)
             };
 
-            teamTile->Initialize(position, value,rowIndex);
-            teamTiles.push_back(std::move(teamTile));
+            teamTile->Initialize(position, value, rowIndex);
+            tiles_[rowIndex][colIndex] = std::move(teamTile);
         }
     }
+}
 
+void TileMap::Update()
+{
+    for (int row = 0; row < maxRow_; ++row) {
+        for (int col = 0; col < maxCol_; ++col) {
+            if (tiles_[row][col]) {
+                tiles_[row][col]->Update();
+            }
+        }
+    }
+}
 
+int TileMap::GetTileMap(int x, int y)
+{
+    if (y >= 0 && y < maxRow_ && x >= 0 && x < maxCol_) {
+        return map_[y][x];
+    }
+    return 0; // 範囲外は0（空白）を返す
+}
 
+void TileMap::SetTileMap(int x, int y, int value)
+{
+    if (y >= 0 && y < maxRow_ && x >= 0 && x < maxCol_) {
+        map_[y][x] = value;
+        if (tiles_[y][x]) {
+            tiles_[y][x]->SetTileMode(value); // TeamTile 側にも反映
+        }
+    }
 }

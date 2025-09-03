@@ -42,7 +42,7 @@ void GameScene::Initialize()
 	archer_->SetProjectile(projectilePool_.get());
 
 	tileMap_ = std::make_unique<TileMap>();
-	tileMap_->LoadTile(teamTiles_);
+	tileMap_->LoadTile();
 
 	// スカイドーム
 	skydome_ = std::make_unique<Skydome>();
@@ -61,6 +61,12 @@ void GameScene::Update()
 		isGameClear = true;
 	}
 
+	if (Input::GetInstance()->PressedKey(DIK_M)) {
+		if (tileMap_->GetTileMap(2, 1) == 0) {
+			tileMap_->SetTileMap(2, 1, 2);
+		}
+	}
+
 	if (isGameOver) {
 		if (Input::GetInstance()->PressedKey(DIK_S)) {
 			GameManager::GetInstance()->ChangeScene("SELECT");
@@ -72,9 +78,7 @@ void GameScene::Update()
 		}
 	}
 
-	for (auto& tile : teamTiles_) {
-		tile->Update();
-	}
+	tileMap_->Update();
 
 	// プール
 	projectilePool_->Update();

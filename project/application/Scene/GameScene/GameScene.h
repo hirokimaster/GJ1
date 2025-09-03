@@ -78,7 +78,7 @@ private:
 	// タイルマップ管理クラス
 	std::unique_ptr<TileMap> tileMap_;
 
-	std::vector<std::unique_ptr<TeamTile>> teamTiles_; // ゲームカメラ
+	
 
 	std::unique_ptr<BaseUnit> archer_;
 	std::unique_ptr<ProjectilePool> projectilePool_;

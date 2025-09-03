@@ -1,6 +1,10 @@
 #pragma once
 #include "engine/3d/BaseObject/BaseInstancingObject.h"
-
+enum TileMode {
+	NORMAL,
+	RED,
+	BLUE
+};
 
 class TeamTile : public BaseInstancingObject
 {
@@ -17,6 +21,8 @@ public:
 
 
 	void ColorChange();
+public:
+	
 
 #pragma region getter
 
