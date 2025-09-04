@@ -51,6 +51,7 @@ public: // メンバ関数
 	void PostProcessDraw()override;
 
 private:
+	Camera camera_{};
 };
 
 
