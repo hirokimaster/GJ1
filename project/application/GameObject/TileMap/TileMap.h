@@ -9,6 +9,9 @@ public:
 
 	void Update();
 
+public:
+	bool IsAllBlue() const;
+
 public: // Getter
 	int GetMaxRow()const { return maxRow_; }
 	int GetMaxCol()const { return maxCol_; }
@@ -23,6 +26,8 @@ private:
 	int maxRow_ = 0;
 	// 最大列数
 	int maxCol_ = 0;
+	// 青チームのタイル数
+	int blueCount_ = 0;
 	// タイルの本体
 	std::vector<std::vector<std::unique_ptr<TeamTile>>> tiles_;
 	// マップデータ

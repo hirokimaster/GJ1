@@ -61,14 +61,8 @@ void GameScene::Update()
 	if (Input::GetInstance()->PressedKey(DIK_G)) {
 		isGameOver = true;
 	}
-	if (Input::GetInstance()->PressedKey(DIK_C)) {
+	if (tileMap_->IsAllBlue()) {
 		isGameClear = true;
-	}
-
-	if (Input::GetInstance()->PressedKey(DIK_M)) {
-		if (tileMap_->GetTileMap(2, 1) == 0) {
-			tileMap_->SetTileMap(2, 1, 2);
-		}
 	}
 
 	if (isGameOver) {
