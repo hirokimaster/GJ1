@@ -69,7 +69,7 @@ public:
 
 	const std::string GetName() const { return name_; }
 
-	const GridPosition GetPosition() const { return gridPosition_; }
+	const GridPosition GetGridPosition() const { return gridPosition_; }
 
 #pragma endregion
 
