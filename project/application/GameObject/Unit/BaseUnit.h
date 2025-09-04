@@ -61,6 +61,10 @@ public:
 	/// <returns></returns>
 	virtual bool IsInActionRange(const GridPosition& targetPosition) const = 0;
 
+	/// <summary>
+	/// 後で消す
+	/// </summary>
+	/// <returns></returns>
 	virtual bool CanAttackInFront() = 0;
 
 #pragma region getter
@@ -70,6 +74,10 @@ public:
 	const std::string GetName() const { return name_; }
 
 	const GridPosition GetGridPosition() const { return gridPosition_; }
+
+	ProjectilePool* GetProjectile()const { return projectilePool_; }
+
+	TileMap* GetTileMap()const { return tileMap_; }
 
 #pragma endregion
 
@@ -89,6 +97,5 @@ protected:
 	uint32_t attack_; // 攻撃力
 	GridPosition gridPosition_{}; // 位置
 	ProjectilePool* projectilePool_ = nullptr;
-
 	TileMap* tileMap_ = nullptr;
 };

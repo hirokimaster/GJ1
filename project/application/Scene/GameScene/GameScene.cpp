@@ -35,15 +35,10 @@ void GameScene::Initialize()
 
 	isGameOver = false;
 	isGameClear = false;
- // 
-	//// プール
-	//projectilePool_ = std::make_unique<ProjectilePool>();
-	//projectilePool_->Initialize();
-
-	//// ユニット
-	//archer_ = std::make_unique<Archer>("Archer");
-	//archer_->Initialize({0.0f,0.0f});
-	//archer_->SetProjectile(projectilePool_.get());
+  
+	// プール
+	projectilePool_ = std::make_unique<ProjectilePool>();
+	projectilePool_->Initialize();
 
 	tileMap_ = std::make_unique<TileMap>();
 	tileMap_->LoadTile();
@@ -51,6 +46,7 @@ void GameScene::Initialize()
 	player_ = std::make_unique<Player>();
 	player_->Init();
 	player_->SetTileMap(tileMap_.get());
+	player_->SetProjectilePool(projectilePool_.get());
 	gameCamera_->SetTileMap(tileMap_.get());
 	// スカイドーム
 	skydome_ = std::make_unique<Skydome>();
@@ -89,10 +85,8 @@ void GameScene::Update()
 	tileMap_->Update();
 
 	player_->Update();
-	//// プール
-	//projectilePool_->Update();
-	//// ユニット
-	//archer_->Update();
+	// プール
+	projectilePool_->Update();
 
 	skydome_->Update();
   
