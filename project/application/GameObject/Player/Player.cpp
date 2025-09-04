@@ -23,6 +23,13 @@ void Player::Update() {
 	}
 	for(auto & unit: units_){
 		unit->Update();
+
+		for (auto& tile : tileMap_->GetSpecialTiles()) {
+			if (tile->GetGridPosition().x == unit->GetGridPosition().x &&
+				tile->GetGridPosition().z == unit->GetGridPosition().z) {
+				tile->OnUnitEnter(unit);
+			}
+		}
 	}
 	
 	BaseIndividualObject::Update(); // object共通の更新処理

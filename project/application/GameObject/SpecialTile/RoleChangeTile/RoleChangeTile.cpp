@@ -1,6 +1,7 @@
 #include <application/GameObject/SpecialTile/RoleChangeTile/RoleChangeTile.h>
+#include <application/GameObject/Unit/UnitFactory.h>
 
-void RoleChangeTile::OnUnitEnter(BaseUnit*& unit)
+void RoleChangeTile::OnUnitEnter(std::unique_ptr<BaseUnit>& unit)
 {
 	// ユニットがnullだったら止める
 	if (!unit) return;
@@ -14,6 +15,5 @@ void RoleChangeTile::OnUnitEnter(BaseUnit*& unit)
 	newUnit->SetProjectile(unit->GetProjectile());
 	newUnit->SetTileMap(unit->GetTileMap());
 
-	delete unit;
-	unit = newUnit.release(); // 差し替え
+	unit = std::move(newUnit); // 差し替え
 }

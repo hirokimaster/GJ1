@@ -2,6 +2,10 @@
 #include <memory>
 #include <vector>
 #include "application/GameObject/TeamTile/TeamTile.h"
+#include <application/GameObject/SpecialTile/ISpecialTile.h>
+
+class RoleChangeTile;
+
 class TileMap
 {
 public:
@@ -18,6 +22,8 @@ public: // Getter
 
 	int GetTileMap(int x, int y);
 
+	std::vector<std::unique_ptr<ISpecialTile>> GetSpecialTiles() { return specialTiles_; }
+
 public: // Setter
 	void SetTileMap(int x, int y, int value);
 
@@ -32,4 +38,6 @@ private:
 	std::vector<std::vector<std::unique_ptr<TeamTile>>> tiles_;
 	// マップデータ
 	std::vector<std::vector<int>> map_;
+	// 特殊マップ
+	std::vector<std::unique_ptr<ISpecialTile>> specialTiles_;
 };

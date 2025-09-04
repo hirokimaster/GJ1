@@ -2,6 +2,9 @@
 #include <string>
 #include <fstream>
 #include <sstream>
+#include <application/GameObject/SpecialTile/RoleChangeTile/RoleChangeTile.h>
+
+
 void TileMap::LoadTile()
 {
     std::ifstream file("resources/Stage/rensyu.csv");
@@ -51,6 +54,9 @@ void TileMap::LoadTile()
             tiles_[rowIndex][colIndex] = std::move(teamTile);
         }
     }
+
+    // debug
+    specialTiles_.push_back(std::make_unique<RoleChangeTile>(GridPosition{ 3,2 }, "warrior"));
 }
 
 void TileMap::Update()

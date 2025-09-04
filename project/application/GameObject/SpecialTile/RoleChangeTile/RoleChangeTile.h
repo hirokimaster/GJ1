@@ -1,6 +1,7 @@
 #pragma once
 #include <application/GameObject/SpecialTile/ISpecialTile.h>
-#include <application/GameObject/Unit/UnitFactory.h>
+
+class BaseUnit;
 
 class RoleChangeTile : public ISpecialTile {
 public:
@@ -17,7 +18,7 @@ public:
 	/// ユニットが来た時の処理
 	/// </summary>
 	/// <param name="unit"></param>
-	void OnUnitEnter(BaseUnit*& unit)override;
+	void OnUnitEnter(std::unique_ptr<BaseUnit>& unit)override;
 
 #pragma region getter
 

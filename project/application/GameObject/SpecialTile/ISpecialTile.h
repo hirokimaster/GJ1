@@ -1,5 +1,5 @@
 #pragma once
-#include <application/GameObject/Unit/BaseUnit.h>
+class BaseUnit;
 
 class ISpecialTile {
 public:
@@ -12,7 +12,7 @@ public:
 	/// ユニットが入った時の処理
 	/// </summary>
 	/// <param name="unit"></param>
-	virtual void OnUnitEnter(BaseUnit*& unit) = 0;
+	virtual void OnUnitEnter(std::unique_ptr<BaseUnit>& unit) = 0;
 
 #pragma region getter
 
