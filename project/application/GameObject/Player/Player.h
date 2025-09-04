@@ -2,6 +2,7 @@
 #include "engine/3d/BaseObject/BaseIndividualObject.h"
 #include "application/GameObject/TileMap/TileMap.h"
 #include "application/GameObject/Unit/BaseUnit.h"
+#include <application/GameObject/Unit/UnitFactory.h>
 class Player : BaseIndividualObject
 {
 public:
@@ -18,6 +19,11 @@ public:
 
 public: // Setter
 	void SetTileMap(TileMap* tileMap) { tileMap_ = tileMap; }
+
+private:
+
+	void SelectUnit(); // unit選択
+
 private:
 	int teamId_ = TileMode::BLUE;        
 	TileMap* tileMap_;    // マップ参照
@@ -26,5 +32,7 @@ private:
 	// 後で書き換えて
 	std::vector<std::unique_ptr<BaseUnit>> units_;
 	std::unique_ptr<ProjectilePool> projectilePool_;
+
+	int32_t selectNum_ = 0; // unit洗濯用の番号
 };
 

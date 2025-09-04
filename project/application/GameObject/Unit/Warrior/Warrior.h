@@ -26,6 +26,10 @@ public:
 	/// </summary>
 	void Attack()override;
 
+	bool CanAttackInFront()override;
+
+	bool IsInActionRange(const GridPosition& targetPosition) const override;
+
 private:
 
 };

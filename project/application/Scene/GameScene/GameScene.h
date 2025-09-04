@@ -20,6 +20,8 @@
 #include "application/GameObject/TileMap/TileMap.h"
 #include "application/GameObject/Skydome/Skydome.h"
 #include "application/GameObject/player/Player.h"
+#include <application/GameObject/Unit/UnitFactory.h>
+#include <application/GameObject/Unit/Warrior/Warrior.h>
 
 class GameScene : public IScene {
 public: // メンバ関数

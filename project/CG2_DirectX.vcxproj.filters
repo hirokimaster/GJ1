@@ -196,6 +196,7 @@
     <ClInclude Include="application\GameObject\Unit\Projectile\ProjectilePool.h" />
     <ClInclude Include="application\GameObject\Skydome\Skydome.h" />
     <ClInclude Include="application\GameObject\Player\Player.h" />
+    <ClInclude Include="application\GameObject\Unit\UnitFactory.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\ShaderFile\Object3d.hlsli" />

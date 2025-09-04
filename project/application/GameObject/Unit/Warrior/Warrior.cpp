@@ -7,7 +7,9 @@ void Warrior::Initialize(Vector2 pos) {
 	TextureManager::Load("resources/TempTexture/white.png");
 	// object生成
 	BaseUnit::CreateObject("TempModel/cube.obj", "TempTexture/white.png");
-	object_.lock()->worldTransform.translate = { pos.x,0.0f,pos.y };
+	object_.lock()->worldTransform.translate = { pos.x,1.5f,pos.y };
+	object_.lock()->worldTransform.scale = { 0.5f,0.5f,0.5f };
+	object_.lock()->color = { 1.0f,0.0f,0.0f,1.0f };
 }
 
 void Warrior::Update()
@@ -18,4 +20,15 @@ void Warrior::Update()
 
 void Warrior::Attack()
 {
+}
+
+bool Warrior::CanAttackInFront()
+{
+	return false;
+}
+
+bool Warrior::IsInActionRange(const GridPosition& targetPosition) const
+{
+	targetPosition;
+	return false;
 }

@@ -17,6 +17,10 @@ GameScene::~GameScene()
 
 void GameScene::Initialize()
 {
+	// ユニット登録
+	UnitFactory::Register("warrior", [] { return std::make_unique<Warrior>("warrior"); });
+	UnitFactory::Register("archer", [] { return std::make_unique<Archer>("archer"); });
+
 	gameCamera_ = std::make_unique<GameCamera>();
 	gameCamera_->Init();
 
