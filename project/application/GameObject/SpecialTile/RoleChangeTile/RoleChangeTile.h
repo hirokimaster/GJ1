@@ -17,7 +17,19 @@ public:
 	/// ユニットが来た時の処理
 	/// </summary>
 	/// <param name="unit"></param>
-	void OnUnitEnter(BaseUnit* unit)override;
+	void OnUnitEnter(BaseUnit*& unit)override;
+
+#pragma region getter
+
+	const GridPosition GetGridPosition()const { return position_; };
+
+#pragma endregion
+
+#pragma region setter
+
+	void SetGridPosition(const GridPosition& position) { position_ = position; };
+
+#pragma endregion
 
 private:
 	GridPosition position_{};
