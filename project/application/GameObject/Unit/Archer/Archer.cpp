@@ -19,7 +19,7 @@ void Archer::Update()
 	BaseUnit::Update();
 	// デバック用の移動、攻撃
 	if (Input::GetInstance()->PressedKey(DIK_W)) {
-		object_.lock()->worldTransform.translate.y += 1.0f;
+		//object_.lock()->worldTransform.translate.y += 1.0f;
 	}
 	shotTimer_++;
 	
