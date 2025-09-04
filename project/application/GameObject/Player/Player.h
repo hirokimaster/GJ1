@@ -20,6 +20,8 @@ public:
 public: // Setter
 	void SetTileMap(TileMap* tileMap) { tileMap_ = tileMap; }
 
+	void SetProjectilePool(ProjectilePool* ptr) { projectilePool_ = ptr; }
+
 private:
 
 	void SelectUnit(); // unit選択
@@ -31,8 +33,7 @@ private:
 
 	// 後で書き換えて
 	std::vector<std::unique_ptr<BaseUnit>> units_;
-	std::unique_ptr<ProjectilePool> projectilePool_;
-
 	int32_t selectNum_ = 0; // unit洗濯用の番号
+	ProjectilePool* projectilePool_ = nullptr;
 };
 

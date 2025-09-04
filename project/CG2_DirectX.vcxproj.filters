@@ -110,6 +110,7 @@
     <ClCompile Include="application\GameObject\Unit\Projectile\ProjectilePool.cpp" />
     <ClCompile Include="application\GameObject\Skydome\Skydome.cpp" />
     <ClCompile Include="application\GameObject\Player\Player.cpp" />
+    <ClCompile Include="application\GameObject\SpecialTile\RoleChangeTile\RoleChangeTile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="application\AdjustmentVariables\AdjustmentVariables.h" />
@@ -197,6 +198,8 @@
     <ClInclude Include="application\GameObject\Skydome\Skydome.h" />
     <ClInclude Include="application\GameObject\Player\Player.h" />
     <ClInclude Include="application\GameObject\Unit\UnitFactory.h" />
+    <ClInclude Include="application\GameObject\SpecialTile\RoleChangeTile\RoleChangeTile.h" />
+    <ClInclude Include="application\GameObject\SpecialTile\ISpecialTile.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\ShaderFile\Object3d.hlsli" />
