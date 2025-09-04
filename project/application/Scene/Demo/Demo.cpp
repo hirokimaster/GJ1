@@ -16,14 +16,17 @@ Demo::~Demo()
 
 void Demo::Initialize()
 {
+	camera_.Initialize();
 }
 
 void Demo::Update()
 {
+	camera_.UpdateMatrix();
 }
 
 void Demo::Draw()
 {
+	ParticleEditor::GetInstance()->Draw(camera_);
 }
 
 void Demo::PostProcessDraw()

@@ -14,17 +14,43 @@ ParticleEditor* ParticleEditor::GetInstance()
 
 void ParticleEditor::CreateParticle(const string& particleName)
 {
-	// 指定名のオブジェクトが無ければ追加する
-	datas_[particleName];
+   
+    Particle newParticle;
+    // 基本情報
+    newParticle["count"] = int32_t(10);
+    newParticle["emit"] = int32_t(1);
+    newParticle["frequency"] = 0.1f;
+    newParticle["frequencyTime"] = 0.1f;
+    newParticle["radius"] = 1.0f;
+    // Translate
+    newParticle["rangeTranslate_min"] = Vector3{ 0.0f, 0.0f, 0.0f };
+    newParticle["rangeTranslate_max"] = Vector3{ 0.0f, 0.0f, 0.0f };
+    newParticle["translate"] = Vector3{ 0.0f, 0.0f, 0.0f };
+    // Scale
+    newParticle["rangeScale_min"] = Vector3{ 1.0f, 1.0f, 1.0f };
+    newParticle["rangeScale_max"] = Vector3{ 1.0f, 1.0f, 1.0f };
+    // LifeTime
+    newParticle["rangeLifeTime_min"] = 1.0f;
+    newParticle["rangeLifeTime_max"] = 1.0f;
+    // Velocity
+    newParticle["rangeVelocity_min"] = Vector3{ 0.0f, 0.0f, 0.0f };
+    newParticle["rangeVelocity_max"] = Vector3{ 0.0f, 0.0f, 0.0f };
+    // CurrentTime
+    newParticle["rangeCurrentTime_min"] = 0.0f;
+    newParticle["rangeCurrentTime_max"] = 0.0f;
+    // Color
+    newParticle["rangeColor_min"] = Vector3{ 1.0f, 1.0f, 1.0f };
+    newParticle["rangeColor_max"] = Vector3{ 1.0f, 1.0f, 1.0f };
+    // Alpha
+    newParticle["rangeAlpha_min"] = 1.0f;
+    newParticle["rangeAlpha_max"] = 1.0f;
+
+    datas_[particleName] = newParticle;
 }
 
 void ParticleEditor::Update()
 {
 #ifdef _DEBUG
-
-    static char newName[128] = "";
-    static int selectedIndex = -1;
-    int currentIndex = 0;
 
     // テクスチャ選択用
     static std::vector<std::string> textureFiles;
@@ -62,6 +88,10 @@ void ParticleEditor::Update()
         return;
     }
 
+   
+    static char newName[128] = "";
+    static std::string selectedName;
+
     // 新規作成UI
     ImGui::InputText("New Particle Name", newName, sizeof(newName));
     ImGui::SameLine();
@@ -69,95 +99,101 @@ void ParticleEditor::Update()
         std::string nameStr = newName;
         if (!nameStr.empty() && datas_.find(nameStr) == datas_.end()) {
             CreateParticle(nameStr);
-            selectedIndex = static_cast<int>(std::distance(datas_.begin(), datas_.find(nameStr)));
-            newName[0] = '\0'; // 入力欄をクリア
+            selectedName = nameStr;
+            newName[0] = '\0';      // 入力欄クリア
         }
     }
 
-    // テクスチャ選択UI
-    if (!textureFiles.empty()) {
-        std::vector<const char*> items;
-        for (const auto& tex : textureFiles) items.push_back(tex.c_str());
-        ImGui::Text("Texture:");
-        if (ImGui::Combo("##TextureCombo", &selectedTextureIndex, items.data(), static_cast<int>(items.size()))) {
-            selectedTextureName = textureFiles[selectedTextureIndex];
-        }
-    } else {
-        ImGui::Text("No textures found in resources/TempTexture/");
-    }
 
-    // 既存パーティクルのリスト
+    // パーティクルのリスト
     ImGui::Text("Select Particle:");
     if (ImGui::BeginListBox("##ParticleList", ImVec2(-FLT_MIN, 5 * ImGui::GetTextLineHeightWithSpacing()))) {
-        currentIndex = 0;
-        for (auto it = datas_.begin(); it != datas_.end(); ++it, ++currentIndex) {
-            const bool isSelected = (selectedIndex == currentIndex);
-            if (ImGui::Selectable(it->first.c_str(), isSelected)) {
-                selectedIndex = currentIndex;
+        for (auto& kv : datas_) {
+            const bool isSelected = (selectedName == kv.first);
+            if (ImGui::Selectable(kv.first.c_str(), isSelected)) {
+                selectedName = kv.first;
             }
         }
         ImGui::EndListBox();
     }
 
     // 編集UI
-    if (selectedIndex >= 0 && selectedIndex < static_cast<int>(datas_.size())) {
-        auto it = datas_.begin();
-        std::advance(it, selectedIndex);
-        const std::string& particleName = it->first;
-        Particle& particle = it->second;
+    if (!selectedName.empty()) {
+        auto it = datas_.find(selectedName);
+        if (it != datas_.end()) {
+            const std::string& particleName = it->first;
+            Particle& particle = it->second;
 
-        if (ImGui::BeginMenuBar()) {
-            if (ImGui::BeginMenu(particleName.c_str())) {
-                for (auto& params : particle) {
-                    const string& itemName = params.first;
-                    Param& param = params.second;
+            // --- パラメータ編集 ---
+            if (ImGui::BeginMenuBar()) {
+                if (ImGui::BeginMenu(particleName.c_str())) {
+                    for (auto& params : particle) {
+                        const std::string& itemName = params.first;
+                        Param& param = params.second;
 
-                    if (holds_alternative<int32_t>(param)) {
-                        int32_t* ptr = get_if<int32_t>(&param);
-                        ImGui::DragInt(itemName.c_str(), ptr, 1.0f, 0, 100);
+                        if (holds_alternative<int32_t>(param)) {
+                            int32_t* ptr = get_if<int32_t>(&param);
+                            ImGui::DragInt(itemName.c_str(), ptr, 1.0f, 0, 100);
+                        }
+                        else if (holds_alternative<float>(param)) {
+                            float* ptr = get_if<float>(&param);
+                            ImGui::DragFloat(itemName.c_str(), ptr, 0.1f, -100.0f, 100.0f, "%.2f");
+                        }
+                        else if (holds_alternative<Vector3>(param)) {
+                            Vector3* ptr = get_if<Vector3>(&param);
+                            ImGui::DragFloat3(itemName.c_str(), reinterpret_cast<float*>(ptr), 0.1f, -100.0f, 100.0f, "%.2f");
+                        }
                     }
-                    else if (holds_alternative<float>(param)) {
-                        float* ptr = get_if<float>(&param);
-                        ImGui::DragFloat(itemName.c_str(), ptr, 0.1f, -100.0f, 100.0f, "%.2f");
+
+                    // --- テクスチャ選択 ---
+                    if (!textureFiles.empty()) {
+                        std::vector<const char*> items;
+                        for (auto& tex : textureFiles) {
+                            items.push_back(tex.c_str());
+                        }
+                        ImGui::Text("Texture:");
+                        if (ImGui::Combo("##TextureCombo", &selectedTextureIndex, items.data(), (int)items.size())) {
+                            selectedTextureName = textureFiles[selectedTextureIndex];
+                        }
                     }
-                    else if (holds_alternative<Vector3>(param)) {
-                        Vector3* ptr = get_if<Vector3>(&param);
-                        ImGui::DragFloat3(itemName.c_str(), reinterpret_cast<float*>(ptr), 0.1f, -100.0f, 100.0f, "%.2f");
+                    else {
+                        ImGui::Text("No textures found in resources/TempTexture/");
                     }
+
+                    ImGui::Separator();
+
+                    if (ImGui::Button("Save")) {
+                        SaveFile(particleName);
+                        std::string message = format("{}.json saved.", particleName);
+                        MessageBoxA(nullptr, message.c_str(), "particleEditor", 0);
+                    }
+
+                    ImGui::EndMenu();
                 }
+                ImGui::EndMenuBar();
+            }
 
-                ImGui::Text("\n");
+            // プレビュー機能
+            // プレビュー用パーティクルがなければ生成
+            if (!previewParticle_) {
+                ModelManager::LoadObjModel("TempModel/cube.obj");
+                previewParticle_ = std::make_unique<GPUParticle>();
+                previewParticle_->SetModel("TempModel/cube.obj");
+                previewParticle_->Initialize();
+                previewParticle_->SetIsActive(true);
+            }
 
-                if (ImGui::Button("Save")) {
-                    SaveFile(particleName);
-                    string message = format("{}.json saved.", particleName);
-                    MessageBoxA(nullptr, message.c_str(), "particleEditor", 0);
+            // ここで毎フレームパラメータをセット
+            if (previewParticle_) {
+                EmitterSphere param = ConvertParticleToEmitterSphere(particle);
+                if (!selectedTextureName.empty()) {
+                    std::string texPath = "TempTexture/" + selectedTextureName;
+                    uint32_t texHandle = TextureManager::GetTexHandle(texPath);
+                    previewParticle_->SetTexHandle(texHandle);
                 }
-
-                ImGui::EndMenu();
+                previewParticle_->SetParticleParam(param);
+                previewParticle_->Update();
             }
-            ImGui::EndMenuBar();
-        }
-
-        // プレビュー機能
-        // プレビュー用パーティクルがなければ生成
-        if (!previewParticle_) {
-            previewParticle_ = std::make_unique<GPUParticle>();
-            previewParticle_->SetModel("Player/plane.obj");
-            previewParticle_->Initialize();
-            previewParticle_->SetIsActive(true);
-        }
-
-        // ここで毎フレームパラメータをセット
-        if (previewParticle_) {
-            EmitterSphere param = ConvertParticleToEmitterSphere(particle);
-            if (!selectedTextureName.empty()) {
-                std::string texPath = "TempTexture/" + selectedTextureName;
-                uint32_t texHandle = TextureManager::GetTexHandle(texPath);
-                previewParticle_->SetTexHandle(texHandle);
-            }
-            previewParticle_->SetParticleParam(param);
-            previewParticle_->Update();
         }
     }
 
