@@ -31,6 +31,12 @@ public:
 	/// <param name="textureName"></param>
 	void CreateObject(const std::string& modelName, const std::string& textureName);
 
+
+	/// <summary>
+	/// タイルを占領
+	/// </summary>
+	void CaptureTile();
+
 	/// <summary>
 	/// 初期化
 	/// </summary>

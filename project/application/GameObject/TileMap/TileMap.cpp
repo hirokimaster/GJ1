@@ -64,6 +64,17 @@ void TileMap::Update()
     }
 }
 
+bool TileMap::IsAllBlue() const {
+    for (int row = 0; row < maxRow_; ++row) {
+        for (int col = 0; col < maxCol_; ++col) {
+            if (map_[row][col] != 1) { // 1 を青にしたなら
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
 int TileMap::GetTileMap(int x, int y)
 {
     if (y >= 0 && y < maxRow_ && x >= 0 && x < maxCol_) {

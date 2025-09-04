@@ -18,13 +18,17 @@ void Archer::Update()
 	// ユニット共通の更新処理
 	BaseUnit::Update();
 	// デバック用の移動、攻撃
-	if (Input::GetInstance()->PressedKey(DIK_W)) {
-		//object_.lock()->worldTransform.translate.y += 1.0f;
-	}
+
+	
+	
 	shotTimer_++;
 	
+	CaptureTile(); // タイル占領
 	if (CanAttackInFront()) {
 		Attack();
+	}
+	else {
+		object_.lock()->worldTransform.translate.z += 0.01f;
 	}
 	
 
