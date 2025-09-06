@@ -3,13 +3,13 @@
 void Arrow::Initialize()
 {
 	// モデル、テクスチャのロード
-	ModelManager::LoadObjModel("TempModel/cube.obj");
-	TextureManager::Load("resources/TempTexture/white.png");
+	ModelManager::LoadObjModel("Unit/Archer/Arrow/arrow.obj");
+	TextureManager::Load("resources/Unit/Archer/ken.png");
 	// object生成
-	Projectile::CreateObject("TempModel/cube.obj", "TempTexture/white.png");
+	Projectile::CreateObject("Unit/Archer/Arrow/arrow.obj", "Unit/Archer/ken.png");
 
 	object_.lock()->worldTransform.translate.y = 1.0f;
-	object_.lock()->worldTransform.scale = { 0.2f,0.2f,0.2f };
+	object_.lock()->worldTransform.scale = { 0.4f,0.4f,0.4f };
 	active_ = false; // 非アクティブ
 }
 
