@@ -120,9 +120,16 @@ bool Archer::CanAttackInBack()
 
 void Archer::Move()
 {
+	int selfY = static_cast<int>(object_.lock()->worldTransform.translate.z / 2);
+	int targetY = tileMap_->GetMaxRow() - 1 - selfY; // CSVの可読性を上げるために奥が0行目のため修正
 	moveTimer_++;
 	if (moveTimer_ >= 240) {
-		object_.lock()->worldTransform.translate.z += velocity_.y;
+		if (targetY < tileMap_->GetMaxRow() - 1 && teamId_ == TileMode::RED) {
+			object_.lock()->worldTransform.translate.z += velocity_.y;
+		}
+		else if (targetY > 0 && teamId_ == TileMode::BLUE) {
+			object_.lock()->worldTransform.translate.z += velocity_.y;
+		}
 		moveTimer_ = 0;
 	}
 }
