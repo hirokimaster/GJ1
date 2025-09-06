@@ -113,6 +113,7 @@
     <ClCompile Include="application\Scene\SelectScene\SelectStage\SelectStage.cpp" />
     <ClCompile Include="application\GameObject\Enemy\Enemy.cpp" />
     <ClCompile Include="application\GameObject\SpecialTile\RoleChangeTile\RoleChangeTile.cpp" />
+    <ClCompile Include="application\GameObject\Unit\Swordsman\Swordsman.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="application\AdjustmentVariables\AdjustmentVariables.h" />
@@ -205,6 +206,7 @@
     <ClInclude Include="application\GameObject\SpecialTile\RoleChangeTile\RoleChangeTile.h" />
     <ClInclude Include="application\GameObject\SpecialTile\ISpecialTile.h" />
     <ClInclude Include="application\GameObject\TeamTile\TileMode.h" />
+    <ClInclude Include="application\GameObject\Unit\Swordsman\Swordsman.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\ShaderFile\Object3d.hlsli" />
