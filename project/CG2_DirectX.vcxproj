@@ -112,6 +112,7 @@ copy "$(WindowsSdkdir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
   <ItemGroup>
     <ClCompile Include="application\AdjustmentVariables\AdjustmentVariables.cpp" />
     <ClCompile Include="application\GameManager\GameManager.cpp" />
+    <ClCompile Include="application\GameObject\SpecialTile\RoleChangeTile\RoleChangeTile.cpp" />
     <ClCompile Include="application\GameObject\Unit\Archer\Archer.cpp" />
     <ClCompile Include="application\GameObject\Unit\BaseUnit.cpp" />
     <ClCompile Include="application\GameObject\Unit\Projectile\Arrow\Arrow.cpp" />
@@ -131,6 +132,7 @@ copy "$(WindowsSdkdir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="application\Scene\SelectScene\SelectStage\SelectStage.cpp" />
     <ClCompile Include="application\Scene\TitleScene\TitleScene.cpp" />
     <ClCompile Include="application\Loader\Loader.cpp" />
+    <ClCompile Include="application\GameObject\Enemy\Enemy.cpp" />
     <ClCompile Include="engine\3d\Line\Line.cpp" />
     <ClCompile Include="engine\3d\BaseObject\BaseInstancingObject.cpp" />
     <ClCompile Include="engine\3d\ObjectManager\ObjectManager.cpp" />
@@ -188,11 +190,14 @@ copy "$(WindowsSdkdir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
   <ItemGroup>
     <ClInclude Include="application\AdjustmentVariables\AdjustmentVariables.h" />
     <ClInclude Include="application\GameManager\GameManager.h" />
+    <ClInclude Include="application\GameObject\SpecialTile\ISpecialTile.h" />
+    <ClInclude Include="application\GameObject\SpecialTile\RoleChangeTile\RoleChangeTile.h" />
     <ClInclude Include="application\GameObject\Unit\Archer\Archer.h" />
     <ClInclude Include="application\GameObject\Unit\BaseUnit.h" />
     <ClInclude Include="application\GameObject\Unit\Projectile\Arrow\Arrow.h" />
     <ClInclude Include="application\GameObject\Unit\Projectile\Projectile.h" />
     <ClInclude Include="application\GameObject\Unit\Projectile\ProjectilePool.h" />
+    <ClInclude Include="application\GameObject\Unit\UnitFactory.h" />
     <ClInclude Include="application\GameObject\Unit\Warrior\Warrior.h" />
     <ClInclude Include="application\SceneSprite\ClearSprite.h" />
     <ClInclude Include="application\SceneSprite\GameOverSprite.h" />
@@ -208,6 +213,7 @@ copy "$(WindowsSdkdir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="application\Scene\SelectScene\SelectStage\SelectStage.h" />
     <ClInclude Include="application\Scene\TitleScene\TitleScene.h" />
     <ClInclude Include="application\Loader\Loader.h" />
+    <ClInclude Include="application\GameObject\Enemy\Enemy.h" />
     <ClInclude Include="engine\3d\Line\Line.h" />
     <ClInclude Include="engine\3d\BaseObject\BaseInstancingObject.h" />
     <ClInclude Include="engine\3d\BaseObject\BaseIndividualObject.h" />

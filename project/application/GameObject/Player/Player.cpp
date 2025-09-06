@@ -12,15 +12,12 @@ void Player::Init() {
 	// object共通の初期化
 	BaseIndividualObject::Initialize("PlayerTargetTile/PlayerTargetTile.obj", "TempTexture/white2.png");
 	object_.lock()->SetColor({ 0.0f,0.0f,0.6f,1.0f });
-
-	// 書き換えて
-	projectilePool_ = std::make_unique<ProjectilePool>();
-	projectilePool_->Initialize();
 }
 
 void Player::Update() {
 	SelectTile();
 	DebugDraw();
+	SelectUnit();
 	if (Input::GetInstance()->PressedKey(DIK_P)) {
 		SpawnUnit();
 	}
@@ -28,7 +25,6 @@ void Player::Update() {
 		unit->Update();
 	}
 	
-	projectilePool_->Update();
 	BaseIndividualObject::Update(); // object共通の更新処理
 }
 
@@ -71,17 +67,27 @@ void Player::SpawnUnit() {
     if (CanSpawnHere(x, y)) {
 		// yを反転（TileMapの行数を知る必要がある）
 		int reversedY = tileMap_->GetMaxRow() - 1 - y; // CSVの可読性を上げるために奥が0行目のため修正
-		// プール
-		/*std::unique_ptr<ProjectilePool> projectilePool_ = std::make_unique<ProjectilePool>();
-		projectilePool_->Initialize();*/
-		/*projectilePool_->Update();*/
-		// ユニット
-		std::unique_ptr<BaseUnit>archer_ = std::make_unique<Archer>("Archer");
-		archer_->Initialize({(float)x*2.0f,(float)reversedY *2.0f});
-		archer_->SetProjectile(projectilePool_.get());
-		archer_->SetTileMap(tileMap_);
-		units_.push_back(std::move(archer_));
 
+		// ユニット
+		std::unique_ptr<BaseUnit> unit;
+		if (selectNum_ == 0) {
+			unit = UnitFactory::Create("archer");
+			roleId_ = TileMode::BLUE_ARCHER;
+		}
+		else if (selectNum_ == 1) {
+			unit = UnitFactory::Create("warrior");
+			roleId_ = TileMode::BLUE_WARRIOR;
+		}
+	
+		unit->Initialize({ (float)x * 2.0f,(float)reversedY * 2.0f });
+		unit->SetProjectile(projectilePool_);
+		unit->SetTileMap(tileMap_);
+		unit->SetGridPosition(x, y);
+		unit->SetTeamId(teamId_);
+		unit->SetRoleId(roleId_);
+		unit->SetColor({ 0.3f,0.3f,1.0f,1.0f });
+		unit->SetVelocity({ 0.0f,2.00f });
+		units_.push_back(std::move(unit));
     }
 }
 
@@ -91,6 +97,7 @@ void Player::DebugDraw()
 	ImGui::Begin("player");
 	ImGui::Text("selectedTileX:%d", (int)selectedTile_.x);
 	ImGui::Text("selectedTileY:%d", (int)selectedTile_.y);
+	ImGui::Text("0:archer, 1:warrior, num:%d", selectNum_);
 	ImGui::End();
 #endif // _DEBUG
 
@@ -99,5 +106,23 @@ void Player::DebugDraw()
 bool Player::CanSpawnHere(int x, int y)
 {
 	int tileValue = tileMap_->GetTileMap(x, y);
-	return tileValue == teamId_; // 自チームタイルならOK
+	if (tileValue != teamId_) return false; // 自チームタイルでない
+
+	for (auto& unit : units_) {
+		if (unit->GetGridPosition().x == x && unit->GetGridPosition().z == y)
+			return false; // すでにユニットがいる
+	}
+	return true;
+}
+
+void Player::SelectUnit()
+{
+	if (Input::GetInstance()->PressedKey(DIK_LEFT) && selectNum_ >= 1) {
+		selectNum_ -= 1;
+	}
+	else if (Input::GetInstance()->PressedKey(DIK_RIGHT) && selectNum_ <= 0) {
+		selectNum_ += 1;
+	}
+
+	selectNum_ = std::clamp(selectNum_, -1, 1); // 制限しとく
 }

@@ -1,9 +1,13 @@
 #pragma once
 #include "engine/3d/BaseObject/BaseInstancingObject.h"
 enum TileMode {
-	NORMAL,
-	BLUE,
-	RED,
+	NORMAL, // 通常 : 0
+	BLUE, // 味方 : 1
+	BLUE_ARCHER, // 味方のアーチャー : 2
+	BLUE_WARRIOR,// 味方のウォリアー : 3
+	RED, // 敵 : 4
+	RED_ARCHER, // 敵のアーチャー : 5
+	RED_WARRIOR, // 敵のウォリアー : 6
 };
 
 class TeamTile : public BaseInstancingObject
@@ -52,5 +56,6 @@ private:
 	int tileMode_ = 0; // 0:通常 1:味方 2:敵
 	// 何行目か
 	int32_t rowNum_ = 0;
+
 };
 

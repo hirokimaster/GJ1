@@ -9,7 +9,7 @@ void Archer::Initialize(Vector2 pos) {
 	BaseUnit::CreateObject("TempModel/cube.obj", "TempTexture/white.png");
 	object_.lock()->worldTransform.translate = { pos.x,1.5f,pos.y };
 	object_.lock()->worldTransform.scale = { 0.5f,0.5f,0.5f };
-	object_.lock()->color = { 0.7f,0.7f,1.0f,1.0f };
+	object_.lock()->color = { 1.0f,1.0f,1.0f,1.0f };
 
 }
 
@@ -18,13 +18,19 @@ void Archer::Update()
 	// ユニット共通の更新処理
 	BaseUnit::Update();
 	// デバック用の移動、攻撃
-	if (Input::GetInstance()->PressedKey(DIK_W)) {
-		//object_.lock()->worldTransform.translate.y += 1.0f;
-	}
+
 	shotTimer_++;
 	
-	if (CanAttackInFront()) {
+	CaptureTile(); // タイル占領
+	if (CanAttackInFront() ) {
 		Attack();
+		moveTimer_ = 0;
+	}
+	else if (CanAttackInBack()) {
+		moveTimer_ = 0;
+	}
+	else if(!CanAttackInFront() || !CanAttackInBack()){
+		Move();
 	}
 	
 
@@ -32,7 +38,7 @@ void Archer::Update()
 
 void Archer::Attack()
 {
-	if (shotTimer_ >=30) {
+	if (shotTimer_ >= 120) {
 		// プールから取ってくる
 		Projectile* baseArrow = projectilePool_->Get("arrow");
 		// 取れたかチェックする
@@ -66,12 +72,53 @@ bool Archer::CanAttackInFront()
 		if (targetY < 0 || targetY >= tileMap_->GetMaxRow()) {
 			continue;
 		}
-
 		// そのマスに敵がいるか
-		if (tileMap_->GetTileMap(selfX, targetY) == 2) {
-			return true;
+		switch (teamId_) {
+		case TileMode::BLUE:
+			if(tileMap_->GetTileMap(selfX, targetY) == TileMode::RED_ARCHER) {
+				return true;
+			}
+		break;
+
 		}
 	}
 
 	return false;
+}
+
+bool Archer::CanAttackInBack()
+{
+	// 自分のタイル座標
+	int selfX = static_cast<int>(object_.lock()->worldTransform.translate.x / 2);
+	int selfY = static_cast<int>(object_.lock()->worldTransform.translate.z / 2);
+
+	// 前方向に2マスまで調べる
+	for (int dy = 1; dy <= 2; ++dy) {
+		// yを反転（TileMapの行数を知る必要がある）
+		int targetY = tileMap_->GetMaxRow() - 1 - selfY + dy; // CSVの可読性を上げるために奥が0行目のため修正
+
+		// マップ外チェック
+		if (targetY < 0 || targetY >= tileMap_->GetMaxRow()) {
+			continue;
+		}
+		// そのマスに敵がいるか
+		switch (teamId_) {
+		case TileMode::RED:
+			if (tileMap_->GetTileMap(selfX, targetY) == TileMode::BLUE_ARCHER) {
+				return true;
+			}
+			break;
+		}
+	}
+
+	return false;
+}
+
+void Archer::Move()
+{
+	moveTimer_++;
+	if (moveTimer_ >= 240) {
+		object_.lock()->worldTransform.translate.z += velocity_.y;
+		moveTimer_ = 0;
+	}
 }

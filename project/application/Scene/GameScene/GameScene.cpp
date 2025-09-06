@@ -17,6 +17,10 @@ GameScene::~GameScene()
 
 void GameScene::Initialize()
 {
+	// ユニット登録
+	UnitFactory::Register("warrior", [] { return std::make_unique<Warrior>("warrior"); });
+	UnitFactory::Register("archer", [] { return std::make_unique<Archer>("archer"); });
+
 	gameCamera_ = std::make_unique<GameCamera>();
 	gameCamera_->Init();
 
@@ -31,15 +35,10 @@ void GameScene::Initialize()
 
 	isGameOver = false;
 	isGameClear = false;
- // 
-	//// プール
-	//projectilePool_ = std::make_unique<ProjectilePool>();
-	//projectilePool_->Initialize();
-
-	//// ユニット
-	//archer_ = std::make_unique<Archer>("Archer");
-	//archer_->Initialize({0.0f,0.0f});
-	//archer_->SetProjectile(projectilePool_.get());
+  
+	// プール
+	projectilePool_ = std::make_unique<ProjectilePool>();
+	projectilePool_->Initialize();
 
 	tileMap_ = std::make_unique<TileMap>();
 	tileMap_->LoadTile();
@@ -47,10 +46,15 @@ void GameScene::Initialize()
 	player_ = std::make_unique<Player>();
 	player_->Init();
 	player_->SetTileMap(tileMap_.get());
+	player_->SetProjectilePool(projectilePool_.get());
 	gameCamera_->SetTileMap(tileMap_.get());
 	// スカイドーム
 	skydome_ = std::make_unique<Skydome>();
 	skydome_->Init();
+
+	enemy_ = std::make_unique<Enemy>();
+	enemy_->SetTileMap(tileMap_.get());
+	enemy_->Init();
 
 }
 
@@ -58,17 +62,11 @@ void GameScene::Update()
 {
 	gameCamera_->Update();
 
-	if (Input::GetInstance()->PressedKey(DIK_G)) {
+	if (tileMap_->IsEnemyAtFrontLine()) {
 		isGameOver = true;
 	}
-	if (Input::GetInstance()->PressedKey(DIK_C)) {
+	if (tileMap_->IsAllBlue()) {
 		isGameClear = true;
-	}
-
-	if (Input::GetInstance()->PressedKey(DIK_M)) {
-		if (tileMap_->GetTileMap(2, 1) == 0) {
-			tileMap_->SetTileMap(2, 1, 2);
-		}
 	}
 
 	if (isGameOver) {
@@ -85,10 +83,9 @@ void GameScene::Update()
 	tileMap_->Update();
 
 	player_->Update();
-	//// プール
-	//projectilePool_->Update();
-	//// ユニット
-	//archer_->Update();
+	enemy_->Update();
+	// プール
+	projectilePool_->Update();
 
 	skydome_->Update();
   

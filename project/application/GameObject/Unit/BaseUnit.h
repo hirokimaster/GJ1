@@ -31,6 +31,12 @@ public:
 	/// <param name="textureName"></param>
 	void CreateObject(const std::string& modelName, const std::string& textureName);
 
+
+	/// <summary>
+	/// タイルを占領
+	/// </summary>
+	void CaptureTile();
+
 	/// <summary>
 	/// 初期化
 	/// </summary>
@@ -61,6 +67,10 @@ public:
 	/// <returns></returns>
 	virtual bool IsInActionRange(const GridPosition& targetPosition) const = 0;
 
+	/// <summary>
+	/// 後で消す
+	/// </summary>
+	/// <returns></returns>
 	virtual bool CanAttackInFront() = 0;
 
 #pragma region getter
@@ -69,7 +79,11 @@ public:
 
 	const std::string GetName() const { return name_; }
 
-	const GridPosition GetPosition() const { return gridPosition_; }
+	const GridPosition GetGridPosition() const { return gridPosition_; }
+
+	ProjectilePool* GetProjectile()const { return projectilePool_; }
+
+	TileMap* GetTileMap()const { return tileMap_; }
 
 #pragma endregion
 
@@ -81,14 +95,29 @@ public:
 
 	void SetTileMap(TileMap* tileMap) { tileMap_ = tileMap; }
 
+	void SetTeamId(int id) { teamId_ = id; }
+
+	void SetRoleId(int id) { roleId_ = id; }
+
+	void SetColor(const Vector4& color) { object_.lock()->color = color; }	
+
+	void SetVelocity(const Vector2& velocity) { velocity_ = velocity; }
+
 #pragma endregion
 
 protected:
+	// メンバ変数
 	std::string name_; // 役職の名前
+	int teamId_ = 0; // チームID
+	int roleId_ = 0; // 役職ID
 	uint32_t hp_; // ライフ
 	uint32_t attack_; // 攻撃力
 	GridPosition gridPosition_{}; // 位置
-	ProjectilePool* projectilePool_ = nullptr;
+	GridPosition prevGridPosition_{}; // 1フレーム前の位置
+	Vector2 velocity_ = { 0.005f,2.0f }; // 移動速度
+	int32_t moveTimer_ = 0; // 移動用タイマー
 
-	TileMap* tileMap_ = nullptr;
+	// 参照用
+	TileMap* tileMap_ = nullptr; // マップ参照
+	ProjectilePool* projectilePool_ = nullptr; // 弾のプール
 };
