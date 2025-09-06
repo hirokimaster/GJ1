@@ -54,6 +54,7 @@ void GameScene::Initialize()
 
 	enemy_ = std::make_unique<Enemy>();
 	enemy_->SetTileMap(tileMap_.get());
+	enemy_->SetProjectilePool(projectilePool_.get());
 	enemy_->Init();
 
 }

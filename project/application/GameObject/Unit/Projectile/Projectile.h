@@ -59,6 +59,8 @@ public:
 #pragma region setter
 	void SetTeamId(int32_t id) { teamId_ = id; }
 	void SetRoleId(int32_t id) { roleId_ = id; }
+	// 速度
+	void SetVelocity(const Vector3& velocity) { velocity_ = velocity; }
 
 #pragma
 
@@ -75,6 +77,9 @@ public:
 protected:
 	std::string name_;
 	bool active_ = false;
+
+	// 攻撃速度
+	Vector3 velocity_ = { 0.0f,0.01f,0.01f };
 
 	int32_t teamId_ = 0; // 所属チーム
 	int32_t roleId_ = 0; // 役職

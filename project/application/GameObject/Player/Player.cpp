@@ -15,6 +15,9 @@ void Player::Init() {
 }
 
 void Player::Update() {
+	std::erase_if(units_, [](const std::unique_ptr<BaseUnit>& unit) {
+		return !unit->GetIsAlive();
+		});
 	SelectTile();
 	DebugDraw();
 	SelectUnit();

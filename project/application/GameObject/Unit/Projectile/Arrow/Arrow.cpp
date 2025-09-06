@@ -8,6 +8,7 @@ void Arrow::Initialize()
 	// object生成
 	Projectile::CreateObject("Unit/Archer/Arrow/arrow.obj", "Unit/Archer/ken.png");
 
+	object_.lock()->worldTransform.translate.x = -10.0f;
 	object_.lock()->worldTransform.translate.y = 1.0f;
 	object_.lock()->worldTransform.scale = { 0.4f,0.4f,0.4f };
 	active_ = false; // 非アクティブ
@@ -16,7 +17,7 @@ void Arrow::Initialize()
 void Arrow::Update()
 {
 	Projectile::Update();
-	object_.lock()->worldTransform.translate.z += 1.0f;
+	object_.lock()->worldTransform.translate.z += velocity_.z;
 }
 
 //void Arrow::OnHit(BaseUnit* target)

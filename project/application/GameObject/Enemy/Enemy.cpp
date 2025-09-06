@@ -9,21 +9,18 @@
 void Enemy::Init() {
 	selectedTile_ = { 0,0 }; // 初期選択タイル
 
-	//// 書き換えて
-	//projectilePool_ = std::make_unique<ProjectilePool>();
-	//projectilePool_->Initialize();
-
 	SpawnUnit();
 }
 
 void Enemy::Update() {
+	std::erase_if(units_, [](const std::unique_ptr<BaseUnit>& unit) {
+		return !unit->GetIsAlive();
+		});
 	DebugDraw();
 	SelectUnit();
 	for (auto& unit : units_) {
 		unit->Update();
 	}
-
-	//projectilePool_->Update();
 }
 
 void Enemy::SpawnUnit() {
@@ -49,6 +46,7 @@ void Enemy::SpawnUnit() {
 					unit->SetRoleId(roleId_);
 					unit->SetColor({ 1.0f,0.3f,0.3f,1.0f });
 					unit->SetVelocity({0.0f,-2.000f});
+					unit->SetProjectile(projectilePool_);
 					units_.push_back(std::move(unit));
 					break;
 				}
