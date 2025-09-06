@@ -32,7 +32,9 @@ void Archer::Update()
 	else if(!CanAttackInFront() || !CanAttackInBack()){
 		Move();
 	}
-	
+	if (projectilePool_) {
+		CheckAttackHit();
+	}
 
 }
 
@@ -46,6 +48,8 @@ void Archer::Attack()
 			Arrow* arrow = dynamic_cast<Arrow*>(baseArrow);
 			arrow->Activate(); // アクティブにする
 			arrow->SetPosition(object_.lock()->worldTransform.translate); // 発射位置
+			arrow->SetTeamId(teamId_); // チームID
+			arrow->SetRoleId(roleId_); // 役職ID
 		}
 		shotTimer_ = 0;
 	}
@@ -120,5 +124,42 @@ void Archer::Move()
 	if (moveTimer_ >= 240) {
 		object_.lock()->worldTransform.translate.z += velocity_.y;
 		moveTimer_ = 0;
+	}
+}
+
+void Archer::CheckAttackHit()
+{
+	for (auto& projectile : projectilePool_->GetProjectiles()) {
+		if (!projectile->GetIsActive()) continue; // 無効弾はスキップ
+
+		GridPosition attackPos = {
+			static_cast<int32_t>(projectile->GetPos().x / 2),
+			static_cast<int32_t>(projectile->GetPos().z / 2)
+		};
+		attackPos.z = tileMap_->GetMaxRow() - 1 - attackPos.z;
+
+		int selfX = static_cast<int>(object_.lock()->worldTransform.translate.x / 2);
+		int selfY = static_cast<int>(object_.lock()->worldTransform.translate.z / 2);
+		int targetY = tileMap_->GetMaxRow() - 1 - selfY;
+
+		if (tileMap_->GetTileMap(selfX, targetY) == tileMap_->GetTileMap(attackPos.x, attackPos.z)) {
+			switch (teamId_)
+			{
+			case BLUE:
+				if (projectile->GetTeamId() == TileMode::RED) {
+					// 死亡処理
+					hp_ = 0;
+					projectile->Deactivate();
+				}
+				break;
+			case RED:
+				if (projectile->GetTeamId() == TileMode::BLUE) {
+					// 死亡処理
+					hp_ = 0;
+					projectile->Deactivate();
+				}
+				break;
+			}
+		}
 	}
 }

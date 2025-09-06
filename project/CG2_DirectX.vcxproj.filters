@@ -204,6 +204,7 @@
     <ClInclude Include="application\GameObject\Enemy\Enemy.h" />
     <ClInclude Include="application\GameObject\SpecialTile\RoleChangeTile\RoleChangeTile.h" />
     <ClInclude Include="application\GameObject\SpecialTile\ISpecialTile.h" />
+    <ClInclude Include="application\GameObject\TeamTile\TileMode.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\ShaderFile\Object3d.hlsli" />
