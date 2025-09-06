@@ -4,6 +4,7 @@ enum TileMode {
 	NORMAL,
 	BLUE,
 	RED,
+	RED_ARCHER,
 };
 
 class TeamTile : public BaseInstancingObject
@@ -52,5 +53,6 @@ private:
 	int tileMode_ = 0; // 0:通常 1:味方 2:敵
 	// 何行目か
 	int32_t rowNum_ = 0;
+
 };
 

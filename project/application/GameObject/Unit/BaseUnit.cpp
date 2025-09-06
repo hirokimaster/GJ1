@@ -15,8 +15,8 @@ void BaseUnit::CaptureTile()
 	int targetY = tileMap_->GetMaxRow() - 1 - selfY; // CSVの可読性を上げるために奥が0行目のため修正
 
 	// そのマスに敵がいるか
-	if (tileMap_->GetTileMap(selfX, targetY) != TileMode::BLUE) {
-		tileMap_->SetTileMap(selfX, targetY, TileMode::BLUE); // 味方に変更
+	if (tileMap_->GetTileMap(selfX, targetY) != teamId_) {
+		tileMap_->SetTileMap(selfX, targetY, teamId_); // 持っているteamのIdに変更
 	}
 }
 

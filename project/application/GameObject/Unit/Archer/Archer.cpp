@@ -9,7 +9,7 @@ void Archer::Initialize(Vector2 pos) {
 	BaseUnit::CreateObject("TempModel/cube.obj", "TempTexture/white.png");
 	object_.lock()->worldTransform.translate = { pos.x,1.5f,pos.y };
 	object_.lock()->worldTransform.scale = { 0.5f,0.5f,0.5f };
-	object_.lock()->color = { 0.7f,0.7f,1.0f,1.0f };
+	object_.lock()->color = { 1.0f,1.0f,1.0f,1.0f };
 
 }
 
@@ -19,8 +19,6 @@ void Archer::Update()
 	BaseUnit::Update();
 	// デバック用の移動、攻撃
 
-	
-	
 	shotTimer_++;
 	
 	CaptureTile(); // タイル占領
@@ -28,7 +26,7 @@ void Archer::Update()
 		Attack();
 	}
 	else {
-		object_.lock()->worldTransform.translate.z += 0.01f;
+		object_.lock()->worldTransform.translate.z += velocity_.y;
 	}
 	
 

@@ -56,6 +56,10 @@ void GameScene::Initialize()
 	skydome_ = std::make_unique<Skydome>();
 	skydome_->Init();
 
+	enemy_ = std::make_unique<Enemy>();
+	enemy_->SetTileMap(tileMap_.get());
+	enemy_->Init();
+
 }
 
 void GameScene::Update()
@@ -83,6 +87,7 @@ void GameScene::Update()
 	tileMap_->Update();
 
 	player_->Update();
+	enemy_->Update();
 	//// プール
 	//projectilePool_->Update();
 	//// ユニット

@@ -43,6 +43,10 @@ void TeamTile::ColorChange()
 		case 2: // 敵
 			object_.lock()->color = { 1.0f,0.0f,0.0f,1.0f };
 		break;
+		case 3: // 敵のアーチャータイル
+			object_.lock()->color = { 1.0f,0.0f,0.0f,1.0f };
+			
+		break;
 	}
 }
 

@@ -20,6 +20,7 @@
 #include "application/GameObject/TileMap/TileMap.h"
 #include "application/GameObject/Skydome/Skydome.h"
 #include "application/GameObject/player/Player.h"
+#include "application/GameObject/Enemy/Enemy.h"
 #include <application/GameObject/Unit/UnitFactory.h>
 #include <application/GameObject/Unit/Warrior/Warrior.h>
 
@@ -84,8 +85,8 @@ private:
 	// プレイヤー（ユニット操作）
 	std::unique_ptr<Player> player_;
 
-	std::unique_ptr<BaseUnit> archer_;
-	std::unique_ptr<ProjectilePool> projectilePool_;
+	std::unique_ptr<Enemy> enemy_;
+
 	// スカイドーム
 	std::unique_ptr<Skydome> skydome_;
 
