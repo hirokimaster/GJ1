@@ -75,6 +75,16 @@ bool TileMap::IsAllBlue() const {
     return true;
 }
 
+bool TileMap::IsEnemyAtFrontLine() const
+{
+    for (int col = 0; col < maxCol_; ++col) {
+        if (map_[maxRow_ - 1][col] == 4 || map_[maxRow_ - 1][col] == 5 || map_[maxRow_ - 1][col] == 6) { // 敵のタイルが最前線にあるか
+            return true;
+        }
+	}
+    return false;
+}
+
 int TileMap::GetTileMap(int x, int y)
 {
     if (y >= 0 && y < maxRow_ && x >= 0 && x < maxCol_) {
