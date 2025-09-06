@@ -7,8 +7,8 @@ void TeamTile::Initialize(Vector2 mapPos, int tileMode, int rowNum)
 	ModelManager::LoadObjModel("TempModel/cube.obj");
 	// object共通の初期化
 	BaseInstancingObject::Initialize("TempModel/cube.obj", "TempTexture/white2.png", ColliderType::AABB);
-	
-	BaseInstancingObject::SetPosition({ mapPos.x, 0.0f,mapPos.y});
+
+	BaseInstancingObject::SetPosition({ mapPos.x, 0.0f,mapPos.y });
 
 	// タイルモード
 	tileMode_ = tileMode;
@@ -34,18 +34,20 @@ void TeamTile::ColorChange()
 {
 	switch (tileMode_)
 	{
-		case 0: // 通常
-			object_.lock()->color = { 1.0f,1.0f,1.0f,1.0f };
+	case TileMode::NORMAL: // 通常
+		object_.lock()->color = { 1.0f,1.0f,1.0f,1.0f };
 		break;
-		case 1: // 味方
-			object_.lock()->color = { 0.0f,0.0f,1.0f,1.0f };
+	case TileMode::BLUE: // 味方
+		object_.lock()->color = { 0.0f,0.0f,1.0f,1.0f };
 		break;
-		case 2: // 敵
-			object_.lock()->color = { 1.0f,0.0f,0.0f,1.0f };
+	case TileMode::BLUE_ARCHER: // 敵
+		object_.lock()->color = { 0.2f,0.2f,1.0f,1.0f };
 		break;
-		case 3: // 敵のアーチャータイル
-			object_.lock()->color = { 1.0f,0.0f,0.0f,1.0f };
-			
+	case TileMode::RED: // 敵のアーチャータイル
+		object_.lock()->color = { 1.0f,0.0f,0.0f,1.0f };
+		break;
+	case TileMode::RED_ARCHER: // 敵のアーチャータイル
+		object_.lock()->color = { 1.0f,0.2f,0.2f,1.0f };
 		break;
 	}
 }

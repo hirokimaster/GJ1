@@ -38,7 +38,7 @@ void Enemy::SpawnUnit() {
 				int reversedY = tileMap_->GetMaxRow() - 1 - y; // CSVの可読性を上げるために奥が0行目のため修正
 
 				switch (value) {
-				case 3: { // RED_ARCHER
+				case TileMode::RED_ARCHER: { // RED_ARCHER
 					// ユニット
 					std::unique_ptr<BaseUnit> unit;
 					unit = UnitFactory::Create("archer");
@@ -46,12 +46,13 @@ void Enemy::SpawnUnit() {
 					unit->SetTileMap(tileMap_);
 					unit->SetGridPosition(x, y);
 					unit->SetTeamId(teamId_);
+					unit->SetRoleId(roleId_);
 					unit->SetColor({ 1.0f,0.3f,0.3f,1.0f });
-					unit->SetVelocity({0.0f,-0.005f});
+					unit->SetVelocity({0.0f,-2.000f});
 					units_.push_back(std::move(unit));
 					break;
 				}
-				case 4: // RED_WARRIOR
+				case TileMode::RED_WARRIOR: // RED_WARRIOR
 					//SpawnEnemy(UnitType::Warrior, x, y);
 					break;
 				default:
@@ -77,7 +78,7 @@ void Enemy::DebugDraw()
 bool Enemy::CanSpawnHere(int x, int y)
 {
 	int tileValue = tileMap_->GetTileMap(x, y);
-	if (tileValue != teamId_) return false; // 自チームタイルでない
+	if (tileValue != teamId_ && tileValue != roleId_) return false; // 自チームタイルでない
 
 	for (auto& unit : units_) {
 		if (unit->GetGridPosition().x == x && unit->GetGridPosition().z == y)

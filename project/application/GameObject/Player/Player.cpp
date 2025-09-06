@@ -72,9 +72,11 @@ void Player::SpawnUnit() {
 		std::unique_ptr<BaseUnit> unit;
 		if (selectNum_ == 0) {
 			unit = UnitFactory::Create("archer");
+			roleId_ = TileMode::BLUE_ARCHER;
 		}
 		else if (selectNum_ == 1) {
 			unit = UnitFactory::Create("warrior");
+			roleId_ = TileMode::BLUE_WARRIOR;
 		}
 	
 		unit->Initialize({ (float)x * 2.0f,(float)reversedY * 2.0f });
@@ -82,8 +84,9 @@ void Player::SpawnUnit() {
 		unit->SetTileMap(tileMap_);
 		unit->SetGridPosition(x, y);
 		unit->SetTeamId(teamId_);
+		unit->SetRoleId(roleId_);
 		unit->SetColor({ 0.3f,0.3f,1.0f,1.0f });
-		unit->SetVelocity({ 0.0f,0.005f });
+		unit->SetVelocity({ 0.0f,2.00f });
 		units_.push_back(std::move(unit));
     }
 }

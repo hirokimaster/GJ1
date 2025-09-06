@@ -97,6 +97,8 @@ public:
 
 	void SetTeamId(int id) { teamId_ = id; }
 
+	void SetRoleId(int id) { roleId_ = id; }
+
 	void SetColor(const Vector4& color) { object_.lock()->color = color; }	
 
 	void SetVelocity(const Vector2& velocity) { velocity_ = velocity; }
@@ -104,12 +106,18 @@ public:
 #pragma endregion
 
 protected:
+	// メンバ変数
 	std::string name_; // 役職の名前
+	int teamId_ = 0; // チームID
+	int roleId_ = 0; // 役職ID
 	uint32_t hp_; // ライフ
 	uint32_t attack_; // 攻撃力
 	GridPosition gridPosition_{}; // 位置
-	ProjectilePool* projectilePool_ = nullptr;
-	int teamId_ =0; // チームID
-	TileMap* tileMap_ = nullptr;
-	Vector2 velocity_ = { 0.005f,0.005f };
+	GridPosition prevGridPosition_{}; // 1フレーム前の位置
+	Vector2 velocity_ = { 0.005f,2.0f }; // 移動速度
+	int32_t moveTimer_ = 0; // 移動用タイマー
+
+	// 参照用
+	TileMap* tileMap_ = nullptr; // マップ参照
+	ProjectilePool* projectilePool_ = nullptr; // 弾のプール
 };

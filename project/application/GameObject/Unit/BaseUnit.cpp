@@ -13,11 +13,17 @@ void BaseUnit::CaptureTile()
 	int selfY = static_cast<int>(object_.lock()->worldTransform.translate.z / 2);
 
 	int targetY = tileMap_->GetMaxRow() - 1 - selfY; // CSVの可読性を上げるために奥が0行目のため修正
-
-	// そのマスに敵がいるか
-	if (tileMap_->GetTileMap(selfX, targetY) != teamId_) {
-		tileMap_->SetTileMap(selfX, targetY, teamId_); // 持っているteamのIdに変更
+	gridPosition_ = { selfX,targetY };
+	// タイルの色が自分の役職IDでなかったら
+	if (tileMap_->GetTileMap(selfX, targetY) != roleId_) {
+		tileMap_->SetTileMap(gridPosition_.x, gridPosition_.z, roleId_); // タイルの色を変える
+		// 前フレームにとったタイルの色を役職ではなく自チームにする
+		if (tileMap_->GetTileMap(prevGridPosition_.x, prevGridPosition_.z) == roleId_) {
+			tileMap_->SetTileMap(prevGridPosition_.x, prevGridPosition_.z, teamId_);
+		}
 	}
+	
+	prevGridPosition_ = gridPosition_;
 }
 
 

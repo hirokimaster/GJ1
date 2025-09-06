@@ -40,6 +40,10 @@ public:
 
 #pragma endregion
 	bool CanAttackInFront();
+
+	bool CanAttackInBack();
+
+	void Move();
 private:
 	int32_t minRange_;
 	int32_t maxRange_;
