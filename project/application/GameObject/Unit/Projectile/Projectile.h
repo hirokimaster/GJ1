@@ -1,7 +1,7 @@
 #pragma once
 //#include <application/GameObject/Unit/BaseUnit.h>
 #include <engine/3d/BaseObject/BaseInstancingObject.h>
-
+#include "application/GameObject/TeamTile/TileMode.h"
 class Projectile : public BaseInstancingObject{
 public:
 	/// <summary>
@@ -48,7 +48,19 @@ public:
 
 	const std::string GetName()const { return name_; }
 
+	//position
+	Vector3 GetPos() const { return object_.lock()->worldTransform.translate; }
+
+	int32_t GetTeamId() const { return teamId_; }
+	int32_t GetRoleId() const { return roleId_; }
+
 #pragma endregion
+
+#pragma region setter
+	void SetTeamId(int32_t id) { teamId_ = id; }
+	void SetRoleId(int32_t id) { roleId_ = id; }
+
+#pragma
 
 	/// <summary>
 	/// アクティブ化
@@ -63,4 +75,7 @@ public:
 protected:
 	std::string name_;
 	bool active_ = false;
+
+	int32_t teamId_ = 0; // 所属チーム
+	int32_t roleId_ = 0; // 役職
 };

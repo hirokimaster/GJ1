@@ -70,6 +70,16 @@ public:
 		pool_[name].push(ptr);
 	}
 
+public: //Getter
+	/// <summary>
+	/// poolのサイズ
+	/// </summary>
+	/// <returns></returns>
+	// コピーではなく参照を返す
+	const std::vector<std::unique_ptr<Projectile>>& GetProjectiles() const {
+		return projectiles_;
+	}
+
 private:
 	static const uint32_t kPoolSize = 600; // poolのサイズ
 	std::vector<std::unique_ptr<Projectile>> projectiles_;
