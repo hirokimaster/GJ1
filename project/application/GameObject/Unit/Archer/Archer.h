@@ -44,6 +44,9 @@ public:
 	bool CanAttackInBack();
 
 	void Move();
+
+	void CheckAttackHit();
+
 private:
 	int32_t minRange_;
 	int32_t maxRange_;
