@@ -12,10 +12,6 @@ void Player::Init() {
 	// object共通の初期化
 	BaseIndividualObject::Initialize("PlayerTargetTile/PlayerTargetTile.obj", "TempTexture/white2.png");
 	object_.lock()->SetColor({ 0.0f,0.0f,0.6f,1.0f });
-
-	// 書き換えて
-	projectilePool_ = std::make_unique<ProjectilePool>();
-	projectilePool_->Initialize();
 }
 
 void Player::Update() {
@@ -29,7 +25,6 @@ void Player::Update() {
 		unit->Update();
 	}
 	
-	projectilePool_->Update();
 	BaseIndividualObject::Update(); // object共通の更新処理
 }
 
@@ -83,7 +78,7 @@ void Player::SpawnUnit() {
 		}
 	
 		unit->Initialize({ (float)x * 2.0f,(float)reversedY * 2.0f });
-		unit->SetProjectile(projectilePool_.get());
+		unit->SetProjectile(projectilePool_);
 		unit->SetTileMap(tileMap_);
 		unit->SetGridPosition(x, y);
 		unit->SetTeamId(teamId_);
