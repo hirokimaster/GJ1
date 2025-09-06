@@ -153,7 +153,7 @@ void Archer::CheckAttackHit()
 		int selfY = static_cast<int>(object_.lock()->worldTransform.translate.z / 2);
 		int targetY = tileMap_->GetMaxRow() - 1 - selfY;
 
-		if (tileMap_->GetTileMap(selfX, targetY) == tileMap_->GetTileMap(attackPos.x, attackPos.z)) {
+		if (selfX == attackPos.x && targetY == attackPos.z) {
 			switch (teamId_)
 			{
 			case BLUE:
