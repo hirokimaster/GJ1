@@ -23,10 +23,13 @@ void Archer::Update()
 	
 	CaptureTile(); // タイル占領
 	if (CanAttackInFront() ) {
+		attackVelocity_.z = 0.1f;
 		Attack();
 		moveTimer_ = 0;
 	}
 	else if (CanAttackInBack()) {
+		attackVelocity_.z = -0.1f;
+		Attack();
 		moveTimer_ = 0;
 	}
 	else if(!CanAttackInFront() || !CanAttackInBack()){
@@ -50,6 +53,7 @@ void Archer::Attack()
 			arrow->SetPosition(object_.lock()->worldTransform.translate); // 発射位置
 			arrow->SetTeamId(teamId_); // チームID
 			arrow->SetRoleId(roleId_); // 役職ID
+			arrow->SetVelocity(attackVelocity_); // 速度
 		}
 		shotTimer_ = 0;
 	}
@@ -156,14 +160,18 @@ void Archer::CheckAttackHit()
 				if (projectile->GetTeamId() == TileMode::RED) {
 					// 死亡処理
 					hp_ = 0;
+					object_.lock()->isAlive = false;
 					projectile->Deactivate();
+					tileMap_->SetTileMap(selfX, targetY, teamId_); // タイルを自分のチームに変更
 				}
 				break;
 			case RED:
 				if (projectile->GetTeamId() == TileMode::BLUE) {
 					// 死亡処理
 					hp_ = 0;
+					object_.lock()->isAlive = false;
 					projectile->Deactivate();
+					tileMap_->SetTileMap(selfX, targetY, teamId_); // タイルを自分のチームに変更
 				}
 				break;
 			}
