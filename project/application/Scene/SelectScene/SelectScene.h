@@ -9,6 +9,7 @@
 #include <application/SceneSprite/SelectSprite.h>
 
 #include "application/GameObject/Skydome/Skydome.h"
+#include "SelectStage/SelectStage.h"
 
 class SelectScene : public IScene {
 public:
@@ -47,11 +48,24 @@ private:
 	/// textureはここに書く
 	/// </summary>
 	void LoadTextureFile();
+
+	void StageSelect();
 private:
 	std::unique_ptr<PostProcess> postEffect_ = nullptr;
 	std::unique_ptr<SelectSprite> selectSprite_ = nullptr;
 
+	std::list<std::unique_ptr<SelectStage>> selectStages_;
+
 	Camera camera_; // ゲームカメラ
 	// スカイドーム
 	std::unique_ptr<Skydome> skydome_;
+
+	int32_t selectedStageNum_ = 0; // 選択されたステージ番号
+	// ステージの最大数
+	int32_t maxStageNum_ = 0; // 最大ステージ数
+
+	// padの入力待機時間
+	float inputWaitTime_ = 0.0f; // 入力待機時間
+	// padの入力待機時間の最大値
+	const float maxInputWaitTime_ = 0.5f; // 入力待機時間の最大値
 };
