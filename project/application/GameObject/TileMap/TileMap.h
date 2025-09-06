@@ -11,6 +11,8 @@ public:
 
 public:
 	bool IsAllBlue() const;
+	//　敵チームが最前線まで来ているか
+	bool IsEnemyAtFrontLine() const;
 
 public: // Getter
 	int GetMaxRow()const { return maxRow_; }

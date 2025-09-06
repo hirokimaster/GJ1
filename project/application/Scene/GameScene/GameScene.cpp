@@ -62,7 +62,7 @@ void GameScene::Update()
 {
 	gameCamera_->Update();
 
-	if (Input::GetInstance()->PressedKey(DIK_G)) {
+	if (tileMap_->IsEnemyAtFrontLine()) {
 		isGameOver = true;
 	}
 	if (tileMap_->IsAllBlue()) {
