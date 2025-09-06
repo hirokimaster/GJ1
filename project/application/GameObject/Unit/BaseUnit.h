@@ -117,6 +117,9 @@ protected:
 	Vector2 velocity_ = { 0.005f,2.0f }; // 移動速度
 	int32_t moveTimer_ = 0; // 移動用タイマー
 
+	// 攻撃関連
+	Vector3 attackVelocity_ = { 0.0f,0.1f }; // 攻撃の速度
+
 	// 参照用
 	TileMap* tileMap_ = nullptr; // マップ参照
 	ProjectilePool* projectilePool_ = nullptr; // 弾のプール
