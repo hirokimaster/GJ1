@@ -81,6 +81,10 @@ void Player::SpawnUnit() {
 			unit = UnitFactory::Create("warrior");
 			roleId_ = TileMode::BLUE_WARRIOR;
 		}
+		else if (selectNum_ == -1) {
+			unit = UnitFactory::Create("swordsman");
+			roleId_ = TileMode::BLUE_SWORDSMAN;
+		}
 	
 		unit->Initialize({ (float)x * 2.0f,(float)reversedY * 2.0f });
 		unit->SetProjectile(projectilePool_);
@@ -100,7 +104,7 @@ void Player::DebugDraw()
 	ImGui::Begin("player");
 	ImGui::Text("selectedTileX:%d", (int)selectedTile_.x);
 	ImGui::Text("selectedTileY:%d", (int)selectedTile_.y);
-	ImGui::Text("0:archer, 1:warrior, num:%d", selectNum_);
+	ImGui::Text("-1:swordsman, 0:archer, 1:warrior, num:%d", selectNum_);
 	ImGui::End();
 #endif // _DEBUG
 
@@ -120,10 +124,10 @@ bool Player::CanSpawnHere(int x, int y)
 
 void Player::SelectUnit()
 {
-	if (Input::GetInstance()->PressedKey(DIK_LEFT) && selectNum_ >= 1) {
+	if (Input::GetInstance()->PressedKey(DIK_LEFT) && selectNum_ > -1) {
 		selectNum_ -= 1;
 	}
-	else if (Input::GetInstance()->PressedKey(DIK_RIGHT) && selectNum_ <= 0) {
+	else if (Input::GetInstance()->PressedKey(DIK_RIGHT) && selectNum_ < 1) {
 		selectNum_ += 1;
 	}
 

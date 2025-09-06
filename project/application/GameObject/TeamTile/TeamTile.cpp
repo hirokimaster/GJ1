@@ -40,13 +40,25 @@ void TeamTile::ColorChange()
 	case TileMode::BLUE: // 味方
 		object_.lock()->color = { 0.0f,0.0f,1.0f,1.0f };
 		break;
-	case TileMode::BLUE_ARCHER: // 敵
+	case TileMode::BLUE_ARCHER: // 味方のアーチャータイル
 		object_.lock()->color = { 0.2f,0.2f,1.0f,1.0f };
 		break;
-	case TileMode::RED: // 敵のアーチャータイル
+	case TileMode::BLUE_WARRIOR: // 味方のウォリアータイル
+		object_.lock()->color = { 0.2f,0.2f,1.0f,1.0f };
+		break;
+	case TileMode::BLUE_SWORDSMAN: // 味方のソードマン
+		object_.lock()->color = { 0.2f,0.2f,1.0f,1.0f };
+		break;
+	case TileMode::RED: // 敵
 		object_.lock()->color = { 1.0f,0.0f,0.0f,1.0f };
 		break;
 	case TileMode::RED_ARCHER: // 敵のアーチャータイル
+		object_.lock()->color = { 1.0f,0.2f,0.2f,1.0f };
+		break;
+	case TileMode::RED_WARRIOR: // 敵のウォリアータイル
+		object_.lock()->color = { 1.0f,0.2f,0.2f,1.0f };
+		break;
+	case TileMode::RED_SWORDSMAN: // 敵のソードマン
 		object_.lock()->color = { 1.0f,0.2f,0.2f,1.0f };
 		break;
 	}

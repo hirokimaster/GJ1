@@ -78,7 +78,7 @@ bool TileMap::IsAllBlue() const {
 bool TileMap::IsEnemyAtFrontLine() const
 {
     for (int col = 0; col < maxCol_; ++col) {
-        if (map_[maxRow_ - 1][col] == 4 || map_[maxRow_ - 1][col] == 5 || map_[maxRow_ - 1][col] == 6) { // 敵のタイルが最前線にあるか
+        if (map_[maxRow_ - 1][col] == TileMode::RED_ARCHER || map_[maxRow_ - 1][col] == TileMode::RED_SWORDSMAN || map_[maxRow_ - 1][col] == TileMode::RED_WARRIOR) { // 敵のタイルが最前線にあるか
             return true;
         }
 	}

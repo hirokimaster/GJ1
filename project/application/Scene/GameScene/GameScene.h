@@ -23,6 +23,8 @@
 #include "application/GameObject/Enemy/Enemy.h"
 #include <application/GameObject/Unit/UnitFactory.h>
 #include <application/GameObject/Unit/Warrior/Warrior.h>
+#include <application/GameObject/Unit/Swordsman/Swordsman.h>
+
 
 class GameScene : public IScene {
 public: // メンバ関数
