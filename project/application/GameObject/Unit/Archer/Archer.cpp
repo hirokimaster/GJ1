@@ -7,7 +7,7 @@ void Archer::Initialize(Vector2 pos) {
 	TextureManager::Load("resources/Unit/Archer/ken.png");
 	// object生成
 	BaseUnit::CreateObject("Unit/Archer/yumi.obj", "Unit/Archer/ken.png");
-	object_.lock()->worldTransform.translate = { pos.x,1.5f,pos.y };
+	object_.lock()->worldTransform.translate = { pos.x,1.0f,pos.y };
 	object_.lock()->worldTransform.scale = { 0.3f,0.3f,0.3f };
 	object_.lock()->color = { 1.0f,1.0f,1.0f,1.0f };
 
@@ -153,7 +153,7 @@ void Archer::CheckAttackHit()
 		int selfY = static_cast<int>(object_.lock()->worldTransform.translate.z / 2);
 		int targetY = tileMap_->GetMaxRow() - 1 - selfY;
 
-		if (tileMap_->GetTileMap(selfX, targetY) == tileMap_->GetTileMap(attackPos.x, attackPos.z)) {
+		if (selfX == attackPos.x && targetY == attackPos.z) {
 			switch (teamId_)
 			{
 			case BLUE:

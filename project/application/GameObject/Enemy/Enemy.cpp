@@ -40,6 +40,7 @@ void Enemy::SpawnUnit() {
 					std::unique_ptr<BaseUnit> unit;
 					unit = UnitFactory::Create("archer");
 					unit->Initialize({ (float)x * 2.0f,(float)reversedY * 2.0f });
+					unit->SetRotate({0.0f,3.1415f,0.0f});
 					unit->SetTileMap(tileMap_);
 					unit->SetGridPosition(x, y);
 					unit->SetTeamId(teamId_);
