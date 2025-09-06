@@ -81,6 +81,9 @@ void Player::SpawnUnit() {
 		unit->SetProjectile(projectilePool_);
 		unit->SetTileMap(tileMap_);
 		unit->SetGridPosition(x, y);
+		unit->SetTeamId(teamId_);
+		unit->SetColor({ 0.3f,0.3f,1.0f,1.0f });
+		unit->SetVelocity({ 0.0f,0.005f });
 		units_.push_back(std::move(unit));
     }
 }

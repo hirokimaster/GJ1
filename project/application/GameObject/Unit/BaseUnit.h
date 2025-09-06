@@ -95,6 +95,12 @@ public:
 
 	void SetTileMap(TileMap* tileMap) { tileMap_ = tileMap; }
 
+	void SetTeamId(int id) { teamId_ = id; }
+
+	void SetColor(const Vector4& color) { object_.lock()->color = color; }	
+
+	void SetVelocity(const Vector2& velocity) { velocity_ = velocity; }
+
 #pragma endregion
 
 protected:
@@ -103,5 +109,7 @@ protected:
 	uint32_t attack_; // 攻撃力
 	GridPosition gridPosition_{}; // 位置
 	ProjectilePool* projectilePool_ = nullptr;
+	int teamId_ =0; // チームID
 	TileMap* tileMap_ = nullptr;
+	Vector2 velocity_ = { 0.005f,0.005f };
 };
