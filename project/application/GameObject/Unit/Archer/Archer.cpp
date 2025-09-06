@@ -3,12 +3,12 @@
 void Archer::Initialize(Vector2 pos) {
 
 	// モデル、テクスチャのロード
-	ModelManager::LoadObjModel("TempModel/cube.obj");
-	TextureManager::Load("resources/TempTexture/white.png");
+	ModelManager::LoadObjModel("Unit/Archer/blue_ken.obj");
+	TextureManager::Load("resources/Unit/Archer/ken.png");
 	// object生成
-	BaseUnit::CreateObject("TempModel/cube.obj", "TempTexture/white.png");
+	BaseUnit::CreateObject("Unit/Archer/blue_ken.obj", "Unit/Archer/ken.png");
 	object_.lock()->worldTransform.translate = { pos.x,1.5f,pos.y };
-	object_.lock()->worldTransform.scale = { 0.5f,0.5f,0.5f };
+	object_.lock()->worldTransform.scale = { 0.3f,0.3f,0.3f };
 	object_.lock()->color = { 1.0f,1.0f,1.0f,1.0f };
 
 }
