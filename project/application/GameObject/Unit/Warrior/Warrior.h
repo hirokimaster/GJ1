@@ -9,7 +9,7 @@ public:
 	/// </summary>
 	/// <param name="name"></param>
 	Warrior(const std::string& name)
-		: BaseUnit(name, 1, 1){}
+		: BaseUnit(name, 100, 1){}
 
 	/// <summary>
 	/// 初期化
@@ -29,7 +29,15 @@ public:
 	bool CanAttackInFront()override;
 
 	bool IsInActionRange(const GridPosition& targetPosition) const override;
+public:
+	bool CanAttackInBack();
 
+	void Move();
+
+	void CheckAttackHit();
+
+private:
+	int32_t attackTimer_ = 0;
 private:
 
 };

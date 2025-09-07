@@ -4,10 +4,12 @@ void Swordsman::Initialize(Vector2 pos) {
 
 	// object生成
 	BaseUnit::CreateObject("Unit/sword/blue_ken.obj", "Unit/sword/ken.png");
+	BaseUnit::CreateHpObject();
 	object_.lock()->worldTransform.translate = { pos.x,1.0f,pos.y };
 	object_.lock()->worldTransform.scale = { 0.31f,0.31f,0.31f };
 	object_.lock()->color = { 1.0f,0.0f,0.0f,1.0f };
 	attackVelocity_ = { 0.0f,0.1f,0.1f };
+	
 }
 
 void Swordsman::Update()
@@ -42,21 +44,22 @@ void Swordsman::Update()
 void Swordsman::Attack()
 {
 	if (attackTimer_ >= 120) {
-		// プールから取ってくる
+		//剣の初期化
 		Projectile* baseSword = projectilePool_->Get("sword");
 		// 取れたかチェックする
 		if (baseSword) {
 			Sword* sword = dynamic_cast<Sword*>(baseSword);
 			sword->Activate(); // アクティブにする
-			sword->SetPosition(object_.lock()->worldTransform.translate); // 発射位置
+			sword->SetPosition({
+				object_.lock()->worldTransform.translate.x,
+				object_.lock()->worldTransform.translate.y + 2.0f,
+				object_.lock()->worldTransform.translate.z + 1.0f}); // 位置
 			sword->SetTeamId(teamId_); // チームID
 			sword->SetRoleId(roleId_); // 役職ID
 			sword->SetVelocity(attackVelocity_); // 速度
 		}
-		attackTimer_ = 0;
 	}
-	
-	
+	attackTimer_ = 0;
 }
 
 bool Swordsman::IsInActionRange(const GridPosition& targetPosition) const
@@ -153,8 +156,7 @@ void Swordsman::CheckAttackHit()
 			case BLUE:
 				if (projectile->GetTeamId() == TileMode::RED) {
 					// 死亡処理
-					hp_ = 0;
-					object_.lock()->isAlive = false;
+					hp_ -= 50;
 					projectile->Deactivate();
 					tileMap_->SetTileMap(selfX, targetY, teamId_); // タイルを自分のチームに変更
 				}
@@ -162,8 +164,7 @@ void Swordsman::CheckAttackHit()
 			case RED:
 				if (projectile->GetTeamId() == TileMode::BLUE) {
 					// 死亡処理
-					hp_ = 0;
-					object_.lock()->isAlive = false;
+					hp_ -= 50;
 					projectile->Deactivate();
 					tileMap_->SetTileMap(selfX, targetY, teamId_); // タイルを自分のチームに変更
 				}
