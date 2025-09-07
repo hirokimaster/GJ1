@@ -51,9 +51,38 @@ void Enemy::SpawnUnit() {
 					units_.push_back(std::move(unit));
 					break;
 				}
-				case TileMode::RED_WARRIOR: // RED_WARRIOR
-					//SpawnEnemy(UnitType::Warrior, x, y);
+				case TileMode::RED_WARRIOR: { // RED_WARRIOR
+					// ユニット
+					std::unique_ptr<BaseUnit> unit;
+					unit = UnitFactory::Create("archer");
+					unit->Initialize({ (float)x * 2.0f,(float)reversedY * 2.0f });
+					unit->SetRotate({ 0.0f,3.1415f,0.0f });
+					unit->SetTileMap(tileMap_);
+					unit->SetGridPosition(x, y);
+					unit->SetTeamId(teamId_);
+					unit->SetRoleId(roleId_);
+					unit->SetColor({ 1.0f,0.3f,0.3f,1.0f });
+					unit->SetVelocity({ 0.0f,-2.000f });
+					unit->SetProjectile(projectilePool_);
+					units_.push_back(std::move(unit));
 					break;
+				}
+				case TileMode::RED_SWORDSMAN: {// RED_SWORDSMAN
+					// ユニット
+					std::unique_ptr<BaseUnit> unit;
+					unit = UnitFactory::Create("swordsman");
+					unit->Initialize({ (float)x * 2.0f,(float)reversedY * 2.0f });
+					unit->SetRotate({ 0.0f,3.1415f,0.0f });
+					unit->SetTileMap(tileMap_);
+					unit->SetGridPosition(x, y);
+					unit->SetTeamId(teamId_);
+					unit->SetRoleId(roleId_);
+					unit->SetColor({ 1.0f,0.3f,0.3f,1.0f });
+					unit->SetVelocity({ 0.0f,-2.000f });
+					unit->SetProjectile(projectilePool_);
+					units_.push_back(std::move(unit));
+					break;
+				}
 				default:
 					break;
 				}
@@ -76,8 +105,7 @@ void Enemy::DebugDraw()
 
 bool Enemy::CanSpawnHere(int x, int y)
 {
-	int tileValue = tileMap_->GetTileMap(x, y);
-	if (tileValue != teamId_ && tileValue != roleId_) return false; // 自チームタイルでない
+	//int tileValue = tileMap_->GetTileMap(x, y);
 
 	for (auto& unit : units_) {
 		if (unit->GetGridPosition().x == x && unit->GetGridPosition().z == y)

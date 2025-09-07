@@ -23,6 +23,7 @@ void TitleScene::Initialize()
 	// ポストエフェクト初期化
 	postEffect_ = std::make_unique<PostProcess>();
 	postEffect_->Initialize();
+	postEffect_->SetEffect(PostEffectType::Bloom); // ブルーム有効
 
 	LoadTextureFile(); // texture読み込み
 
@@ -45,21 +46,20 @@ void TitleScene::Update()
 
 void TitleScene::Draw()
 {
-
-	titleSprite_->Draw();
-	ObjectManager::GetInstance()->Draw(gameCamera_->GetCamera());
-	//postEffect_->Draw();
+	postEffect_->Draw();
 }
 
 void TitleScene::PostProcessDraw()
 {
-	/*postEffect_->PreDraw();
-	postEffect_->PostDraw();*/
+	postEffect_->PreDraw();
+	titleSprite_->Draw();
+	ObjectManager::GetInstance()->Draw(gameCamera_->GetCamera());
+	postEffect_->PostDraw();
 }
 
 void TitleScene::LoadTextureFile()
 {
 	TextureManager::Load("resources/TempTexture/white.png");
 	TextureManager::Load("resources/UI/space.png");
-	TextureManager::Load("resources/UI/title.png");
+	TextureManager::Load("resources/UI/title2.png");
 }

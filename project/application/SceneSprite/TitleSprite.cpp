@@ -14,10 +14,10 @@ void TitleSprite::Initialize()
 	ApplyAdjustmentVariables();
 	// タイトルのスプライト
 	spriteTitlePosition_ = { 640, 360 };
-	spriteTitle_.reset(Sprite::Create(TextureManager::GetTexHandle("UI/title.png"), spriteTitlePosition_));
+	spriteTitle_.reset(Sprite::Create(TextureManager::GetTexHandle("UI/title2.png"), spriteTitlePosition_));
 	spriteTitle_->SetAnchorPoint({ 0.5f,0.5f });
 	spriteTitle_->SetColor({ 1.0f,1.0f,1.0f,1.0f });
-	spriteTitle_->SetScale({ 3.0f, 3.0f });
+	spriteTitle_->SetScale({ 1.0f, 1.0f });
 
 	spriteSpacePosition_ = { 640, 500 };
 	spriteSpace_.reset(Sprite::Create(TextureManager::GetTexHandle("UI/space.png"), spriteSpacePosition_));

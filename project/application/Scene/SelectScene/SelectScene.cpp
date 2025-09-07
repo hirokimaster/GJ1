@@ -14,6 +14,7 @@ void SelectScene::Initialize()
 	// ポストエフェクト初期化
 	postEffect_ = std::make_unique<PostProcess>();
 	postEffect_->Initialize();
+	postEffect_->SetEffect(PostEffectType::Bloom);
 
 	LoadTextureFile(); // texture読み込み
 
@@ -63,19 +64,19 @@ void SelectScene::Update()
 
 void SelectScene::Draw()
 {
-	for (auto& selectStage : selectStages_) {
-		selectStage->Draw();
-	}
-
-	selectSprite_->Draw();
-	ObjectManager::GetInstance()->Draw(camera_);
-	//postEffect_->Draw();
+	
+	postEffect_->Draw();
 }
 
 void SelectScene::PostProcessDraw()
 {
-	/*postEffect_->PreDraw();
-	postEffect_->PostDraw();*/
+	postEffect_->PreDraw();
+	for (auto& selectStage : selectStages_) {
+		selectStage->Draw();
+	}
+	selectSprite_->Draw();
+	ObjectManager::GetInstance()->Draw(camera_);
+	postEffect_->PostDraw();
 }
 
 void SelectScene::LoadTextureFile()

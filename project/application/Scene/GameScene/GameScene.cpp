@@ -27,6 +27,7 @@ void GameScene::Initialize()
 	// ポストエフェクト初期化
 	postEffect_ = std::make_unique<PostProcess>();
 	postEffect_->Initialize();
+	postEffect_->SetEffect(PostEffectType::Bloom);
 
 	LoadTextureFile(); // texture読み込み
 
@@ -84,6 +85,7 @@ void GameScene::Update()
 	tileMap_->Update();
 
 	player_->Update();
+
 	enemy_->Update();
 	// プール
 	projectilePool_->Update();
@@ -91,10 +93,17 @@ void GameScene::Update()
 	skydome_->Update();
   
 	ObjectManager::GetInstance()->Update();
+
 }
 
 void GameScene::Draw()
 {
+	postEffect_->Draw();
+}
+
+void GameScene::PostProcessDraw()
+{
+	postEffect_->PreDraw();
 	ObjectManager::GetInstance()->Draw(gameCamera_->GetCamera());
 
 	if (isGameClear) {
@@ -106,14 +115,7 @@ void GameScene::Draw()
 	else if (!isGameClear && !isGameOver) {
 		gameSprite_->Draw();
 	}
-
-	//postEffect_->Draw();
-}
-
-void GameScene::PostProcessDraw()
-{
-	/*postEffect_->PreDraw();
-	postEffect_->PostDraw();*/
+	postEffect_->PostDraw();
 }
 
 void GameScene::Collision()

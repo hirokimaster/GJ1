@@ -1,5 +1,5 @@
 #include "Swordsman.h"
-
+#include "engine/Input/Input.h"
 void Swordsman::Initialize(Vector2 pos) {
 
 	// モデル、テクスチャのロード
@@ -10,14 +10,20 @@ void Swordsman::Initialize(Vector2 pos) {
 	object_.lock()->worldTransform.translate = { pos.x,1.0f,pos.y };
 	object_.lock()->worldTransform.scale = { 0.31f,0.31f,0.31f };
 	object_.lock()->color = { 1.0f,0.0f,0.0f,1.0f };
+	attackVelocity_ = { 0.0f,0.1f,0.1f };
 }
 
 void Swordsman::Update()
 {
-
+	attackTimer_++;
 	CaptureTile(); // タイル占領
+
+	if (Input::GetInstance()->PressedKey(DIK_Y) && attackTimer_ >= 120) {
+		Attack();
+	}
+
 	if (CanAttackInFront()) {
-		attackVelocity_.z = 0.1f;
+		attackVelocity_.z = 1.1f;
 		Attack();
 		moveTimer_ = 0;
 	}
@@ -38,6 +44,22 @@ void Swordsman::Update()
 
 void Swordsman::Attack()
 {
+	if (attackTimer_ >= 120) {
+		// プールから取ってくる
+		Projectile* baseSword = projectilePool_->Get("sword");
+		// 取れたかチェックする
+		if (baseSword) {
+			Sword* sword = dynamic_cast<Sword*>(baseSword);
+			sword->Activate(); // アクティブにする
+			sword->SetPosition(object_.lock()->worldTransform.translate); // 発射位置
+			sword->SetTeamId(teamId_); // チームID
+			sword->SetRoleId(roleId_); // 役職ID
+			sword->SetVelocity(attackVelocity_); // 速度
+		}
+		attackTimer_ = 0;
+	}
+	
+	
 }
 
 bool Swordsman::IsInActionRange(const GridPosition& targetPosition) const
@@ -49,27 +71,26 @@ bool Swordsman::CanAttackInFront() {
 	// 自分のタイル座標
 	int selfX = static_cast<int>(object_.lock()->worldTransform.translate.x / 2);
 	int selfY = static_cast<int>(object_.lock()->worldTransform.translate.z / 2);
-
 	// 前方向に2マスまで調べる
-	for (int dy = 1; dy <= 2; ++dy) {
-		// yを反転（TileMapの行数を知る必要がある）
-		int targetY = tileMap_->GetMaxRow() - 1 - selfY - dy; // CSVの可読性を上げるために奥が0行目のため修正
-
-		// マップ外チェック
-		if (targetY < 0 || targetY >= tileMap_->GetMaxRow()) {
-			continue;
-		}
-		// そのマスに敵がいるか
-		switch (teamId_) {
-		case TileMode::BLUE:
-			if (tileMap_->GetTileMap(selfX, targetY) == TileMode::RED_ARCHER) {
-				return true;
-			}
-			break;
-
-		}
+	int dy = 1;
+	// yを反転（TileMapの行数を知る必要がある）
+	int targetY = tileMap_->GetMaxRow() - 1 - selfY - dy; // CSVの可読性を上げるために奥が0行目のため修正
+	// マップ外チェック
+	if (targetY < 0 || targetY >= tileMap_->GetMaxRow()) {
+		return false;
 	}
+	// そのマスに敵がいるか
+	switch (teamId_) {
+	case TileMode::BLUE:
+		if (
+			tileMap_->GetTileMap(selfX, targetY) == TileMode::RED_ARCHER ||
+			tileMap_->GetTileMap(selfX, targetY) == TileMode::RED_SWORDSMAN ||
+			tileMap_->GetTileMap(selfX, targetY) == TileMode::RED_WARRIOR) {
+			return true;
+		}
+		break;
 
+	}
 	return false;
 }
 
@@ -77,26 +98,25 @@ bool Swordsman::CanAttackInBack() {
 	// 自分のタイル座標
 	int selfX = static_cast<int>(object_.lock()->worldTransform.translate.x / 2);
 	int selfY = static_cast<int>(object_.lock()->worldTransform.translate.z / 2);
-
 	// 前方向に2マスまで調べる
-	for (int dy = 1; dy <= 2; ++dy) {
-		// yを反転（TileMapの行数を知る必要がある）
-		int targetY = tileMap_->GetMaxRow() - 1 - selfY + dy; // CSVの可読性を上げるために奥が0行目のため修正
-
-		// マップ外チェック
-		if (targetY < 0 || targetY >= tileMap_->GetMaxRow()) {
-			continue;
-		}
-		// そのマスに敵がいるか
-		switch (teamId_) {
-		case TileMode::RED:
-			if (tileMap_->GetTileMap(selfX, targetY) == TileMode::BLUE_ARCHER) {
-				return true;
-			}
-			break;
-		}
+	int dy = 1;
+	// yを反転（TileMapの行数を知る必要がある）
+	int targetY = tileMap_->GetMaxRow() - 1 - selfY + dy; // CSVの可読性を上げるために奥が0行目のため修正
+	// マップ外チェック
+	if (targetY < 0 || targetY >= tileMap_->GetMaxRow()) {
+		return false;
 	}
-
+	// そのマスに敵がいるか
+	switch (teamId_) {
+	case TileMode::RED:
+		if (
+			tileMap_->GetTileMap(selfX, targetY) == TileMode::BLUE_ARCHER ||
+			tileMap_->GetTileMap(selfX, targetY) == TileMode::BLUE_SWORDSMAN ||
+			tileMap_->GetTileMap(selfX, targetY) == TileMode::BLUE_WARRIOR) {
+			return true;
+		}
+		break;
+	}
 	return false;
 }
 
@@ -117,4 +137,41 @@ void Swordsman::Move()
 }
 void Swordsman::CheckAttackHit()
 {
+	for (auto& projectile : projectilePool_->GetProjectiles()) {
+		if (!projectile->GetIsActive()) continue; // 無効弾はスキップ
+
+		GridPosition attackPos = {
+			static_cast<int32_t>(projectile->GetPos().x / 2),
+			static_cast<int32_t>(projectile->GetPos().z / 2)
+		};
+		attackPos.z = tileMap_->GetMaxRow() - 1 - attackPos.z;
+
+		int selfX = static_cast<int>(object_.lock()->worldTransform.translate.x / 2);
+		int selfY = static_cast<int>(object_.lock()->worldTransform.translate.z / 2);
+		int targetY = tileMap_->GetMaxRow() - 1 - selfY;
+
+		if (selfX == attackPos.x && targetY == attackPos.z) {
+			switch (teamId_)
+			{
+			case BLUE:
+				if (projectile->GetTeamId() == TileMode::RED) {
+					// 死亡処理
+					hp_ = 0;
+					object_.lock()->isAlive = false;
+					projectile->Deactivate();
+					tileMap_->SetTileMap(selfX, targetY, teamId_); // タイルを自分のチームに変更
+				}
+				break;
+			case RED:
+				if (projectile->GetTeamId() == TileMode::BLUE) {
+					// 死亡処理
+					hp_ = 0;
+					object_.lock()->isAlive = false;
+					projectile->Deactivate();
+					tileMap_->SetTileMap(selfX, targetY, teamId_); // タイルを自分のチームに変更
+				}
+				break;
+			}
+		}
+	}
 }
