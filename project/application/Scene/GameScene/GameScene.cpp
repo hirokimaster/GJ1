@@ -17,6 +17,13 @@ GameScene::~GameScene()
 
 void GameScene::Initialize()
 {
+
+	// モデル、テクスチャのロード
+	ModelManager::LoadObjModel("Unit/sword/blue_ken.obj");
+	TextureManager::Load("resources/Unit/sword/ken.png");
+	ModelManager::LoadObjModel("Unit/Archer/yumi.obj");
+	TextureManager::Load("resources/Unit/Archer/ken.png");
+
 	// ユニット登録
 	UnitFactory::Register("warrior", [] { return std::make_unique<Warrior>("warrior"); });
 	UnitFactory::Register("archer", [] { return std::make_unique<Archer>("archer"); });
@@ -125,6 +132,16 @@ void GameScene::PostProcessDraw()
 	else if (!isGameClear && !isGameOver) {
 		gameSprite_->Draw();
 	}
+
+	player_->DrawUI(gameCamera_->GetCamera());
+	//postEffect_->Draw();
+}
+
+void GameScene::PostProcessDraw()
+{
+	/*postEffect_->PreDraw();
+	postEffect_->PostDraw();*/
+  
 	postEffect_->PostDraw();
 }
 

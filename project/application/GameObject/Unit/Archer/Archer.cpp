@@ -2,9 +2,6 @@
 
 void Archer::Initialize(Vector2 pos) {
 
-	// モデル、テクスチャのロード
-	ModelManager::LoadObjModel("Unit/Archer/yumi.obj");
-	TextureManager::Load("resources/Unit/Archer/ken.png");
 	// object生成
 	BaseUnit::CreateObject("Unit/Archer/yumi.obj", "Unit/Archer/ken.png");
 	object_.lock()->worldTransform.translate = { pos.x,1.0f,pos.y };
