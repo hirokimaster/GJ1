@@ -40,5 +40,6 @@ public:
 	void CheckAttackHit();
 
 private:
+	int32_t attackTimer_ = 0;
 
 };

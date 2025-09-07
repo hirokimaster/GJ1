@@ -80,7 +80,10 @@ bool Archer::CanAttackInFront()
 		// そのマスに敵がいるか
 		switch (teamId_) {
 		case TileMode::BLUE:
-			if(tileMap_->GetTileMap(selfX, targetY) == TileMode::RED_ARCHER) {
+			if(
+				tileMap_->GetTileMap(selfX, targetY) == TileMode::RED_ARCHER ||
+				tileMap_->GetTileMap(selfX, targetY) == TileMode::RED_SWORDSMAN ||
+				tileMap_->GetTileMap(selfX, targetY) == TileMode::RED_WARRIOR) {
 				return true;
 			}
 		break;
@@ -109,7 +112,10 @@ bool Archer::CanAttackInBack()
 		// そのマスに敵がいるか
 		switch (teamId_) {
 		case TileMode::RED:
-			if (tileMap_->GetTileMap(selfX, targetY) == TileMode::BLUE_ARCHER) {
+			if (
+				tileMap_->GetTileMap(selfX, targetY) == TileMode::BLUE_ARCHER ||
+				tileMap_->GetTileMap(selfX, targetY) == TileMode::BLUE_SWORDSMAN || 
+				tileMap_->GetTileMap(selfX, targetY) == TileMode::BLUE_WARRIOR) {
 				return true;
 			}
 			break;

@@ -67,7 +67,7 @@ void TileMap::Update()
 bool TileMap::IsAllBlue() const {
     for (int row = 0; row < maxRow_; ++row) {
         for (int col = 0; col < maxCol_; ++col) {
-            if ((map_[row][col] != TileMode::BLUE) && (map_[row][col] != TileMode::BLUE_ARCHER)) { // 1 を青にしたなら
+            if ((map_[row][col] != TileMode::BLUE) && (map_[row][col] != TileMode::BLUE_ARCHER) && (map_[row][col] != TileMode::BLUE_WARRIOR) && (map_[row][col] != TileMode::BLUE_SWORDSMAN)) { // 1 を青にしたなら
                 return false;
             }
         }

@@ -23,11 +23,18 @@ void TitleScene::Initialize()
 	// ポストエフェクト初期化
 	postEffect_ = std::make_unique<PostProcess>();
 	postEffect_->Initialize();
+	postEffect_->SetEffect(PostEffectType::Bloom); // ブルーム有効
 
 	LoadTextureFile(); // texture読み込み
 
 	titleSprite_ = std::make_unique<TitleSprite>();
 	titleSprite_->Initialize();
+	
+	// シーン遷移用
+	transition_ = std::make_unique<FadeOut>();
+	transition_->Initialize();
+	GameManager::GetInstance()->SetSceneTransition(transition_.get());
+	isTransition_ = false;
 
 	// スカイドーム
 	skydome_ = std::make_unique<Skydome>();
@@ -36,8 +43,15 @@ void TitleScene::Initialize()
 
 void TitleScene::Update()
 {
-	if (Input::GetInstance()->PressedKey(DIK_SPACE)) {
-		GameManager::GetInstance()->ChangeScene("SELECT");
+	// Aボタンが押されたらシーン遷移処理を開始する
+	if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_A) || Input::GetInstance()->PressedKey(DIK_SPACE)) {
+		if (!isTransition_) {// シーン遷移がまだ始まっていない場合のみ
+			isTransition_ = true;
+			transition_ = std::make_unique<FadeIn>();
+			transition_->Initialize();
+			GameManager::GetInstance()->SetSceneTransition(transition_.get());
+			GameManager::GetInstance()->ChangeScene("SELECT");
+		}
 	}
 	skydome_->Update();
 	ObjectManager::GetInstance()->Update();
@@ -45,21 +59,21 @@ void TitleScene::Update()
 
 void TitleScene::Draw()
 {
-
-	titleSprite_->Draw();
-	ObjectManager::GetInstance()->Draw(gameCamera_->GetCamera());
-	//postEffect_->Draw();
+	postEffect_->Draw();
 }
 
 void TitleScene::PostProcessDraw()
 {
-	/*postEffect_->PreDraw();
-	postEffect_->PostDraw();*/
+	postEffect_->PreDraw();
+	titleSprite_->Draw();
+	ObjectManager::GetInstance()->Draw(gameCamera_->GetCamera());
+	postEffect_->PostDraw();
 }
 
 void TitleScene::LoadTextureFile()
 {
 	TextureManager::Load("resources/TempTexture/white.png");
+	TextureManager::Load("resources/TempTexture/white2.png");
 	TextureManager::Load("resources/UI/space.png");
-	TextureManager::Load("resources/UI/title.png");
+	TextureManager::Load("resources/UI/title2.png");
 }
