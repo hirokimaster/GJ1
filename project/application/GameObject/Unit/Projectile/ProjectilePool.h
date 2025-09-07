@@ -1,6 +1,7 @@
 #pragma once
 #include <application/GameObject/Unit/Projectile/Projectile.h>
 #include <application/GameObject/Unit/Projectile/Arrow/Arrow.h>
+#include <application/GameObject/Unit/Projectile/Sword/Sword.h>
 #include <map>
 #include <queue>
 
@@ -25,6 +26,10 @@ public:
 		std::unique_ptr<Projectile> projectile;
 		if (name == "arrow") {
 			projectile = std::make_unique<Arrow>("arrow");
+			projectile->Initialize();
+		}
+		else if (name == "sword") {
+			projectile = std::make_unique<Sword>("sword");
 			projectile->Initialize();
 		}
 
