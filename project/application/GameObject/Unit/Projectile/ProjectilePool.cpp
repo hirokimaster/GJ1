@@ -2,11 +2,14 @@
 
 void ProjectilePool::Initialize() {
 	// 初期化時にあらかじめ作っておく
-	for (uint32_t i = 0; i < kPoolSize-100; ++i) {
+	for (uint32_t i = 0; i < kPoolSize-200; ++i) {
 		Create("arrow");
 	}
-	for (uint32_t i = 0+100; i < kPoolSize ; ++i) {
+	for (uint32_t i = kPoolSize - 200; i < kPoolSize -100 ; ++i) {
 		Create("sword");
+	}
+	for (uint32_t i = kPoolSize - 100; i < kPoolSize; ++i) {
+		Create("shield");
 	}
 }
 
@@ -27,6 +30,10 @@ void ProjectilePool::Update() {
 			else if (projectile->GetName() == "sword") {
 				projectile->SetPosition({ -10.0f, -10.0f, -10.0f });
 				PushPool("sword", projectile.get());
+			}
+			else if (projectile->GetName() == "shield") {
+				projectile->SetPosition({ -10.0f, -10.0f, -10.0f });
+				PushPool("shield", projectile.get());
 			}
 		}
 	}

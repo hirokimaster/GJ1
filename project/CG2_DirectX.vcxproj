@@ -188,6 +188,7 @@ copy "$(WindowsSdkdir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="application\GameObject\Player\Player.cpp" />
     <ClCompile Include="application\GameObject\Unit\Swordsman\Swordsman.cpp" />
     <ClCompile Include="application\GameObject\Unit\Projectile\Sword\Sword.cpp" />
+    <ClCompile Include="application\GameObject\Unit\Projectile\Shield\Shield.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="application\AdjustmentVariables\AdjustmentVariables.h" />
@@ -282,6 +283,7 @@ copy "$(WindowsSdkdir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="application\GameObject\TeamTile\TileMode.h" />
     <ClInclude Include="application\GameObject\Unit\Swordsman\Swordsman.h" />
     <ClInclude Include="application\GameObject\Unit\Projectile\Sword\Sword.h" />
+    <ClInclude Include="application\GameObject\Unit\Projectile\Shield\Shield.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="engine\3d\BaseObject\BaseIndividualObject.cpp" />

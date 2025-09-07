@@ -4,6 +4,7 @@ void Archer::Initialize(Vector2 pos) {
 
 	// object生成
 	BaseUnit::CreateObject("Unit/Archer/yumi.obj", "Unit/Archer/ken.png");
+	BaseUnit::CreateHpObject();
 	object_.lock()->worldTransform.translate = { pos.x,1.0f,pos.y };
 	object_.lock()->worldTransform.scale = { 0.3f,0.3f,0.3f };
 	object_.lock()->color = { 1.0f,1.0f,1.0f,1.0f };
@@ -12,8 +13,7 @@ void Archer::Initialize(Vector2 pos) {
 
 void Archer::Update()
 {
-	// ユニット共通の更新処理
-	BaseUnit::Update();
+	
 	// デバック用の移動、攻撃
 
 	shotTimer_++;
@@ -35,6 +35,8 @@ void Archer::Update()
 	if (projectilePool_) {
 		CheckAttackHit();
 	}
+	// ユニット共通の更新処理
+	BaseUnit::Update();
 
 }
 
@@ -162,8 +164,7 @@ void Archer::CheckAttackHit()
 			case BLUE:
 				if (projectile->GetTeamId() == TileMode::RED) {
 					// 死亡処理
-					hp_ = 0;
-					object_.lock()->isAlive = false;
+					hp_ -= 50;
 					projectile->Deactivate();
 					tileMap_->SetTileMap(selfX, targetY, teamId_); // タイルを自分のチームに変更
 				}
@@ -171,8 +172,7 @@ void Archer::CheckAttackHit()
 			case RED:
 				if (projectile->GetTeamId() == TileMode::BLUE) {
 					// 死亡処理
-					hp_ = 0;
-					object_.lock()->isAlive = false;
+					hp_ -= 50;
 					projectile->Deactivate();
 					tileMap_->SetTileMap(selfX, targetY, teamId_); // タイルを自分のチームに変更
 				}

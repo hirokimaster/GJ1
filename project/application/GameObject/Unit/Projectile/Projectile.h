@@ -62,6 +62,12 @@ public:
 	// 速度
 	void SetVelocity(const Vector3& velocity) { velocity_ = velocity; }
 
+	void SetWorldTransformParent(InstanceWorldTransform* worldTransform) {
+		if (object_.lock()) {
+			object_.lock()->worldTransform.parent = worldTransform;
+		}
+	}
+
 #pragma
 
 	/// <summary>

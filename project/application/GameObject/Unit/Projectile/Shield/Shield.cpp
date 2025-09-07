@@ -1,6 +1,6 @@
-#include "Sword.h"
+#include "Shield.h"
 
-void Sword::Initialize()
+void Shield::Initialize()
 {
 	// モデル、テクスチャのロード
 	ModelManager::LoadObjModel("TempModel/cube.obj");
@@ -11,12 +11,12 @@ void Sword::Initialize()
 
 	object_.lock()->worldTransform.translate.x = -10.0f;
 	object_.lock()->worldTransform.translate.y = 1.0f;
-	object_.lock()->worldTransform.scale = { 0.1f,0.2f,2.5f };
+	object_.lock()->worldTransform.scale = { 0.6f,0.6f,0.2f };
 	active_ = false; // 非アクティブ
 }
 
-void Sword::Update()
+void Shield::Update()
 {
-	object_.lock()->worldTransform.translate.y -= velocity_.y;
+	object_.lock()->worldTransform.translate.z += velocity_.y;
 	Projectile::Update();
 }
