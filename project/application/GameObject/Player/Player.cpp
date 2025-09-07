@@ -6,12 +6,25 @@
 #include <application/GameObject/Unit/Projectile/ProjectilePool.h>
 #include <application/GameObject/Unit/Archer/Archer.h>
 void Player::Init() {
+
+	// 調整項目
+	AddAdjustmentVariables();
+	ApplyAdjustmentVariables();
 	selectedTile_ = {0,0}; // 初期選択タイル
 	TextureManager::Load("resources/TempTexture/white2.png");
 	ModelManager::LoadObjModel("PlayerTargetTile/PlayerTargetTile.obj");
 	// object共通の初期化
 	BaseIndividualObject::Initialize("PlayerTargetTile/PlayerTargetTile.obj", "TempTexture/white2.png");
 	object_.lock()->SetColor({ 0.0f,0.0f,0.6f,1.0f });
+
+	// 選択してるユニットのモデル
+	selectObject_ = std::make_unique<Object3dPlacer>();
+	selectObject_->Initialize();
+	selectObject_->SetModel("Unit/Archer/yumi.obj");
+	selectObject_->SetTexHandle(TextureManager::GetTexHandle("Unit/Archer/ken.png"));
+	selectObject_->SetPosition({ selectObjectPosition_ });
+	selectObject_->SetScale({ 0.2f,0.2f,0.2f });
+	selectObject_->SetRotate({ 0,rotateY_,0 });
 }
 
 void Player::Update() {
@@ -29,6 +42,11 @@ void Player::Update() {
 	}
 	
 	BaseIndividualObject::Update(); // object共通の更新処理
+
+	// 選択ユニットの回転
+	rotateY_ += 0.015f;
+	selectObject_->SetRotate({ 0,rotateY_,0 });
+	selectObject_->Update();
 }
 
 void Player::SelectTile() {
@@ -98,6 +116,11 @@ void Player::SpawnUnit() {
     }
 }
 
+void Player::DrawUI(const Camera& camera)
+{
+	selectObject_->Draw(camera);
+}
+
 void Player::DebugDraw()
 {
 #ifdef _DEBUG
@@ -106,6 +129,9 @@ void Player::DebugDraw()
 	ImGui::Text("selectedTileY:%d", (int)selectedTile_.y);
 	ImGui::Text("-1:swordsman, 0:archer, 1:warrior, num:%d", selectNum_);
 	ImGui::End();
+
+	ApplyAdjustmentVariables();
+	selectObject_->SetPosition(selectObjectPosition_);
 #endif // _DEBUG
 
 }
@@ -126,10 +152,44 @@ void Player::SelectUnit()
 {
 	if (Input::GetInstance()->PressedKey(DIK_LEFT) && selectNum_ > -1) {
 		selectNum_ -= 1;
+		rotateY_ = std::numbers::pi_v<float>;
 	}
 	else if (Input::GetInstance()->PressedKey(DIK_RIGHT) && selectNum_ < 1) {
 		selectNum_ += 1;
+		rotateY_ = std::numbers::pi_v<float>;
 	}
 
 	selectNum_ = std::clamp(selectNum_, -1, 1); // 制限しとく
+
+	if (selectNum_ == 0) {
+		selectObject_->SetModel("Unit/Archer/yumi.obj");
+		selectObject_->SetTexHandle(TextureManager::GetTexHandle("Unit/Archer/ken.png"));
+	}
+	else if (selectNum_ == 1) {
+		selectObject_->SetModel("Unit/sword/blue_ken.obj");
+		selectObject_->SetTexHandle(TextureManager::GetTexHandle("Unit/sword/ken.png"));
+	}
+	else if (selectNum_ == -1) {
+		selectObject_->SetModel("Unit/sword/blue_ken.obj");
+		selectObject_->SetTexHandle(TextureManager::GetTexHandle("Unit/sword/ken.png"));
+	}
+
+}
+
+void Player::AddAdjustmentVariables()
+{
+	AdjustmentVariables* variables = AdjustmentVariables::GetInstance();
+	const char* groupName = "Player";
+	// グループを追加
+	variables->CreateGroup(groupName);
+	// アイテム追加
+	variables->AddItem(groupName, "selectObjectPosition", selectObjectPosition_);
+}
+
+void Player::ApplyAdjustmentVariables()
+{
+	// jsonから読み込んだ値を適用
+	AdjustmentVariables* variables = AdjustmentVariables::GetInstance();
+	const char* groupName = "Player";
+	selectObjectPosition_ = variables->GetValue<Vector3>(groupName, "selectObjectPosition");
 }

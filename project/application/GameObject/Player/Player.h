@@ -3,6 +3,8 @@
 #include "application/GameObject/TileMap/TileMap.h"
 #include "application/GameObject/Unit/BaseUnit.h"
 #include <application/GameObject/Unit/UnitFactory.h>
+#include <application/AdjustmentVariables/AdjustmentVariables.h>
+
 class Player : BaseIndividualObject
 {
 public:
@@ -12,6 +14,12 @@ public:
 
 	void MoveSelectTile(); // タイル移動
 	void SpawnUnit(); // ユニット出現
+
+	/// <summary>
+	/// playerのUI描画
+	/// </summary>
+	/// <param name="camera"></param>
+	void DrawUI(const Camera& camera);
 
 	void DebugDraw(); // デバッグ描画
 public:
@@ -24,7 +32,20 @@ public: // Setter
 
 private:
 
-	void SelectUnit(); // unit選択
+	/// <summary>
+	/// ユニット選択
+	/// </summary>
+	void SelectUnit();
+
+	/// <summary>
+	/// 調整項目の追加
+	/// </summary>
+	void AddAdjustmentVariables();
+
+	/// <summary>
+	/// 調整項目の適用
+	/// </summary>
+	void ApplyAdjustmentVariables();
 
 private:
 	int teamId_ = TileMode::BLUE;  
@@ -36,5 +57,8 @@ private:
 	std::vector<std::unique_ptr<BaseUnit>> units_;
 	int32_t selectNum_ = 0; // unit洗濯用の番号
 	ProjectilePool* projectilePool_ = nullptr;
+	std::unique_ptr<Object3dPlacer> selectObject_;
+	Vector3 selectObjectPosition_{};
+	float rotateY_ = std::numbers::pi_v<float>;
 };
 

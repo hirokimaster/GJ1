@@ -2,9 +2,6 @@
 
 void Swordsman::Initialize(Vector2 pos) {
 
-	// モデル、テクスチャのロード
-	ModelManager::LoadObjModel("Unit/sword/blue_ken.obj");
-	TextureManager::Load("resources/Unit/sword/ken.png");
 	// object生成
 	BaseUnit::CreateObject("Unit/sword/blue_ken.obj", "Unit/sword/ken.png");
 	object_.lock()->worldTransform.translate = { pos.x,1.0f,pos.y };
