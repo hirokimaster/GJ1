@@ -6,12 +6,14 @@
 #include <application/GameObject/Unit/Projectile/ProjectilePool.h>
 #include <application/GameObject/Unit/Archer/Archer.h>
 void Player::Init() {
-	selectedTile_ = {0,0}; // 初期選択タイル
+	selectedTile_ = { 0,0 }; // 初期選択タイル
 	TextureManager::Load("resources/TempTexture/white2.png");
+	// モデルのロード
 	ModelManager::LoadObjModel("PlayerTargetTile/PlayerTargetTile.obj");
 	// object共通の初期化
 	BaseIndividualObject::Initialize("PlayerTargetTile/PlayerTargetTile.obj", "TempTexture/white2.png");
 	object_.lock()->SetColor({ 0.0f,0.0f,0.6f,1.0f });
+
 }
 
 void Player::Update() {
@@ -24,17 +26,17 @@ void Player::Update() {
 	if (Input::GetInstance()->PressedKey(DIK_P)) {
 		SpawnUnit();
 	}
-	for(auto & unit: units_){
+	for (auto& unit : units_) {
 		unit->Update();
 	}
-	
+
 	BaseIndividualObject::Update(); // object共通の更新処理
 }
 
 void Player::SelectTile() {
 	if (Input::GetInstance()->PressedKey(DIK_D)) {
 		// 参照の外じゃなかったら
-		if (tileMap_->GetMaxCol() - 1> selectedTile_.x) {
+		if (tileMap_->GetMaxCol() - 1 > selectedTile_.x) {
 			selectedTile_.x += 1;
 		}
 	}
@@ -52,7 +54,7 @@ void Player::SelectTile() {
 	}
 	else if (Input::GetInstance()->PressedKey(DIK_S)) {
 		// 参照の外じゃなかったら
-		if (tileMap_->GetMaxRow() -1 > selectedTile_.y) {
+		if (tileMap_->GetMaxRow() - 1 > selectedTile_.y) {
 			selectedTile_.y += 1;
 		}
 	}
@@ -65,12 +67,11 @@ void Player::MoveSelectTile()
 }
 
 void Player::SpawnUnit() {
-    int x = (int)selectedTile_.x;
-    int y = (int)selectedTile_.y;
-    if (CanSpawnHere(x, y)) {
+	int x = (int)selectedTile_.x;
+	int y = (int)selectedTile_.y;
+	if (CanSpawnHere(x, y)) {
 		// yを反転（TileMapの行数を知る必要がある）
 		int reversedY = tileMap_->GetMaxRow() - 1 - y; // CSVの可読性を上げるために奥が0行目のため修正
-
 		// ユニット
 		std::unique_ptr<BaseUnit> unit;
 		if (selectNum_ == 0) {
@@ -85,7 +86,7 @@ void Player::SpawnUnit() {
 			unit = UnitFactory::Create("swordsman");
 			roleId_ = TileMode::BLUE_SWORDSMAN;
 		}
-	
+
 		unit->Initialize({ (float)x * 2.0f,(float)reversedY * 2.0f });
 		unit->SetProjectile(projectilePool_);
 		unit->SetTileMap(tileMap_);
@@ -95,7 +96,7 @@ void Player::SpawnUnit() {
 		unit->SetColor({ 0.3f,0.3f,1.0f,1.0f });
 		unit->SetVelocity({ 0.0f,2.00f });
 		units_.push_back(std::move(unit));
-    }
+	}
 }
 
 void Player::DebugDraw()

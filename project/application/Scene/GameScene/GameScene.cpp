@@ -58,6 +58,12 @@ void GameScene::Initialize()
 	enemy_->SetProjectilePool(projectilePool_.get());
 	enemy_->Init();
 
+	// シーン遷移
+	transition_ = std::make_unique<FadeOut>();
+	transition_->Initialize();
+	GameManager::GetInstance()->SetSceneTransition(transition_.get());
+
+
 }
 
 void GameScene::Update()
@@ -71,15 +77,19 @@ void GameScene::Update()
 		isGameClear = true;
 	}
 
-	if (isGameOver) {
-		if (Input::GetInstance()->PressedKey(DIK_S)) {
-			GameManager::GetInstance()->ChangeScene("SELECT");
-		}
+	if (Input::GetInstance()->PressedKey(DIK_S) && isGameOver && (!isTransitionClear_)) {
+		isTransitionClear_ = true;
+		transition_ = std::make_unique<FadeIn>();
+		transition_->Initialize();
+		GameManager::GetInstance()->SetSceneTransition(transition_.get());
+		GameManager::GetInstance()->ChangeScene("SELECT");
 	}
-	else if (isGameClear) {
-		if (Input::GetInstance()->PressedKey(DIK_S)) {
-			GameManager::GetInstance()->ChangeScene("SELECT");
-		}
+	else if (Input::GetInstance()->PressedKey(DIK_S) &&isGameClear && (!isTransitionClear_)) {
+		isTransitionClear_ = true;
+		transition_ = std::make_unique<FadeIn>();
+		transition_->Initialize();
+		GameManager::GetInstance()->SetSceneTransition(transition_.get());
+		GameManager::GetInstance()->ChangeScene("SELECT");
 	}
 
 	tileMap_->Update();
