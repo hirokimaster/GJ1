@@ -27,8 +27,10 @@ private:
 	void SelectUnit(); // unit選択
 
 private:
+	// チーム && 役職ID
 	int teamId_ = TileMode::BLUE;  
 	int roleId_ = TileMode::BLUE_ARCHER;
+
 	TileMap* tileMap_;    // マップ参照
 	Vector2 selectedTile_; // 現在選択中タイル
 

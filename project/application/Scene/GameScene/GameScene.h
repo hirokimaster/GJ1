@@ -92,5 +92,8 @@ private:
 	std::unique_ptr<ProjectilePool> projectilePool_;
 	// スカイドーム
 	std::unique_ptr<Skydome> skydome_;
+	// フェード用
+	std::unique_ptr<ISceneTransition> transition_; // 遷移
+	bool isTransitionClear_ = false; // クリアに行くかどうか
 
 };

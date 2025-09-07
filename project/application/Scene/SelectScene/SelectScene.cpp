@@ -39,17 +39,37 @@ void SelectScene::Initialize()
 	// スカイドーム
 	skydome_ = std::make_unique<Skydome>();
 	skydome_->Init();
+
+	// シーン遷移用
+	transition_ = std::make_unique<FadeOut>();
+	transition_->Initialize();
+	GameManager::GetInstance()->SetSceneTransition(transition_.get());
+	isTransition_ = false;
 }
 
 void SelectScene::Update()
 {
 	camera_.UpdateMatrix();
-	if (Input::GetInstance()->PressedKey(DIK_SPACE)) {
-		GameManager::GetInstance()->ChangeScene("GAME");
-	}
 
-	if (Input::GetInstance()->PressedKey(DIK_RETURN)) {
-		GameManager::GetInstance()->ChangeScene("TITLE");
+	// SPACEボタンが押されたらシーン遷移処理を開始する
+	if (Input::GetInstance()->PressedKey(DIK_SPACE)) {
+		if (!isTransition_) {// シーン遷移がまだ始まっていない場合のみ
+			isTransition_ = true;
+			transition_ = std::make_unique<FadeIn>();
+			transition_->Initialize();
+			GameManager::GetInstance()->SetSceneTransition(transition_.get());
+			GameManager::GetInstance()->ChangeScene("GAME");
+		}
+	}
+	// RETURNボタンが押されたらシーン遷移処理を開始する
+	else if (Input::GetInstance()->PressedKey(DIK_RETURN)) {
+		if (!isTransition_) {// シーン遷移がまだ始まっていない場合のみ
+			isTransition_ = true;
+			transition_ = std::make_unique<FadeIn>();
+			transition_->Initialize();
+			GameManager::GetInstance()->SetSceneTransition(transition_.get());
+			GameManager::GetInstance()->ChangeScene("TITLE");
+		}
 	}
 
 	StageSelect();
@@ -57,14 +77,14 @@ void SelectScene::Update()
 	for (auto& selectStage : selectStages_) {
 		selectStage->Update(selectedStageNum_);
 	}
-	
+
 	skydome_->Update();
 	ObjectManager::GetInstance()->Update();
 }
 
 void SelectScene::Draw()
 {
-	
+
 	postEffect_->Draw();
 }
 

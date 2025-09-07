@@ -10,7 +10,7 @@
 #include "application/SceneTransition/FadeIn/FadeIn.h"
 #include "application/SceneSprite/TitleSprite.h"
 #include "application/GameManager/GameManager.h"
-
+#include "application/SceneTransition/FadeIn/FadeIn.h"
 #include "application/GameObject/Skydome/Skydome.h"
 #include "application/GameObject/GameCamera/GameCamera.h"
 
@@ -58,4 +58,8 @@ private:
 	std::unique_ptr<GameCamera> gameCamera_; // ゲームカメラ
 	// スカイドーム
 	std::unique_ptr<Skydome> skydome_;
+
+	// シーン遷移用
+	bool isTransition_ = false;
+	std::unique_ptr<ISceneTransition> transition_ = nullptr;
 };
