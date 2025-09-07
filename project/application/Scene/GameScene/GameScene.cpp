@@ -134,14 +134,6 @@ void GameScene::PostProcessDraw()
 	}
 
 	player_->DrawUI(gameCamera_->GetCamera());
-	//postEffect_->Draw();
-}
-
-void GameScene::PostProcessDraw()
-{
-	/*postEffect_->PreDraw();
-	postEffect_->PostDraw();*/
-  
 	postEffect_->PostDraw();
 }
 
