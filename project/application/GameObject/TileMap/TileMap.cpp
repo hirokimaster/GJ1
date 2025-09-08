@@ -4,9 +4,6 @@
 #include <sstream>
 void TileMap::LoadTile()
 {
-
-    specialTiles_;
-
     std::ifstream file("resources/Stage/rensyu.csv");
     if (!file.is_open()) {
         assert(false && "Failed to open CSV file");
@@ -47,7 +44,7 @@ void TileMap::LoadTile()
 
             // 9番だったらロール変えタイル
             if (value == 9) {
-                GridPosition pos = { rowIndex, colIndex };
+                GridPosition pos = { colIndex, rowIndex };
                 specialTiles_.push_back(std::make_unique<RoleChangeTile>(pos, "warrior"));
             }
 

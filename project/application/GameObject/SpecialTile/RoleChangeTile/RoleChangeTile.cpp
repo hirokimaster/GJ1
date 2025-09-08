@@ -16,6 +16,5 @@ void RoleChangeTile::OnUnitEnter(std::unique_ptr<BaseUnit>& unit)
 	newUnit->SetProjectile(unit->GetProjectile());
 	newUnit->SetTileMap(unit->GetTileMap());
 
-	
 	unit = std::move(newUnit); // 差し替え
 }

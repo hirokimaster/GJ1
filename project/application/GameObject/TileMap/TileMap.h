@@ -7,10 +7,6 @@
 class TileMap
 {
 public:
-	TileMap() {};
-	~TileMap() {};
-
-
 	void LoadTile();
 
 	void Update();

@@ -35,7 +35,7 @@ void Player::Update() {
 	SelectTile();
 	DebugDraw();
 	SelectUnit();
-	//RoleChange();
+	RoleChange();
 	if (Input::GetInstance()->PressedKey(DIK_P)) {
 		SpawnUnit();
 	}
@@ -181,7 +181,14 @@ void Player::SelectUnit()
 void Player::RoleChange()
 {
 	// ロールチェンジ
-
+	for (auto& spTile : tileMap_->GetSpecialTile()) {
+		for (auto& unit : units_) {
+			if (spTile->GetGridPosition().x == unit->GetGridPosition().x &&
+				spTile->GetGridPosition().z == unit->GetGridPosition().z) {
+				spTile->OnUnitEnter(unit);
+			}
+		}
+	}
 }
 
 void Player::AddAdjustmentVariables()
