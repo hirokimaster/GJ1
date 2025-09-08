@@ -1,25 +1,29 @@
 #pragma once
+#include <string>
+#include <externals/Json/json.hpp>
 
 class SharedGameData {
-public: //‰Šú‰»
+public: //åˆæœŸåŒ–
 	void Init();
 private:
 	SharedGameData() = default;
 	~SharedGameData() = default;
-	// ƒRƒs[ƒRƒ“ƒXƒgƒ‰ƒNƒ^‚Æ‘ã“ü‰‰Zq‚ğíœ
+	// ã‚³ãƒ”ãƒ¼ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã¨ä»£å…¥æ¼”ç®—å­ã‚’å‰Šé™¤
 	const SharedGameData& operator=(const SharedGameData&) = delete;
 public:
 	static SharedGameData* GetInstance();
 
+public: // Getter
+	uint32_t GetStageId() const { return stageId; } // ã‚¹ãƒ†ãƒ¼ã‚¸ç•ªå·å–å¾—
+	uint32_t GetMaxUnitCount() const { return maxUnitCount; } // æœ€å¤§é…ç½®å¯èƒ½ãƒ¦ãƒ‹ãƒƒãƒˆæ•°å–å¾—
 
-public: //Getter
-	//@‘I‚Î‚ê‚Ä‚éƒXƒe[ƒW‚Ì”Ô†
-	int GetSelectedStageNo() const { return selectedStageNo_; } // 0:ƒXƒe[ƒW1, 1:ƒXƒe[ƒW2, 2:ƒXƒe[ƒW3, 3:ƒXƒe[ƒW4
-public: //Setter
-	//@‘I‚Î‚ê‚Ä‚éƒXƒe[ƒW‚Ì”Ô†
-	void SetSelectedStageNo(int stageNo) { selectedStageNo_ = stageNo; } // 0:ƒXƒe[ƒW1, 1:ƒXƒe[ƒW2, 2:ƒXƒe[ƒW3, 3:ƒXƒe[ƒW4
+	// JSONã‹ã‚‰ãƒ­ãƒ¼ãƒ‰
+	void LoadFromJson(const std::string& filePath);
+private:
 
-public: // ‹¤—L‚·‚éƒf[ƒ^
-	//@‘I‚Î‚ê‚Ä‚éƒXƒe[ƒW‚Ì”Ô†
-	int selectedStageNo_ = 0; // 0:ƒXƒe[ƒW1, 1:ƒXƒe[ƒW2, 2:ƒXƒe[ƒW3, 3:ƒXƒe[ƒW4
+
+	// ã‚¹ãƒ†ãƒ¼ã‚¸ç•ªå·ã‚„ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼å…±é€šãƒ‡ãƒ¼ã‚¿
+	uint32_t stageId = 0; // ã‚¹ãƒ†ãƒ¼ã‚¸ç•ªå·
+	uint32_t maxUnitCount = 0; /// æœ€å¤§é…ç½®å¯èƒ½ãƒ¦ãƒ‹ãƒƒãƒˆæ•°
+
 };

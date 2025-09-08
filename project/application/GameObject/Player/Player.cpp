@@ -86,34 +86,38 @@ void Player::MoveSelectTile()
 void Player::SpawnUnit() {
 	int x = (int)selectedTile_.x;
 	int y = (int)selectedTile_.y;
-	if (CanSpawnHere(x, y)) {
-		// yを反転（TileMapの行数を知る必要がある）
-		int reversedY = tileMap_->GetMaxRow() - 1 - y; // CSVの可読性を上げるために奥が0行目のため修正
-		// ユニット
-		std::unique_ptr<BaseUnit> unit;
-		if (selectNum_ == 0) {
-			unit = UnitFactory::Create("archer");
-			roleId_ = TileMode::BLUE_ARCHER;
-		}
-		else if (selectNum_ == 1) {
-			unit = UnitFactory::Create("warrior");
-			roleId_ = TileMode::BLUE_WARRIOR;
-		}
-		else if (selectNum_ == -1) {
-			unit = UnitFactory::Create("swordsman");
-			roleId_ = TileMode::BLUE_SWORDSMAN;
-		}
+	if (currentUnitCount_ < maxUnitCount_) {
+		if (CanSpawnHere(x, y)) {
+			// yを反転（TileMapの行数を知る必要がある）
+			int reversedY = tileMap_->GetMaxRow() - 1 - y; // CSVの可読性を上げるために奥が0行目のため修正
+			// ユニット
+			std::unique_ptr<BaseUnit> unit;
+			if (selectNum_ == 0) {
+				unit = UnitFactory::Create("archer");
+				roleId_ = TileMode::BLUE_ARCHER;
+			}
+			else if (selectNum_ == 1) {
+				unit = UnitFactory::Create("warrior");
+				roleId_ = TileMode::BLUE_WARRIOR;
+			}
+			else if (selectNum_ == -1) {
+				unit = UnitFactory::Create("swordsman");
+				roleId_ = TileMode::BLUE_SWORDSMAN;
+			}
 
-		unit->Initialize({ (float)x * 2.0f,(float)reversedY * 2.0f });
-		unit->SetProjectile(projectilePool_);
-		unit->SetTileMap(tileMap_);
-		unit->SetGridPosition(x, y);
-		unit->SetTeamId(teamId_);
-		unit->SetRoleId(roleId_);
-		unit->SetColor({ 0.3f,0.3f,1.0f,1.0f });
-		unit->SetVelocity({ 0.0f,2.00f });
-		units_.push_back(std::move(unit));
+			unit->Initialize({ (float)x * 2.0f,(float)reversedY * 2.0f });
+			unit->SetProjectile(projectilePool_);
+			unit->SetTileMap(tileMap_);
+			unit->SetGridPosition(x, y);
+			unit->SetTeamId(teamId_);
+			unit->SetRoleId(roleId_);
+			unit->SetColor({ 0.3f,0.3f,1.0f,1.0f });
+			unit->SetVelocity({ 0.0f,2.00f });
+			units_.push_back(std::move(unit));
+		}
+		currentUnitCount_++;
 	}
+
 }
 
 void Player::DrawUI(const Camera& camera)

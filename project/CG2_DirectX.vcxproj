@@ -313,8 +313,8 @@ copy "$(WindowsSdkdir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </None>
-    <None Include="resources\Stage\rensyu.csv" />
-    <None Include="resources\Stage\stage1.csv" />
+    <None Include="resources\Stage\csv\stage1.csv" />
+    <None Include="resources\Stage\csv\stage2.csv" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="resources\ShaderFile\EmitParticle.CS.hlsl">

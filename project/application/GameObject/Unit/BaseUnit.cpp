@@ -51,6 +51,10 @@ void BaseUnit::Update() {
 	if (hp_ <= 0) {
 		object_.lock()->isAlive = false;
 		hpObject_.lock()->isAlive = false;
+		// 前フレームにとったタイルの色を役職ではなく自チームにする
+		if (tileMap_->GetTileMap(gridPosition_.x, gridPosition_.z) == roleId_) {
+			tileMap_->SetTileMap(gridPosition_.x, gridPosition_.z, teamId_);
+		}
 	}
 	
 	BaseInstancingObject::Update(); // object共通の更新処理

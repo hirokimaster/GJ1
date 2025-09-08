@@ -1,5 +1,6 @@
 #include "SelectScene.h"
 
+#include "application/GameObject/SharedGameData/SharedGameData.h"
 SelectScene::SelectScene()
 {
 }
@@ -21,9 +22,9 @@ void SelectScene::Initialize()
 	selectSprite_ = std::make_unique<SelectSprite>();
 	selectSprite_->Initialize();
 
-	const std::filesystem::path folderPath = "Resources/stage/"; // ← ここを自分のパスに
+	const std::filesystem::path folderPath = "Resources/stage/json"; // ← ここを自分のパスに
 	for (const auto& entry : std::filesystem::directory_iterator(folderPath)) {
-		if (entry.is_regular_file() && entry.path().extension() == ".csv") {
+		if (entry.is_regular_file() && entry.path().extension() == ".json") {
 			maxStageNum_++;
 		}
 	}
@@ -57,6 +58,7 @@ void SelectScene::Update()
 			isTransition_ = true;
 			transition_ = std::make_unique<FadeIn>();
 			transition_->Initialize();
+			SharedGameData::GetInstance()->LoadFromJson("Resources/stage/json/stage" + std::to_string(selectedStageNum_ + 1) + ".json");
 			GameManager::GetInstance()->SetSceneTransition(transition_.get());
 			GameManager::GetInstance()->ChangeScene("GAME");
 		}

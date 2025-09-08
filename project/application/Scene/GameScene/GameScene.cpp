@@ -6,7 +6,7 @@
 
 #include "GameScene.h"
 #include "engine/3d/ObjectManager/ObjectManager.h"
-
+#include "application/GameObject/SharedGameData/SharedGameData.h"
 GameScene::GameScene()
 {
 }
@@ -49,12 +49,13 @@ void GameScene::Initialize()
 	projectilePool_->Initialize();
 
 	tileMap_ = std::make_unique<TileMap>();
-	tileMap_->LoadTile();
+	tileMap_->LoadTile(SharedGameData::GetInstance()->GetStageId());
 
 	player_ = std::make_unique<Player>();
 	player_->Init();
 	player_->SetTileMap(tileMap_.get());
 	player_->SetProjectilePool(projectilePool_.get());
+	player_->SetMaxUnitCount(SharedGameData::GetInstance()->GetMaxUnitCount());
 	gameCamera_->SetTileMap(tileMap_.get());
 	// スカイドーム
 	skydome_ = std::make_unique<Skydome>();

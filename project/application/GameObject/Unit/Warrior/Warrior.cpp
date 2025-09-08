@@ -15,7 +15,7 @@ void Warrior::Initialize(Vector2 pos) {
 void Warrior::Update()
 {
 	attackTimer_++;
-	CaptureTile(); // タイル占領
+	
 
 	if (Input::GetInstance()->PressedKey(DIK_Y) && attackTimer_ >= 120) {
 		Attack();
@@ -31,9 +31,10 @@ void Warrior::Update()
 		Attack();
 		moveTimer_ = 0;
 	}
-	else if (!CanAttackInFront() || !CanAttackInBack()) {
+	else if (!CanAttackInFront() && !CanAttackInBack()) {
 		Move();
 	}
+	CaptureTile(); // タイル占領
 	if (projectilePool_) {
 		CheckAttackHit();
 	}
@@ -159,14 +160,13 @@ void Warrior::CheckAttackHit()
 				if (projectile->GetTeamId() == TileMode::RED) {
 					hp_ -= 50;
 					projectile->Deactivate();
-					tileMap_->SetTileMap(selfX, targetY, teamId_); // タイルを自分のチームに変更
+
 				}
 				break;
 			case RED:
 				if (projectile->GetTeamId() == TileMode::BLUE) {
 					hp_ -= 50;
 					projectile->Deactivate();
-					tileMap_->SetTileMap(selfX, targetY, teamId_); // タイルを自分のチームに変更
 				}
 				break;
 			}
