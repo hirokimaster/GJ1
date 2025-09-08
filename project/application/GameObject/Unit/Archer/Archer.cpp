@@ -18,7 +18,7 @@ void Archer::Update()
 
 	shotTimer_++;
 	
-	CaptureTile(); // タイル占領
+
 	if (CanAttackInFront() ) {
 		attackVelocity_.z = 0.1f;
 		Attack();
@@ -29,9 +29,10 @@ void Archer::Update()
 		Attack();
 		moveTimer_ = 0;
 	}
-	else if(!CanAttackInFront() || !CanAttackInBack()){
+	else if(!CanAttackInFront() && !CanAttackInBack()){
 		Move();
 	}
+	CaptureTile(); // タイル占領
 	if (projectilePool_) {
 		CheckAttackHit();
 	}
@@ -166,7 +167,6 @@ void Archer::CheckAttackHit()
 					// 死亡処理
 					hp_ -= 50;
 					projectile->Deactivate();
-					tileMap_->SetTileMap(selfX, targetY, teamId_); // タイルを自分のチームに変更
 				}
 				break;
 			case RED:
@@ -174,7 +174,6 @@ void Archer::CheckAttackHit()
 					// 死亡処理
 					hp_ -= 50;
 					projectile->Deactivate();
-					tileMap_->SetTileMap(selfX, targetY, teamId_); // タイルを自分のチームに変更
 				}
 				break;
 			}

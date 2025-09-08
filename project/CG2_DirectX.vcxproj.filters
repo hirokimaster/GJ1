@@ -116,6 +116,7 @@
     <ClCompile Include="application\GameObject\Unit\Swordsman\Swordsman.cpp" />
     <ClCompile Include="application\GameObject\Unit\Projectile\Sword\Sword.cpp" />
     <ClCompile Include="application\GameObject\Unit\Projectile\Shield\Shield.cpp" />
+    <ClCompile Include="application\GameObject\SharedGameData\SharedGameData.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="application\AdjustmentVariables\AdjustmentVariables.h" />
@@ -211,6 +212,7 @@
     <ClInclude Include="application\GameObject\Unit\Swordsman\Swordsman.h" />
     <ClInclude Include="application\GameObject\Unit\Projectile\Sword\Sword.h" />
     <ClInclude Include="application\GameObject\Unit\Projectile\Shield\Shield.h" />
+    <ClInclude Include="application\GameObject\SharedGameData\SharedGameData.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\ShaderFile\Object3d.hlsli" />
@@ -219,8 +221,8 @@
     <None Include="resources\ShaderFile\PostProcess.hlsli" />
     <None Include="resources\ShaderFile\SkyBox.hlsli" />
     <None Include="resources\ShaderFile\SkyBox.VS.hlsl" />
-    <None Include="resources\Stage\rensyu.csv" />
-    <None Include="resources\Stage\stage1.csv" />
+    <None Include="resources\Stage\csv\stage1.csv" />
+    <None Include="resources\Stage\csv\stage2.csv" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="externals\imgui\LICENSE.txt" />

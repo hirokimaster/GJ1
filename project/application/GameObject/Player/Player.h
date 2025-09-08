@@ -30,6 +30,8 @@ public: // Setter
 
 	void SetProjectilePool(ProjectilePool* ptr) { projectilePool_ = ptr; }
 
+	void SetMaxUnitCount(uint32_t count) { maxUnitCount_ = count; }
+
 private:
 
 	/// <summary>
@@ -62,5 +64,8 @@ private:
 	std::unique_ptr<Object3dPlacer> selectObject_;
 	Vector3 selectObjectPosition_{};
 	float rotateY_ = std::numbers::pi_v<float>;
+
+	uint32_t maxUnitCount_ = 0; // 最大ユニット数
+	uint32_t currentUnitCount_ = 0; // 現在のユニット数
 };
 

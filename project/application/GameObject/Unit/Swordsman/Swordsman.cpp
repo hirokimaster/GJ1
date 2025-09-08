@@ -15,11 +15,14 @@ void Swordsman::Initialize(Vector2 pos) {
 void Swordsman::Update()
 {
 	attackTimer_++;
-	CaptureTile(); // タイル占領
 
+
+#ifdef _DEBUG
 	if (Input::GetInstance()->PressedKey(DIK_Y) && attackTimer_ >= 120) {
 		Attack();
 	}
+#endif // _DEBUG
+
 
 	if (CanAttackInFront()) {
 		attackVelocity_.z = 1.1f;
@@ -31,9 +34,10 @@ void Swordsman::Update()
 		Attack();
 		moveTimer_ = 0;
 	}
-	else if (!CanAttackInFront() || !CanAttackInBack()) {
+	else if (!CanAttackInFront() && !CanAttackInBack()) {
 		Move();
 	}
+	CaptureTile(); // タイル占領
 	if (projectilePool_) {
 		CheckAttackHit();
 	}
@@ -158,7 +162,7 @@ void Swordsman::CheckAttackHit()
 					// 死亡処理
 					hp_ -= 50;
 					projectile->Deactivate();
-					tileMap_->SetTileMap(selfX, targetY, teamId_); // タイルを自分のチームに変更
+	
 				}
 				break;
 			case RED:
@@ -166,7 +170,6 @@ void Swordsman::CheckAttackHit()
 					// 死亡処理
 					hp_ -= 50;
 					projectile->Deactivate();
-					tileMap_->SetTileMap(selfX, targetY, teamId_); // タイルを自分のチームに変更
 				}
 				break;
 			}

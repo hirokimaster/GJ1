@@ -37,6 +37,7 @@ void Enemy::SpawnUnit() {
 				switch (value) {
 				case TileMode::RED_ARCHER: { // RED_ARCHER
 					// ユニット
+					roleId_ = TileMode::RED_ARCHER;
 					std::unique_ptr<BaseUnit> unit;
 					unit = UnitFactory::Create("archer");
 					unit->Initialize({ (float)x * 2.0f,(float)reversedY * 2.0f });
@@ -53,6 +54,7 @@ void Enemy::SpawnUnit() {
 				}
 				case TileMode::RED_WARRIOR: { // RED_WARRIOR
 					// ユニット
+					roleId_ = TileMode::RED_WARRIOR;
 					std::unique_ptr<BaseUnit> unit;
 					unit = UnitFactory::Create("archer");
 					unit->Initialize({ (float)x * 2.0f,(float)reversedY * 2.0f });
@@ -69,6 +71,7 @@ void Enemy::SpawnUnit() {
 				}
 				case TileMode::RED_SWORDSMAN: {// RED_SWORDSMAN
 					// ユニット
+					roleId_ = TileMode::RED_SWORDSMAN;
 					std::unique_ptr<BaseUnit> unit;
 					unit = UnitFactory::Create("swordsman");
 					unit->Initialize({ (float)x * 2.0f,(float)reversedY * 2.0f });
