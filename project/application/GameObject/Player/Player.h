@@ -32,6 +32,8 @@ public: // Setter
 
 	void SetMaxUnitCount(uint32_t count) { maxUnitCount_ = count; }
 
+	void SetSelectTile(const Vector2& pos) { selectedTile_ = pos; MoveSelectTile(); }
+
 private:
 
 	/// <summary>
