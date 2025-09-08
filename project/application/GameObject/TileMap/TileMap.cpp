@@ -4,6 +4,9 @@
 #include <sstream>
 void TileMap::LoadTile()
 {
+
+    specialTiles_;
+
     std::ifstream file("resources/Stage/rensyu.csv");
     if (!file.is_open()) {
         assert(false && "Failed to open CSV file");

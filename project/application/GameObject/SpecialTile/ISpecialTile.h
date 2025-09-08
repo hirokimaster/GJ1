@@ -4,6 +4,8 @@
 
 class ISpecialTile {
 public:
+	ISpecialTile() {};
+
 	/// <summary>
 	/// デストラクタ
 	/// </summary>

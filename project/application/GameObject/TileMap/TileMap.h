@@ -7,6 +7,10 @@
 class TileMap
 {
 public:
+	TileMap() {};
+	~TileMap() {};
+
+
 	void LoadTile();
 
 	void Update();
@@ -22,7 +26,7 @@ public: // Getter
 
 	int GetTileMap(int x, int y);
 
-	std::vector<std::unique_ptr<ISpecialTile>>& GetSpecialTile() { return specialTiles_; }
+	const std::vector<std::unique_ptr<ISpecialTile>>& GetSpecialTile() { return specialTiles_; }
 
 public: // Setter
 	void SetTileMap(int x, int y, int value);

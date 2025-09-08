@@ -25,7 +25,7 @@ private:
 private:
 	int teamId_ = TileMode::RED;
 	int roleId_ = TileMode::RED_ARCHER;
-	TileMap* tileMap_;    // マップ参照
+	TileMap* tileMap_ = nullptr;    // マップ参照
 	Vector2 selectedTile_; // 現在選択中タイル
 
 	// 後で書き換えて
