@@ -76,13 +76,14 @@ void GameScene::Initialize()
 void GameScene::Update()
 {
 	gameCamera_->Update();
-
+#ifdef _DEBUG
 	if (tileMap_->IsEnemyAtFrontLine() || Input::GetInstance()->PressedKey(DIK_G)) {
 		isGameOver = true;
 	}
 	if (tileMap_->IsAllBlue() || Input::GetInstance()->PressedKey(DIK_C)) {
 		isGameClear = true;
 	}
+#endif // _DEBUG
 
 	if (Input::GetInstance()->PressedKey(DIK_S) && isGameOver && (!isTransitionClear_)) {
 		isTransitionClear_ = true;

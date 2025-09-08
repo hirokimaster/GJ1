@@ -116,6 +116,7 @@
     <ClCompile Include="application\GameObject\Unit\Swordsman\Swordsman.cpp" />
     <ClCompile Include="application\GameObject\Unit\Projectile\Sword\Sword.cpp" />
     <ClCompile Include="application\GameObject\Unit\Projectile\Shield\Shield.cpp" />
+    <ClCompile Include="SharedGameData.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="application\AdjustmentVariables\AdjustmentVariables.h" />
@@ -211,6 +212,7 @@
     <ClInclude Include="application\GameObject\Unit\Swordsman\Swordsman.h" />
     <ClInclude Include="application\GameObject\Unit\Projectile\Sword\Sword.h" />
     <ClInclude Include="application\GameObject\Unit\Projectile\Shield\Shield.h" />
+    <ClInclude Include="SharedGameData.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\ShaderFile\Object3d.hlsli" />

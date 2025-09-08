@@ -17,9 +17,12 @@ void Swordsman::Update()
 	attackTimer_++;
 	CaptureTile(); // タイル占領
 
+#ifdef _DEBUG
 	if (Input::GetInstance()->PressedKey(DIK_Y) && attackTimer_ >= 120) {
 		Attack();
 	}
+#endif // _DEBUG
+
 
 	if (CanAttackInFront()) {
 		attackVelocity_.z = 1.1f;
