@@ -57,6 +57,7 @@ void GameScene::Initialize()
 	player_->Init();
 	player_->SetTileMap(tileMap_.get());
 	player_->SetProjectilePool(projectilePool_.get());
+	player_->SetSelectTile({0,static_cast<float>(tileMap_->GetMaxRow()) -1 });
 	player_->SetMaxUnitCount(SharedGameData::GetInstance()->GetMaxUnitCount());
 	gameCamera_->SetTileMap(tileMap_.get());
 	// スカイドーム
