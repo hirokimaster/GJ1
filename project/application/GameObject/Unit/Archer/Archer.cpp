@@ -3,7 +3,7 @@
 void Archer::Initialize(Vector2 pos) {
 
 	// object生成
-	BaseUnit::CreateObject("Unit/Archer/yumi.obj", "Unit/Archer/ken.png");
+	BaseUnit::CreateObject("Unit/Archer/yumi_move.obj", "Unit/Archer/ken.png");
 	BaseUnit::CreateHpObject();
 	object_.lock()->worldTransform.translate = { pos.x,1.0f,pos.y };
 	object_.lock()->worldTransform.scale = { 0.3f,0.3f,0.3f };

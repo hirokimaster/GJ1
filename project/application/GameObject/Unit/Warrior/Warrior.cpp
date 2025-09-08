@@ -4,7 +4,7 @@
 void Warrior::Initialize(Vector2 pos) {
 
 	// object生成
-	BaseUnit::CreateObject("Unit/sword/blue_ken.obj", "Unit/sword/ken.png");
+	BaseUnit::CreateObject("Unit/gardian/tate.obj", "Unit/sword/ken.png");
 	BaseUnit::CreateHpObject();
 	object_.lock()->worldTransform.translate = { pos.x,1.0f,pos.y };
 	object_.lock()->worldTransform.scale = { 0.31f,0.31f,0.31f };

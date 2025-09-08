@@ -166,7 +166,7 @@ void Player::SelectUnit()
 		selectObject_->SetTexHandle(TextureManager::GetTexHandle("Unit/Archer/ken.png"));
 	}
 	else if (selectNum_ == 1) {
-		selectObject_->SetModel("Unit/sword/blue_ken.obj");
+		selectObject_->SetModel("Unit/gardian/tate.obj");
 		selectObject_->SetTexHandle(TextureManager::GetTexHandle("Unit/sword/ken.png"));
 	}
 	else if (selectNum_ == -1) {
