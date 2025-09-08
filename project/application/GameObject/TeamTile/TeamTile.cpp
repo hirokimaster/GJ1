@@ -61,6 +61,9 @@ void TeamTile::ColorChange()
 	case TileMode::RED_SWORDSMAN: // 敵のソードマン
 		object_.lock()->color = { 1.0f,0.2f,0.2f,1.0f };
 		break;
+	case TileMode::ROLECHANGETILE: // ロールチェンジ
+		object_.lock()->color = { 0.0f,1.0f,0.0f,1.0f };
+		break;
 	}
 }
 

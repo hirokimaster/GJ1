@@ -2,11 +2,9 @@
 #include "engine/3d/BaseObject/BaseInstancingObject.h"
 #include <string>
 #include <application/GameObject/Unit/Projectile/ProjectilePool.h>
-#include "application/GameObject/TileMap/TileMap.h"
-struct GridPosition {
-	int32_t x; // 横
-	int32_t z;	// 奥行
-};
+#include <application/GameObject/GridPosition/GridPosition.h>
+
+class TileMap;
 
 class BaseUnit : public BaseInstancingObject {
 public:

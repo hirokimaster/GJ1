@@ -8,5 +8,6 @@ enum TileMode {
 	RED, // 敵 : 5
 	RED_ARCHER, // 敵のアーチャー : 6 
 	RED_WARRIOR, // 敵のウォリアー : 7
-	RED_SWORDSMAN // 敵のソードマン : 8
+	RED_SWORDSMAN, // 敵のソードマン : 8
+	ROLECHANGETILE // ロールが変わるマス : 9
 };

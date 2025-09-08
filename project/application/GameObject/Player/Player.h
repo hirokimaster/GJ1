@@ -38,6 +38,11 @@ private:
 	void SelectUnit();
 
 	/// <summary>
+	/// ロール変更
+	/// </summary>
+	void RoleChange();
+
+	/// <summary>
 	/// 調整項目の追加
 	/// </summary>
 	void AddAdjustmentVariables();

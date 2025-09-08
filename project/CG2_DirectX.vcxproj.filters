@@ -209,6 +209,7 @@
     <ClInclude Include="application\GameObject\TeamTile\TileMode.h" />
     <ClInclude Include="application\GameObject\Unit\Swordsman\Swordsman.h" />
     <ClInclude Include="application\GameObject\Unit\Projectile\Sword\Sword.h" />
+    <ClInclude Include="application\GameObject\GridPosition\GridPosition.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\ShaderFile\Object3d.hlsli" />

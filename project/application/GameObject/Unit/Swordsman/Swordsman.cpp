@@ -1,5 +1,7 @@
 #include "Swordsman.h"
 #include "engine/Input/Input.h"
+#include "application/GameObject/TileMap/TileMap.h"
+
 void Swordsman::Initialize(Vector2 pos) {
 
 	// object生成

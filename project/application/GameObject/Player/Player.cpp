@@ -35,6 +35,7 @@ void Player::Update() {
 	SelectTile();
 	DebugDraw();
 	SelectUnit();
+	//RoleChange();
 	if (Input::GetInstance()->PressedKey(DIK_P)) {
 		SpawnUnit();
 	}
@@ -48,6 +49,7 @@ void Player::Update() {
 	rotateY_ += 0.015f;
 	selectObject_->SetRotate({ 0,rotateY_,0 });
 	selectObject_->Update();
+
 }
 
 void Player::SelectTile() {
@@ -173,6 +175,12 @@ void Player::SelectUnit()
 		selectObject_->SetModel("Unit/sword/blue_ken.obj");
 		selectObject_->SetTexHandle(TextureManager::GetTexHandle("Unit/sword/ken.png"));
 	}
+
+}
+
+void Player::RoleChange()
+{
+	// ロールチェンジ
 
 }
 

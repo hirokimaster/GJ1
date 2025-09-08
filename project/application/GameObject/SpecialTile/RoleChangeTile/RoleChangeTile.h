@@ -17,7 +17,7 @@ public:
 	/// ユニットが来た時の処理
 	/// </summary>
 	/// <param name="unit"></param>
-	void OnUnitEnter(BaseUnit*& unit)override;
+	void OnUnitEnter(std::unique_ptr<BaseUnit>& unit)override;
 
 #pragma region getter
 
