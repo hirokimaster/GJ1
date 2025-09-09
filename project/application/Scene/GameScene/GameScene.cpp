@@ -110,7 +110,7 @@ void GameScene::Update()
 		transition_ = std::make_unique<FadeIn>();
 		transition_->Initialize();
 		GameManager::GetInstance()->SetSceneTransition(transition_.get());
-		GameManager::GetInstance()->ChangeScene("GAME"); // ←自分のシーン名
+		GameManager::GetInstance()->ChangeScene("GAME");
 		return;
 	}
 
