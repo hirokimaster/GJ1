@@ -116,4 +116,5 @@ private: // メンバ変数
 	Vector2 textureLeftTop_ = {};
 	Vector2 textureSize_ = {};
 	uint32_t texHandle_ = 0;
+	Vector2 textureWholeSize_;
 };

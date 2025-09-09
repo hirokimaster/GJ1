@@ -40,6 +40,8 @@ public:
 	/// </summary>
 	void GameOverDraw();
 
+	void SetNumber(int digit);
+
 private:
 
 	/// <summary>
@@ -58,5 +60,13 @@ private:
 
 	std::unique_ptr<Sprite> spriteGame_ = nullptr;
 	Vector2 spritePositionGame_{};
+
+	std::unique_ptr<Sprite> spriteNumGame_ = nullptr;
+	Vector2 spriteNumPositionGame_{};
+
+	std::unique_ptr<Sprite> spriteYajirusi_ = nullptr;
+	Vector2 spriteYajirusiPositionGame_{};
+
+	uint32_t numHandle_ = 0;
 };
 

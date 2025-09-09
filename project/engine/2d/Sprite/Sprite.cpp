@@ -79,10 +79,10 @@ void Sprite::CreateVertex()
 	float top = (0.0f - anchorPoint_.y) * size_.y;
 	float bottom = (1.0f - anchorPoint_.y) * size_.y;
 
-	float tex_left = textureLeftTop_.x / size_.x;
-	float tex_right = (textureLeftTop_.x + textureSize_.x) / size_.x;
-	float tex_top = textureLeftTop_.y / size_.y;
-	float tex_bottom = (textureLeftTop_.y + textureSize_.y) / size_.y;
+	float tex_left = textureLeftTop_.x / textureWholeSize_.x;
+	float tex_right = (textureLeftTop_.x + textureSize_.x) / textureWholeSize_.x;
+	float tex_top = textureLeftTop_.y / textureWholeSize_.y;
+	float tex_bottom = (textureLeftTop_.y + textureSize_.y) / textureWholeSize_.y;
 
 
 	// 1枚目の三角形
@@ -120,6 +120,8 @@ void Sprite::AdjustTextureSize(uint32_t texHandle)
 
 	size_.x = static_cast<float>(metadata.width);
 	size_.y = static_cast<float>(metadata.height);
+
+	textureWholeSize_ = size_;
 
 }
 
