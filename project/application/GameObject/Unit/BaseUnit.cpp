@@ -51,11 +51,15 @@ void BaseUnit::Update() {
 	if (hp_ <= 0) {
 		object_.lock()->isAlive = false;
 		hpObject_.lock()->isAlive = false;
+		weaponObject_.lock()->isAlive = false;
 		// 前フレームにとったタイルの色を役職ではなく自チームにする
 		if (tileMap_->GetTileMap(gridPosition_.x, gridPosition_.z) == roleId_) {
 			tileMap_->SetTileMap(gridPosition_.x, gridPosition_.z, teamId_);
 		}
 	}
-	
+
+	if(weaponObject_.lock()) {
+		weaponObject_.lock()->worldTransform.UpdateMatrix(); // weapon更新
+	}
 	BaseInstancingObject::Update(); // object共通の更新処理
 }

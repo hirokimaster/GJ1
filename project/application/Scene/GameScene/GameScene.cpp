@@ -21,11 +21,16 @@ void GameScene::Initialize()
 	// モデル、テクスチャのロード
 	ModelManager::LoadObjModel("Unit/sword/blue_ken.obj");
 	TextureManager::Load("resources/Unit/sword/ken.png");
-	ModelManager::LoadObjModel("Unit/Archer/yumi_move.obj");
+	ModelManager::LoadObjModel("Unit/Archer/yumi_move2.obj");
 	ModelManager::LoadObjModel("Unit/Archer/yumi.obj");
 	TextureManager::Load("resources/Unit/Archer/ken.png");
 	ModelManager::LoadObjModel("Unit/gardian/tate.obj");
-
+	// 人だけのモデル
+	ModelManager::LoadObjModel("Unit/gardian/hito.obj");
+	ModelManager::LoadObjModel("Unit/sword/hito.obj");
+	// ウェポンのモデル
+	ModelManager::LoadObjModel("Unit/gardian/tatedake.obj");
+	ModelManager::LoadObjModel("Unit/sword/kendake.obj");
 	// ユニット登録
 	UnitFactory::Register("warrior", [] { return std::make_unique<Warrior>("warrior"); });
 	UnitFactory::Register("archer", [] { return std::make_unique<Archer>("archer"); });
@@ -73,8 +78,6 @@ void GameScene::Initialize()
 	transition_ = std::make_unique<FadeOut>();
 	transition_->Initialize();
 	GameManager::GetInstance()->SetSceneTransition(transition_.get());
-
-
 }
 
 void GameScene::Update()

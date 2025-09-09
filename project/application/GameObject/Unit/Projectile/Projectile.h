@@ -68,6 +68,12 @@ public:
 		}
 	}
 
+	void SetColor(const Vector4& color) {
+		if (object_.lock()) {
+			object_.lock()->color = color;
+		}
+	}
+
 #pragma
 
 	/// <summary>

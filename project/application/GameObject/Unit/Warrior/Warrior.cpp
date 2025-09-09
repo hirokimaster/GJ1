@@ -2,14 +2,22 @@
 #include "engine/Input/Input.h"
 
 void Warrior::Initialize(Vector2 pos) {
-
+	TextureManager::Load("resources/Unit/Archer/ken.png");
 	// object生成
-	BaseUnit::CreateObject("Unit/gardian/tate.obj", "Unit/sword/ken.png");
+	BaseUnit::CreateObject("Unit/gardian/hito.obj", "Unit/sword/ken.png");
 	BaseUnit::CreateHpObject();
 	object_.lock()->worldTransform.translate = { pos.x,1.0f,pos.y };
 	object_.lock()->worldTransform.scale = { 0.31f,0.31f,0.31f };
 	object_.lock()->color = { 1.0f,0.0f,0.0f,1.0f };
 	attackVelocity_ = { 0.0f,0.1f,0.1f };
+
+	// weponのmodel、テクスチャのロード
+
+	// weapon生成
+	weaponObject_ = ObjectManager::GetInstance()->CreateInstancingObject("Unit/gardian/tatedake.obj", TextureManager::GetTexHandle("Unit/sword/ken.png"));
+	weaponObject_.lock()->worldTransform.parent = &object_.lock()->worldTransform;
+	weaponObject_.lock()->worldTransform.translate = { 0.0f,3.0f,2.0f };
+
 }
 
 void Warrior::Update()
@@ -17,9 +25,15 @@ void Warrior::Update()
 	attackTimer_++;
 	
 
+#ifdef _DEBUG
 	if (Input::GetInstance()->PressedKey(DIK_Y) && attackTimer_ >= 120) {
 		Attack();
+		isAttack_ = true;
 	}
+	ImGui::Begin("swordsman");
+	ImGui::DragFloat3("translate,", &weaponObject_.lock()->worldTransform.translate.x);
+	ImGui::End();
+#endif // _DEBUG
 
 	if (CanAttackInFront()) {
 		attackVelocity_.z = 1.1f;
@@ -38,12 +52,22 @@ void Warrior::Update()
 	if (projectilePool_) {
 		CheckAttackHit();
 	}
+	// 攻撃中は透明、非攻撃中は不透明
+	if (isAttack_) {
+		weaponObject_.lock()->color.w = 0.0f;
+	}
+	else if (!isAttack_) {
+		weaponObject_.lock()->color.w = 1.0f;
+
+	}
 	// ユニット共通の更新処理
 	BaseUnit::Update();
 }
 
 void Warrior::Attack()
 {
+
+
 	if (attackTimer_ >= 120) {
 		// プールから取ってくる
 		Projectile* baseShield = projectilePool_->Get("shield");
@@ -53,8 +77,9 @@ void Warrior::Attack()
 			shield->Activate(); // アクティブにする
 			shield->SetPosition({
 				object_.lock()->worldTransform.translate.x,
-				object_.lock()->worldTransform.translate.y + 1.5f,
-				object_.lock()->worldTransform.translate.z + 1.5f }); // 位置
+				object_.lock()->worldTransform.translate.y + 1.0f,
+				object_.lock()->worldTransform.translate.z + 0.5f }); // 位置
+			shield->SetColor(object_.lock()->color); // 色
 			shield->SetTeamId(teamId_); // チームID
 			shield->SetRoleId(roleId_); // 役職ID
 			shield->SetVelocity(attackVelocity_); // 速度
@@ -157,16 +182,43 @@ void Warrior::CheckAttackHit()
 			switch (teamId_)
 			{
 			case BLUE:
-				if (projectile->GetTeamId() == TileMode::RED) {
+				if (projectile->GetRoleId() == TileMode::RED_ARCHER) {
+					// 死亡処理
+					hp_ -= 10;
+					projectile->Deactivate();
+
+				}
+				else if (projectile->GetRoleId() == TileMode::RED_SWORDSMAN) {
+					// 死亡処理
+					hp_ -= 50;
+					projectile->Deactivate();
+
+				}
+				else if (projectile->GetRoleId() == TileMode::RED_WARRIOR) {
+					// 死亡処理
 					hp_ -= 50;
 					projectile->Deactivate();
 
 				}
 				break;
 			case RED:
-				if (projectile->GetTeamId() == TileMode::BLUE) {
+				if (projectile->GetRoleId() == TileMode::BLUE_ARCHER) {
+					// 死亡処理
+					hp_ -= 10;
+					projectile->Deactivate();
+
+				}
+				else if (projectile->GetRoleId() == TileMode::BLUE_SWORDSMAN) {
+					// 死亡処理
 					hp_ -= 50;
 					projectile->Deactivate();
+
+				}
+				else if (projectile->GetRoleId() == TileMode::BLUE_WARRIOR) {
+					// 死亡処理
+					hp_ -= 50;
+					projectile->Deactivate();
+
 				}
 				break;
 			}

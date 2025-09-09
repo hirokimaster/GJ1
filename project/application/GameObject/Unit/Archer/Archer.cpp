@@ -3,11 +3,20 @@
 void Archer::Initialize(Vector2 pos) {
 
 	// object生成
-	BaseUnit::CreateObject("Unit/Archer/yumi_move.obj", "Unit/Archer/ken.png");
+	BaseUnit::CreateObject("Unit/Archer/yumi_move2.obj", "Unit/Archer/ken.png");
 	BaseUnit::CreateHpObject();
 	object_.lock()->worldTransform.translate = { pos.x,1.0f,pos.y };
 	object_.lock()->worldTransform.scale = { 0.3f,0.3f,0.3f };
 	object_.lock()->color = { 1.0f,1.0f,1.0f,1.0f };
+
+	// weponのmodel、テクスチャのロード
+	TextureManager::Load("resources/Unit/sword/ken.png");
+	// weapon生成
+	weaponObject_ = ObjectManager::GetInstance()->CreateInstancingObject("Unit/Archer/yumi.obj", TextureManager::GetTexHandle("Unit/sword/ken.png"));
+	weaponObject_.lock()->worldTransform.parent = &object_.lock()->worldTransform;
+	weaponObject_.lock()->worldTransform.translate = { 0.0f,0.0f,0.0f };
+	weaponObject_.lock()->color.w = 0.0f;
+
 
 }
 
@@ -20,16 +29,22 @@ void Archer::Update()
 	
 
 	if (CanAttackInFront() ) {
+		weaponObject_.lock()->color.w = 1.0f;
+		object_.lock()->color.w = 0.0f;
 		attackVelocity_.z = 0.1f;
 		Attack();
 		moveTimer_ = 0;
 	}
 	else if (CanAttackInBack()) {
+		weaponObject_.lock()->color.w = 1.0f;
+		object_.lock()->color.w = 0.0f;
 		attackVelocity_.z = -0.1f;
 		Attack();
 		moveTimer_ = 0;
 	}
 	else if(!CanAttackInFront() && !CanAttackInBack()){
+		weaponObject_.lock()->color.w = 0.0f;
+		object_.lock()->color.w = 1.0f;
 		Move();
 	}
 	CaptureTile(); // タイル占領
@@ -56,6 +71,7 @@ void Archer::Attack()
 			arrow->SetVelocity(attackVelocity_); // 速度
 		}
 		shotTimer_ = 0;
+
 	}
 }
 
@@ -163,17 +179,43 @@ void Archer::CheckAttackHit()
 			switch (teamId_)
 			{
 			case BLUE:
-				if (projectile->GetTeamId() == TileMode::RED) {
+				if (projectile->GetRoleId() == TileMode::RED_ARCHER) {
 					// 死亡処理
 					hp_ -= 50;
 					projectile->Deactivate();
+
+				}
+				else if (projectile->GetRoleId() == TileMode::RED_SWORDSMAN) {
+					// 死亡処理
+					hp_ -= 50;
+					projectile->Deactivate();
+
+				}
+				else if (projectile->GetRoleId() == TileMode::RED_WARRIOR) {
+					// 死亡処理
+					hp_ -= 50;
+					projectile->Deactivate();
+
 				}
 				break;
 			case RED:
-				if (projectile->GetTeamId() == TileMode::BLUE) {
+				if (projectile->GetRoleId() == TileMode::BLUE_ARCHER) {
 					// 死亡処理
 					hp_ -= 50;
 					projectile->Deactivate();
+
+				}
+				else if (projectile->GetRoleId() == TileMode::BLUE_SWORDSMAN) {
+					// 死亡処理
+					hp_ -= 50;
+					projectile->Deactivate();
+
+				}
+				else if (projectile->GetRoleId() == TileMode::BLUE_WARRIOR) {
+					// 死亡処理
+					hp_ -= 50;
+					projectile->Deactivate();
+
 				}
 				break;
 			}
