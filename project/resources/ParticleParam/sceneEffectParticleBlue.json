@@ -2,8 +2,8 @@
     "sceneEffectParticleBlue": {
         "count": 1,
         "emit": 1,
-        "frequency": 0.009999999776482582,
-        "frequencyTime": 100.0,
+        "frequency": 41.209999084472656,
+        "frequencyTime": 88.5999984741211,
         "radius": 1.0,
         "rangeAlpha_max": 1.0,
         "rangeAlpha_min": 1.0,
@@ -17,10 +17,10 @@
             0.4000000059604645,
             1.0
         ],
-        "rangeCurrentTime_max": 0.0,
-        "rangeCurrentTime_min": 0.0,
-        "rangeLifeTime_max": 2.4000000953674316,
-        "rangeLifeTime_min": 1.0,
+        "rangeCurrentTime_max": 12.699999809265137,
+        "rangeCurrentTime_min": 0.699999988079071,
+        "rangeLifeTime_max": 17.299999237060547,
+        "rangeLifeTime_min": 0.10000000149011612,
         "rangeScale_max": [
             1.0,
             1.0,
@@ -32,14 +32,14 @@
             1.0
         ],
         "rangeTranslate_max": [
-            25.100000381469727,
-            14.5,
-            15.100000381469727
+            100.0,
+            100.0,
+            100.0
         ],
         "rangeTranslate_min": [
-            -25.799999237060547,
-            -13.399999618530273,
-            -20.5
+            -100.0,
+            -100.0,
+            -10.0
         ],
         "rangeVelocity_max": [
             0.0,

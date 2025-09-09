@@ -80,12 +80,12 @@ void TitleScene::PostProcessDraw()
 {
 	postEffect_->PreDraw();
 	ObjectManager::GetInstance()->Draw(gameCamera_->GetCamera());
-
-#ifdef _DEBUG
-	//ParticleEditor::GetInstance()->Draw(gameCamera_->GetCamera());
-#endif // _DEBUG
 	particleManager_->Draw(gameCamera_->GetCamera());
 	titleSprite_->Draw();
+#ifdef _DEBUG
+	ParticleEditor::GetInstance()->Draw(gameCamera_->GetCamera());
+#endif // _DEBUG
+	
 
 	postEffect_->PostDraw();
 }

@@ -32,8 +32,6 @@ private:
 	ParticleManager* particleManager_ = nullptr;
 	GPUParticle* sceneEffectRed_ = nullptr;
 	GPUParticle* sceneEffectBlue_ = nullptr;
-	Vector3 particleOffsetL_{ -0.3f,0.0f,-3.8f };
-	Vector3 particleOffsetR_{ 0.3f,0.0f,-3.8f };
 	float lifeTime_ = 0.0f;
 };
 

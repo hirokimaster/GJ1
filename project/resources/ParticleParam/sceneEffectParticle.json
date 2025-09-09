@@ -1,26 +1,26 @@
 {
     "sceneEffectParticle": {
-        "count": 10,
+        "count": 1,
         "emit": 1,
-        "frequency": 0.10000000149011612,
-        "frequencyTime": 0.10000000149011612,
+        "frequency": 46.90999984741211,
+        "frequencyTime": 99.9000015258789,
         "radius": 1.0,
         "rangeAlpha_max": 1.0,
         "rangeAlpha_min": 1.0,
         "rangeColor_max": [
             1.0,
-            1.0,
-            2.200000047683716
+            0.4000000059604645,
+            0.4000000059604645
         ],
         "rangeColor_min": [
             1.0,
-            1.0,
-            1.0
+            0.4000000059604645,
+            0.4000000059604645
         ],
         "rangeCurrentTime_max": 0.0,
         "rangeCurrentTime_min": 0.0,
-        "rangeLifeTime_max": 1.0,
-        "rangeLifeTime_min": 1.0,
+        "rangeLifeTime_max": 10.5,
+        "rangeLifeTime_min": 0.699999988079071,
         "rangeScale_max": [
             1.0,
             1.0,
@@ -32,18 +32,18 @@
             1.0
         ],
         "rangeTranslate_max": [
-            0.0,
-            0.0,
-            26.399999618530273
+            100.0,
+            100.0,
+            100.0
         ],
         "rangeTranslate_min": [
-            0.0,
-            0.0,
-            0.0
+            -100.0,
+            -100.0,
+            -11.5
         ],
         "rangeVelocity_max": [
             0.0,
-            0.0,
+            0.009999999776482582,
             0.0
         ],
         "rangeVelocity_min": [

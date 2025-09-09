@@ -23,6 +23,6 @@ void SceneEffect::Update()
 	sceneEffectBlue_->SetParticleParam(particleManager_->GetParam("sceneEffectParticleBlue"));
 	// アクティブにする
 	sceneEffectRed_->SetIsActive(true);
-	sceneEffectRed_->SetIsActive(true);
+	sceneEffectBlue_->SetIsActive(true);
 
 }
