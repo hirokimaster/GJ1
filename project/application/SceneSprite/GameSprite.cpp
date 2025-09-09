@@ -30,6 +30,12 @@ void GameSprite::Initialize()
 	spriteNumGame_->SetAnchorPoint({ 0.5f,0.5f });
 	spriteNumGame_->SetColor({ 1.0f,1.0f,1.0f,1.0f });
 
+	spriteYajirusiPositionGame_ = { 135, 540 };
+	spriteYajirusi_.reset(Sprite::Create(TextureManager::GetTexHandle("UI/yazirusi.png"), spriteYajirusiPositionGame_));
+	spriteYajirusi_->SetAnchorPoint({ 0.5f,0.5f });
+	spriteYajirusi_->SetColor({ 1.0f,1.0f,1.0f,1.0f });
+	spriteYajirusi_->SetScale({1.3f, 1.3f});
+
 	// 初期値は「0」
 	SetNumber(4);
 }
@@ -42,6 +48,7 @@ void GameSprite::Draw()
 {
 	spriteGame_->Draw();
 	spriteNumGame_->Draw();
+	spriteYajirusi_->Draw();
 }
 
 void GameSprite::ClearDraw()

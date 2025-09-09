@@ -74,6 +74,6 @@ void TitleScene::LoadTextureFile()
 {
 	TextureManager::Load("resources/TempTexture/white.png");
 	TextureManager::Load("resources/TempTexture/white2.png");
-	TextureManager::Load("resources/UI/space.png");
+	TextureManager::Load("resources/UI/titleUI.png");
 	TextureManager::Load("resources/UI/title2.png");
 }

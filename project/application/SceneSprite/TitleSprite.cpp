@@ -20,7 +20,7 @@ void TitleSprite::Initialize()
 	spriteTitle_->SetScale({ 1.0f, 1.0f });
 
 	spriteSpacePosition_ = { 640, 500 };
-	spriteSpace_.reset(Sprite::Create(TextureManager::GetTexHandle("UI/space.png"), spriteSpacePosition_));
+	spriteSpace_.reset(Sprite::Create(TextureManager::GetTexHandle("UI/titleUI.png"), spriteSpacePosition_));
 	spriteSpace_->SetAnchorPoint({ 0.5f,0.5f });
 	spriteSpace_->SetColor({ 1.0f,1.0f,1.0f,1.0f });
 

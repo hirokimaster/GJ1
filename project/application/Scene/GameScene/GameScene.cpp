@@ -152,5 +152,6 @@ void GameScene::LoadTextureFile()
 	TextureManager::Load("resources/UI/haiti.png");
 	TextureManager::Load("resources/UI/s.png");
 	TextureManager::Load("resources/UI/num.png");
+	TextureManager::Load("resources/UI/yazirusi.png");
 }
 
