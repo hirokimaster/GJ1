@@ -156,16 +156,22 @@ bool Player::CanSpawnHere(int x, int y)
 
 void Player::SelectUnit()
 {
-	if (Input::GetInstance()->PressedKey(DIK_LEFT) && selectNum_ > -1) {
+	if (Input::GetInstance()->PressedKey(DIK_LEFT)) {
 		selectNum_ -= 1;
+		if (selectNum_ < -1) {
+			selectNum_ = 1; // 左端を超えたら右端へ
+		}
 		rotateY_ = std::numbers::pi_v<float>;
 	}
-	else if (Input::GetInstance()->PressedKey(DIK_RIGHT) && selectNum_ < 1) {
+	else if (Input::GetInstance()->PressedKey(DIK_RIGHT)) {
 		selectNum_ += 1;
+		if (selectNum_ > 1) {
+			selectNum_ = -1; // 右端を超えたら左端へ
+		}
 		rotateY_ = std::numbers::pi_v<float>;
 	}
 
-	selectNum_ = std::clamp(selectNum_, -1, 1); // 制限しとく
+	//selectNum_ = std::clamp(selectNum_, -1, 1); // 制限しとく
 
 	if (selectNum_ == 0) {
 		selectObject_->SetModel("Unit/Archer/yumi.obj");
