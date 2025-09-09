@@ -15,6 +15,7 @@ public:
 
 public: // Getter
 	uint32_t GetStageId() const { return stageId; } // ステージ番号取得
+	void SetStageId(uint32_t id) { stageId = id; }
 	uint32_t GetMaxUnitCount() const { return maxUnitCount; } // 最大配置可能ユニット数取得
 
 	// JSONからロード
