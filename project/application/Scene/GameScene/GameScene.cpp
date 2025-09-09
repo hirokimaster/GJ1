@@ -49,7 +49,7 @@ void GameScene::Initialize()
 
 	isGameOver = false;
 	isGameClear = false;
-  
+
 	// プール
 	projectilePool_ = std::make_unique<ProjectilePool>();
 	projectilePool_->Initialize();
@@ -61,7 +61,7 @@ void GameScene::Initialize()
 	player_->Init();
 	player_->SetTileMap(tileMap_.get());
 	player_->SetProjectilePool(projectilePool_.get());
-	player_->SetSelectTile({0,static_cast<float>(tileMap_->GetMaxRow()) -1 });
+	player_->SetSelectTile({ 0,static_cast<float>(tileMap_->GetMaxRow()) - 1 });
 	player_->SetMaxUnitCount(SharedGameData::GetInstance()->GetMaxUnitCount());
 	gameCamera_->SetTileMap(tileMap_.get());
 	// スカイドーム
@@ -98,12 +98,29 @@ void GameScene::Update()
 		GameManager::GetInstance()->SetSceneTransition(transition_.get());
 		GameManager::GetInstance()->ChangeScene("SELECT");
 	}
-	else if (Input::GetInstance()->PressedKey(DIK_S) &&isGameClear && (!isTransitionClear_)) {
-		isTransitionClear_ = true;
-		transition_ = std::make_unique<FadeIn>();
-		transition_->Initialize();
-		GameManager::GetInstance()->SetSceneTransition(transition_.get());
-		GameManager::GetInstance()->ChangeScene("SELECT");
+	else if (isGameClear && (!isTransitionClear_)) {
+		if (Input::GetInstance()->PressedKey(DIK_R)) {
+			isTransitionClear_ = true;
+			transition_ = std::make_unique<FadeIn>();
+			transition_->Initialize();
+			GameManager::GetInstance()->SetSceneTransition(transition_.get());
+
+			int nextStage = SharedGameData::GetInstance()->GetStageId() + 1;
+			SharedGameData::GetInstance()->LoadFromJson(
+				"Resources/stage/json/stage" + std::to_string(nextStage) + ".json"
+			);
+			SharedGameData::GetInstance()->SetStageId(nextStage); // 管理用に更新
+			GameManager::GetInstance()->ChangeScene("GAME");
+		}
+		else if (Input::GetInstance()->PressedKey(DIK_B)) {
+			// Bキーでセレクトに戻る (あとで変えて)
+			isTransitionClear_ = true;
+			transition_ = std::make_unique<FadeIn>();
+			transition_->Initialize();
+			GameManager::GetInstance()->SetSceneTransition(transition_.get());
+			GameManager::GetInstance()->ChangeScene("SELECT");
+		}
+
 	}
 
 	if (Input::GetInstance()->PressedKey(DIK_R)) {
@@ -123,7 +140,7 @@ void GameScene::Update()
 	projectilePool_->Update();
 
 	skydome_->Update();
-  
+
 	ObjectManager::GetInstance()->Update();
 
 }
