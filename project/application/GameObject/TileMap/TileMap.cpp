@@ -45,7 +45,7 @@ void TileMap::LoadTile(uint32_t stageId)
             // 9番だったらロール変えタイル
             if (value == 9) {
                 GridPosition pos = { colIndex, rowIndex };
-                specialTiles_.push_back(std::make_unique<RoleChangeTile>(pos, "warrior"));
+                specialTiles_.push_back(std::make_unique<RoleChangeTile>(pos));
             }
 
             Vector2 position{
