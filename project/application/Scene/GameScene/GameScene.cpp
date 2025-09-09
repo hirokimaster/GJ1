@@ -107,7 +107,7 @@ void GameScene::Update()
 		GameManager::GetInstance()->ChangeScene("SELECT");
 	}
 	else if (isGameClear && (!isTransitionClear_)) {
-		if (Input::GetInstance()->PressedKey(DIK_R)) {
+		if (Input::GetInstance()->PressedKey(DIK_S)) {
 			isTransitionClear_ = true;
 			transition_ = std::make_unique<FadeIn>();
 			transition_->Initialize();
