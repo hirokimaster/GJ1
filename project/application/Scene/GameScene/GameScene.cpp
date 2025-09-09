@@ -106,6 +106,14 @@ void GameScene::Update()
 		GameManager::GetInstance()->ChangeScene("SELECT");
 	}
 
+	if (Input::GetInstance()->PressedKey(DIK_R)) {
+		transition_ = std::make_unique<FadeIn>();
+		transition_->Initialize();
+		GameManager::GetInstance()->SetSceneTransition(transition_.get());
+		GameManager::GetInstance()->ChangeScene("GAME"); // ←自分のシーン名
+		return;
+	}
+
 	tileMap_->Update();
 
 	player_->Update();
