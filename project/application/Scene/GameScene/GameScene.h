@@ -26,6 +26,7 @@
 #include <application/GameObject/Unit/Swordsman/Swordsman.h>
 
 
+
 class GameScene : public IScene {
 public: // メンバ関数
 	/// <summary>
@@ -95,5 +96,6 @@ private:
 	// フェード用
 	std::unique_ptr<ISceneTransition> transition_; // 遷移
 	bool isTransitionClear_ = false; // クリアに行くかどうか
+
 
 };

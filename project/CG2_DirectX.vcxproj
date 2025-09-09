@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|x64">
@@ -188,6 +188,8 @@ copy "$(WindowsSdkdir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="application\GameObject\Player\Player.cpp" />
     <ClCompile Include="application\GameObject\Unit\Swordsman\Swordsman.cpp" />
     <ClCompile Include="application\GameObject\Unit\Projectile\Sword\Sword.cpp" />
+    <ClCompile Include="application\GameObject\Unit\Projectile\Shield\Shield.cpp" />
+    <ClCompile Include="application\GameObject\SharedGameData\SharedGameData.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="application\AdjustmentVariables\AdjustmentVariables.h" />
@@ -283,6 +285,8 @@ copy "$(WindowsSdkdir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="application\GameObject\TeamTile\TileMode.h" />
     <ClInclude Include="application\GameObject\Unit\Swordsman\Swordsman.h" />
     <ClInclude Include="application\GameObject\Unit\Projectile\Sword\Sword.h" />
+    <ClInclude Include="application\GameObject\Unit\Projectile\Shield\Shield.h" />
+    <ClInclude Include="application\GameObject\SharedGameData\SharedGameData.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="engine\3d\BaseObject\BaseIndividualObject.cpp" />
@@ -310,8 +314,8 @@ copy "$(WindowsSdkdir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </None>
-    <None Include="resources\Stage\rensyu.csv" />
-    <None Include="resources\Stage\stage1.csv" />
+    <None Include="resources\Stage\csv\stage1.csv" />
+    <None Include="resources\Stage\csv\stage2.csv" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="resources\ShaderFile\EmitParticle.CS.hlsl">

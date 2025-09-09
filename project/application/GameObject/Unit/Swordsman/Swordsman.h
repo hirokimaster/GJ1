@@ -9,7 +9,7 @@ public:
 	/// </summary>
 	/// <param name="name"></param>
 	Swordsman(const std::string& name)
-		: BaseUnit(name, 1, 1) {
+		: BaseUnit(name, 100, 1) {
 	}
 
 	/// <summary>

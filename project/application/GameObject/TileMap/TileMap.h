@@ -7,7 +7,7 @@
 class TileMap
 {
 public:
-	void LoadTile();
+	void LoadTile(uint32_t stageId);
 
 	void Update();
 

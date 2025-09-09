@@ -2,6 +2,7 @@
 #include <application/GameObject/Unit/Projectile/Projectile.h>
 #include <application/GameObject/Unit/Projectile/Arrow/Arrow.h>
 #include <application/GameObject/Unit/Projectile/Sword/Sword.h>
+#include <application/GameObject/Unit/Projectile/Shield/Shield.h>
 #include <map>
 #include <queue>
 
@@ -30,6 +31,10 @@ public:
 		}
 		else if (name == "sword") {
 			projectile = std::make_unique<Sword>("sword");
+			projectile->Initialize();
+		}
+		else if (name == "shield") {
+			projectile = std::make_unique<Shield>("shield");
 			projectile->Initialize();
 		}
 

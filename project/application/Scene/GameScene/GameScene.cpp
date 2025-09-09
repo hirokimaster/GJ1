@@ -6,7 +6,7 @@
 
 #include "GameScene.h"
 #include "engine/3d/ObjectManager/ObjectManager.h"
-
+#include "application/GameObject/SharedGameData/SharedGameData.h"
 GameScene::GameScene()
 {
 }
@@ -21,9 +21,16 @@ void GameScene::Initialize()
 	// モデル、テクスチャのロード
 	ModelManager::LoadObjModel("Unit/sword/blue_ken.obj");
 	TextureManager::Load("resources/Unit/sword/ken.png");
+	ModelManager::LoadObjModel("Unit/Archer/yumi_move2.obj");
 	ModelManager::LoadObjModel("Unit/Archer/yumi.obj");
 	TextureManager::Load("resources/Unit/Archer/ken.png");
-
+	ModelManager::LoadObjModel("Unit/gardian/tate.obj");
+	// 人だけのモデル
+	ModelManager::LoadObjModel("Unit/gardian/hito.obj");
+	ModelManager::LoadObjModel("Unit/sword/hito.obj");
+	// ウェポンのモデル
+	ModelManager::LoadObjModel("Unit/gardian/tatedake.obj");
+	ModelManager::LoadObjModel("Unit/sword/kendake.obj");
 	// ユニット登録
 	UnitFactory::Register("warrior", [] { return std::make_unique<Warrior>("warrior"); });
 	UnitFactory::Register("archer", [] { return std::make_unique<Archer>("archer"); });
@@ -49,12 +56,14 @@ void GameScene::Initialize()
 	projectilePool_->Initialize();
 
 	tileMap_ = std::make_unique<TileMap>();
-	tileMap_->LoadTile();
+	tileMap_->LoadTile(SharedGameData::GetInstance()->GetStageId());
 
 	player_ = std::make_unique<Player>();
 	player_->Init();
 	player_->SetTileMap(tileMap_.get());
 	player_->SetProjectilePool(projectilePool_.get());
+	player_->SetSelectTile({0,static_cast<float>(tileMap_->GetMaxRow()) -1 });
+	player_->SetMaxUnitCount(SharedGameData::GetInstance()->GetMaxUnitCount());
 	gameCamera_->SetTileMap(tileMap_.get());
 	// スカイドーム
 	skydome_ = std::make_unique<Skydome>();
@@ -69,20 +78,19 @@ void GameScene::Initialize()
 	transition_ = std::make_unique<FadeOut>();
 	transition_->Initialize();
 	GameManager::GetInstance()->SetSceneTransition(transition_.get());
-
-
 }
 
 void GameScene::Update()
 {
 	gameCamera_->Update();
-
+#ifdef _DEBUG
 	if (tileMap_->IsEnemyAtFrontLine() || Input::GetInstance()->PressedKey(DIK_G)) {
 		isGameOver = true;
 	}
 	if (tileMap_->IsAllBlue() || Input::GetInstance()->PressedKey(DIK_C)) {
 		isGameClear = true;
 	}
+#endif // _DEBUG
 
 	if (Input::GetInstance()->PressedKey(DIK_S) && isGameOver && (!isTransitionClear_)) {
 		isTransitionClear_ = true;

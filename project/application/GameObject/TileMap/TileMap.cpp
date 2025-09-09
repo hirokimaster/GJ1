@@ -2,9 +2,9 @@
 #include <string>
 #include <fstream>
 #include <sstream>
-void TileMap::LoadTile()
+void TileMap::LoadTile(uint32_t stageId)
 {
-    std::ifstream file("resources/Stage/rensyu.csv");
+    std::ifstream file("resources/Stage/csv/stage" + std::to_string(stageId) + ".csv");
     if (!file.is_open()) {
         assert(false && "Failed to open CSV file");
     };

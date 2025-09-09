@@ -29,6 +29,10 @@ public:
 	/// <param name="textureName"></param>
 	void CreateObject(const std::string& modelName, const std::string& textureName);
 
+	/// <summary>
+	/// hp表示用オブジェクト生成
+	/// </summary>
+	void CreateHpObject();
 
 	/// <summary>
 	/// タイルを占領
@@ -82,7 +86,6 @@ public:
 	ProjectilePool* GetProjectile()const { return projectilePool_; }
 
 	TileMap* GetTileMap()const { return tileMap_; }
-
 #pragma endregion
 
 #pragma region setter
@@ -97,7 +100,12 @@ public:
 
 	void SetRoleId(int id) { roleId_ = id; }
 
-	void SetColor(const Vector4& color) { object_.lock()->color = color; }	
+	void SetColor(const Vector4& color) { 
+		object_.lock()->color = color;
+		hpObject_.lock()->color = color;
+		if(weaponObject_.lock())
+			weaponObject_.lock()->color = color;
+	}	
 
 	void SetVelocity(const Vector2& velocity) { velocity_ = velocity; }
 
@@ -116,6 +124,9 @@ protected:
 	GridPosition prevGridPosition_{}; // 1フレーム前の位置
 	Vector2 velocity_ = { 0.005f,2.0f }; // 移動速度
 	int32_t moveTimer_ = 0; // 移動用タイマー
+	std::weak_ptr<Object3dInstancing> hpObject_; // HP表示用オブジェクト
+	std::weak_ptr<Object3dInstancing> weaponObject_; // 武器オブジェクト
+	bool isAttack_ = false; // 攻撃中かどうか
 
 	// 攻撃関連
 	Vector3 attackVelocity_ = { 0.0f,0.1f }; // 攻撃の速度
