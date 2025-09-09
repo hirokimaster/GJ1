@@ -24,7 +24,7 @@
 #include <application/GameObject/Unit/UnitFactory.h>
 #include <application/GameObject/Unit/Warrior/Warrior.h>
 #include <application/GameObject/Unit/Swordsman/Swordsman.h>
-
+#include "application/GameObject/GameParticle/SceneEffect/SceneEffect.h"
 
 
 class GameScene : public IScene {
@@ -97,5 +97,7 @@ private:
 	std::unique_ptr<ISceneTransition> transition_; // 遷移
 	bool isTransitionClear_ = false; // クリアに行くかどうか
 
-
+	// シーンエフェクト
+	std::unique_ptr<SceneEffect> sceneEffect_ = nullptr;
+	ParticleManager* particleManager_ = nullptr; // particle
 };
