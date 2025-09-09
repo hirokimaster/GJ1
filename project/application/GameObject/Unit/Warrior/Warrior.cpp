@@ -37,7 +37,7 @@ void Warrior::Update()
 #endif // _DEBUG
 
 	if (CanAttackInFront()) {
-		attackVelocity_.z = 1.1f;
+		attackVelocity_.z = 0.1f;
 		Attack();
 		moveTimer_ = 0;
 	}

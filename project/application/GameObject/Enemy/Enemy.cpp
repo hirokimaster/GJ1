@@ -56,7 +56,7 @@ void Enemy::SpawnUnit() {
 					// ユニット
 					roleId_ = TileMode::RED_WARRIOR;
 					std::unique_ptr<BaseUnit> unit;
-					unit = UnitFactory::Create("archer");
+					unit = UnitFactory::Create("warrior");
 					unit->Initialize({ (float)x * 2.0f,(float)reversedY * 2.0f });
 					unit->SetRotate({ 0.0f,3.1415f,0.0f });
 					unit->SetTileMap(tileMap_);
