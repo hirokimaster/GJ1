@@ -13,8 +13,10 @@ void RoleChangeTile::OnUnitEnter(std::unique_ptr<BaseUnit>& unit)
 	// 新しいユニットを生成
 	auto newUnit = UnitFactory::Create(roleName_);
 	newUnit->Initialize({ (float)oldPosition.x,(float)oldPosition.z });
+	newUnit->SetGridPosition(oldPosition.x, oldPosition.z);
 	newUnit->SetProjectile(unit->GetProjectile());
 	newUnit->SetTileMap(unit->GetTileMap());
 
+	unit->SetIsDead();
 	unit = std::move(newUnit); // 差し替え
 }

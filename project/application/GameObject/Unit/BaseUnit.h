@@ -101,6 +101,8 @@ public:
 
 	void SetVelocity(const Vector2& velocity) { velocity_ = velocity; }
 
+	void SetIsDead() { object_.lock()->isAlive = false; }
+
 #pragma endregion
 
 protected:
