@@ -10,7 +10,7 @@
 
 #include "application/GameObject/Skydome/Skydome.h"
 #include "SelectStage/SelectStage.h"
-
+#include "application/GameObject/GameParticle/SceneEffect/SceneEffect.h"
 class SelectScene : public IScene {
 public:
 	/// <summary>
@@ -71,4 +71,7 @@ private:
 	// シーン遷移用
 	bool isTransition_ = false;
 	std::unique_ptr<ISceneTransition> transition_ = nullptr;
+	// シーンエフェクト
+	std::unique_ptr<SceneEffect> sceneEffect_ = nullptr;
+	ParticleManager* particleManager_ = nullptr; // particle
 };
