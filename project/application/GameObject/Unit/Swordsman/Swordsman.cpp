@@ -1,14 +1,19 @@
 #include "Swordsman.h"
 #include "engine/Input/Input.h"
 void Swordsman::Initialize(Vector2 pos) {
-
+	// 本体のmodel、テクスチャのロード
+	TextureManager::Load("resources/Unit/sword/ken.png");
 	// object生成
-	BaseUnit::CreateObject("Unit/sword/blue_ken.obj", "Unit/sword/ken.png");
+	BaseUnit::CreateObject("Unit/sword/hito.obj", "Unit/sword/ken.png");
 	BaseUnit::CreateHpObject();
 	object_.lock()->worldTransform.translate = { pos.x,1.0f,pos.y };
 	object_.lock()->worldTransform.scale = { 0.31f,0.31f,0.31f };
 	object_.lock()->color = { 1.0f,0.0f,0.0f,1.0f };
 	attackVelocity_ = { 0.0f,0.1f,0.1f };
+	// weapon生成
+	weaponObject_ = ObjectManager::GetInstance()->CreateInstancingObject("Unit/sword/kendake.obj", TextureManager::GetTexHandle("Unit/sword/ken.png"));
+	weaponObject_.lock()->worldTransform.parent = &object_.lock()->worldTransform;
+	weaponObject_.lock()->worldTransform.translate = { 2.0f,2.0f,1.0f };
 	
 }
 
@@ -20,7 +25,11 @@ void Swordsman::Update()
 #ifdef _DEBUG
 	if (Input::GetInstance()->PressedKey(DIK_Y) && attackTimer_ >= 120) {
 		Attack();
+		isAttack_ = true;
 	}
+	ImGui::Begin("swordsman");
+	ImGui::DragFloat3("translate,", &weaponObject_.lock()->worldTransform.translate.x);
+	ImGui::End();
 #endif // _DEBUG
 
 
@@ -41,8 +50,17 @@ void Swordsman::Update()
 	if (projectilePool_) {
 		CheckAttackHit();
 	}
+	// 攻撃中は透明、非攻撃中は不透明
+	if (isAttack_) {
+		weaponObject_.lock()->color.w = 0.0f;
+	}
+	else if (!isAttack_) {
+		weaponObject_.lock()->color.w = 1.0f;
+
+	}
 	// ユニット共通の更新処理
 	BaseUnit::Update();
+	weaponObject_.lock()->worldTransform.UpdateMatrix(); // weapon更新
 }
 
 void Swordsman::Attack()
@@ -54,16 +72,26 @@ void Swordsman::Attack()
 		if (baseSword) {
 			Sword* sword = dynamic_cast<Sword*>(baseSword);
 			sword->Activate(); // アクティブにする
-			sword->SetPosition({
-				object_.lock()->worldTransform.translate.x,
-				object_.lock()->worldTransform.translate.y + 2.0f,
-				object_.lock()->worldTransform.translate.z + 1.0f}); // 位置
+			if (teamId_ == TileMode::BLUE) {
+				sword->SetPosition({
+					object_.lock()->worldTransform.translate.x,
+					object_.lock()->worldTransform.translate.y + 2.0f,
+					object_.lock()->worldTransform.translate.z + 2.0f }); // 位置
+			}
+			else if (teamId_ == TileMode::RED) {
+				sword->SetPosition({
+					object_.lock()->worldTransform.translate.x,
+					object_.lock()->worldTransform.translate.y + 2.0f,
+					object_.lock()->worldTransform.translate.z - 2.0f }); // 位置
+				sword->SetRotate({ 0.0f,3.1415f,0.0f });
+			}
 			sword->SetTeamId(teamId_); // チームID
 			sword->SetRoleId(roleId_); // 役職ID
+			sword->SetColor(object_.lock()->color); // 色
 			sword->SetVelocity(attackVelocity_); // 速度
 		}
+		attackTimer_ = 0;
 	}
-	attackTimer_ = 0;
 }
 
 bool Swordsman::IsInActionRange(const GridPosition& targetPosition) const
@@ -158,18 +186,43 @@ void Swordsman::CheckAttackHit()
 			switch (teamId_)
 			{
 			case BLUE:
-				if (projectile->GetTeamId() == TileMode::RED) {
+				if (projectile->GetRoleId() == TileMode::RED_ARCHER) {
 					// 死亡処理
 					hp_ -= 50;
 					projectile->Deactivate();
 	
 				}
-				break;
-			case RED:
-				if (projectile->GetTeamId() == TileMode::BLUE) {
+				else if (projectile->GetRoleId() == TileMode::RED_SWORDSMAN) {
 					// 死亡処理
 					hp_ -= 50;
 					projectile->Deactivate();
+
+				}
+				else if (projectile->GetRoleId() == TileMode::RED_WARRIOR) {
+					// 死亡処理
+					hp_ -= 20;
+					projectile->Deactivate();
+
+				}
+				break;
+			case RED:
+				if (projectile->GetRoleId() == TileMode::BLUE_ARCHER) {
+					// 死亡処理
+					hp_ -= 50;
+					projectile->Deactivate();
+
+				}
+				else if (projectile->GetRoleId() == TileMode::BLUE_SWORDSMAN) {
+					// 死亡処理
+					hp_ -= 50;
+					projectile->Deactivate();
+
+				}
+				else if (projectile->GetRoleId() == TileMode::BLUE_WARRIOR) {
+					// 死亡処理
+					hp_ -= 20;
+					projectile->Deactivate();
+
 				}
 				break;
 			}

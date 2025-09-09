@@ -36,8 +36,12 @@ public:
 
 	void CheckAttackHit();
 
+public: //Setter
+	
+
 private:
 	int32_t attackTimer_ = 0;
 private:
+
 
 };

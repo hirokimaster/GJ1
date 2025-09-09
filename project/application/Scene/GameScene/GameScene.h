@@ -97,4 +97,5 @@ private:
 	std::unique_ptr<ISceneTransition> transition_; // 遷移
 	bool isTransitionClear_ = false; // クリアに行くかどうか
 
+
 };
