@@ -15,7 +15,8 @@ public:
 	/// <param name="hp"></param>
 	/// <param name="attack"></param>
 	BaseUnit(const std::string& name, uint32_t hp, uint32_t attack)
-		: name_(name), hp_(hp), attack_(attack){}
+		: name_(name), hp_(hp), attack_(attack) {
+	}
 
 	/// <summary>
 	/// デストラクタ
@@ -75,8 +76,15 @@ public:
 	/// <returns></returns>
 	virtual bool CanAttackInFront() = 0;
 
+	// 移動リセット
+	void ResetMoveState() {
+		moveTimer_ = 0;
+		velocity_ = { 0,0 };
+		isMoving_ = false;
+	}
+
 #pragma region getter
-	
+
 	bool GetIsAlive() const { return hp_ > 0; }
 
 	const std::string GetName() const { return name_; }
@@ -86,6 +94,10 @@ public:
 	ProjectilePool* GetProjectile()const { return projectilePool_; }
 
 	TileMap* GetTileMap()const { return tileMap_; }
+
+	uint32_t GetTeamId() { return teamId_; }
+
+	uint32_t GetRoleId() { return roleId_; }
 #pragma endregion
 
 #pragma region setter
@@ -107,9 +119,15 @@ public:
 			weaponObject_.lock()->color = color;
 	}	
 
+	void SnapToGrid();
+
 	void SetVelocity(const Vector2& velocity) { velocity_ = velocity; }
 
-	void SetIsDead() { object_.lock()->isAlive = false; }
+	void SetIsDead() { 
+		object_.lock()->isAlive = false;
+		weaponObject_.lock()->isAlive = false;
+		hpObject_.lock()->isAlive = false;
+	}
 
 #pragma endregion
 
@@ -127,6 +145,7 @@ protected:
 	std::weak_ptr<Object3dInstancing> hpObject_; // HP表示用オブジェクト
 	std::weak_ptr<Object3dInstancing> weaponObject_; // 武器オブジェクト
 	bool isAttack_ = false; // 攻撃中かどうか
+	bool isMoving_ = false;
 
 	// 攻撃関連
 	Vector3 attackVelocity_ = { 0.0f,0.1f }; // 攻撃の速度

@@ -9,8 +9,8 @@ public:
 	/// </summary>
 	/// <param name="position"></param>
 	/// <param name="roleName"></param>
-	RoleChangeTile(const GridPosition& position, const std::string& roleName)
-		:position_(position), roleName_(roleName) {
+	RoleChangeTile(const GridPosition& position)
+		:position_(position){
 	}
 
 	/// <summary>
@@ -34,4 +34,7 @@ public:
 private:
 	GridPosition position_{};
 	std::string roleName_;
+	bool active_ = true;
+	uint32_t roleId_;
+	uint32_t teamId_;
 };

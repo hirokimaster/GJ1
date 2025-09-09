@@ -17,6 +17,7 @@ void Enemy::Update() {
 		return !unit->GetIsAlive();
 		});
 	DebugDraw();
+	ChageRole();
 	SelectUnit();
 	for (auto& unit : units_) {
 		unit->Update();
@@ -127,4 +128,17 @@ void Enemy::SelectUnit()
 	}
 
 	selectNum_ = std::clamp(selectNum_, -1, 1); // 制限しとく
+}
+
+void Enemy::ChageRole()
+{
+	// ロールチェンジ
+	for (auto& spTile : tileMap_->GetSpecialTile()) {
+		for (auto& unit : units_) {
+			if (spTile->GetGridPosition().x == unit->GetGridPosition().x &&
+				spTile->GetGridPosition().z == unit->GetGridPosition().z) {
+				spTile->OnUnitEnter(unit);
+			}
+		}
+	}
 }
