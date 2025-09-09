@@ -67,7 +67,19 @@ void Archer::Attack()
 		if (baseArrow) {
 			Arrow* arrow = dynamic_cast<Arrow*>(baseArrow);
 			arrow->Activate(); // アクティブにする
-			arrow->SetPosition(object_.lock()->worldTransform.translate); // 発射位置
+			if (teamId_ == TileMode::BLUE) {
+				arrow->SetPosition({
+				object_.lock()->worldTransform.translate.x,
+				object_.lock()->worldTransform.translate.y + 1.0f,
+				object_.lock()->worldTransform.translate.z  }); // 位置
+			}
+			else if (teamId_ == TileMode::RED) {
+				arrow->SetPosition({
+				object_.lock()->worldTransform.translate.x,
+				object_.lock()->worldTransform.translate.y + 1.0f,
+				object_.lock()->worldTransform.translate.z}); // 位置
+				arrow->SetRotate({ 0.0f,3.1415f,0.0f });
+			}
 			arrow->SetTeamId(teamId_); // チームID
 			arrow->SetRoleId(roleId_); // 役職ID
 			arrow->SetVelocity(attackVelocity_); // 速度
