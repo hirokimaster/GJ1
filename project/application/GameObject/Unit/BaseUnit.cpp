@@ -1,4 +1,5 @@
 #include "BaseUnit.h"
+#include "application/GameObject/TileMap/TileMap.h"
 
 void BaseUnit::CreateObject(const std::string& modelName, const std::string& textureName)
 {

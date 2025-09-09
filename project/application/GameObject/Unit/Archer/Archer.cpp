@@ -1,4 +1,5 @@
 #include "Archer.h"
+#include "application/GameObject/TileMap/TileMap.h"
 
 void Archer::Initialize(Vector2 pos) {
 
@@ -51,6 +52,7 @@ void Archer::Update()
 	if (projectilePool_) {
 		CheckAttackHit();
 	}
+  
 	// ユニット共通の更新処理
 	BaseUnit::Update();
 

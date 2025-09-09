@@ -42,6 +42,12 @@ void TileMap::LoadTile(uint32_t stageId)
             int value = map_[rowIndex][colIndex];
             int reversedRow = maxRow_ - 1 - rowIndex;
 
+            // 9番だったらロール変えタイル
+            if (value == 9) {
+                GridPosition pos = { colIndex, rowIndex };
+                specialTiles_.push_back(std::make_unique<RoleChangeTile>(pos, "warrior"));
+            }
+
             Vector2 position{
                 colIndex * tileSize,
                 startZ + (reversedRow * tileSize)

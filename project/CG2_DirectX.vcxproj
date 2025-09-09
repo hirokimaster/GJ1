@@ -194,6 +194,7 @@ copy "$(WindowsSdkdir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
   <ItemGroup>
     <ClInclude Include="application\AdjustmentVariables\AdjustmentVariables.h" />
     <ClInclude Include="application\GameManager\GameManager.h" />
+    <ClInclude Include="application\GameObject\GridPosition\GridPosition.h" />
     <ClInclude Include="application\GameObject\SpecialTile\ISpecialTile.h" />
     <ClInclude Include="application\GameObject\SpecialTile\RoleChangeTile\RoleChangeTile.h" />
     <ClInclude Include="application\GameObject\Unit\Archer\Archer.h" />

@@ -1,5 +1,7 @@
 #include "Swordsman.h"
 #include "engine/Input/Input.h"
+#include "application/GameObject/TileMap/TileMap.h"
+
 void Swordsman::Initialize(Vector2 pos) {
 	// 本体のmodel、テクスチャのロード
 	TextureManager::Load("resources/Unit/sword/ken.png");

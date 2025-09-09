@@ -1,4 +1,5 @@
 #include "Warrior.h"
+#include "application/GameObject/TileMap/TileMap.h"
 #include "engine/Input/Input.h"
 
 void Warrior::Initialize(Vector2 pos) {

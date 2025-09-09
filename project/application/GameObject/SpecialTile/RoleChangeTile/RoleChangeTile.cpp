@@ -1,9 +1,11 @@
 #include <application/GameObject/SpecialTile/RoleChangeTile/RoleChangeTile.h>
 
-void RoleChangeTile::OnUnitEnter(BaseUnit*& unit)
+void RoleChangeTile::OnUnitEnter(std::unique_ptr<BaseUnit>& unit)
 {
 	// ユニットがnullだったら止める
 	if (!unit) return;
+
+	if (roleName_ == unit->GetName())return;
 
 	// 現在のマスを保存
 	GridPosition oldPosition = unit->GetGridPosition();
@@ -11,9 +13,10 @@ void RoleChangeTile::OnUnitEnter(BaseUnit*& unit)
 	// 新しいユニットを生成
 	auto newUnit = UnitFactory::Create(roleName_);
 	newUnit->Initialize({ (float)oldPosition.x,(float)oldPosition.z });
+	newUnit->SetGridPosition(oldPosition.x, oldPosition.z);
 	newUnit->SetProjectile(unit->GetProjectile());
 	newUnit->SetTileMap(unit->GetTileMap());
 
-	delete unit;
-	unit = newUnit.release(); // 差し替え
+	unit->SetIsDead();
+	unit = std::move(newUnit); // 差し替え
 }

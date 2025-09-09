@@ -8,6 +8,8 @@
 #include "engine/3d/ObjectManager/ObjectManager.h"
 TitleScene::TitleScene()
 {
+
+	
 }
 
 TitleScene::~TitleScene()
