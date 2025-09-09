@@ -99,7 +99,7 @@ void GameScene::Update()
 	}
 #endif // _DEBUG
 
-	if (Input::GetInstance()->PressedKey(DIK_S) && isGameOver && (!isTransitionClear_)) {
+	if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_X) || Input::GetInstance()->PressedKey(DIK_S) && isGameOver && (!isTransitionClear_)) {
 		isTransitionClear_ = true;
 		transition_ = std::make_unique<FadeIn>();
 		transition_->Initialize();
@@ -107,7 +107,7 @@ void GameScene::Update()
 		GameManager::GetInstance()->ChangeScene("SELECT");
 	}
 	else if (isGameClear && (!isTransitionClear_)) {
-		if (Input::GetInstance()->PressedKey(DIK_S)) {
+		if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_Y) || Input::GetInstance()->PressedKey(DIK_B)) {
 			isTransitionClear_ = true;
 			transition_ = std::make_unique<FadeIn>();
 			transition_->Initialize();
@@ -120,7 +120,7 @@ void GameScene::Update()
 			SharedGameData::GetInstance()->SetStageId(nextStage); // 管理用に更新
 			GameManager::GetInstance()->ChangeScene("GAME");
 		}
-		else if (Input::GetInstance()->PressedKey(DIK_B)) {
+		else if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_X) || Input::GetInstance()->PressedKey(DIK_S)) {
 			// Bキーでセレクトに戻る (あとで変えて)
 			isTransitionClear_ = true;
 			transition_ = std::make_unique<FadeIn>();
@@ -131,7 +131,7 @@ void GameScene::Update()
 
 	}
 
-	if (Input::GetInstance()->PressedKey(DIK_R)) {
+	if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_B) || Input::GetInstance()->PressedKey(DIK_R)) {
 		transition_ = std::make_unique<FadeIn>();
 		transition_->Initialize();
 		GameManager::GetInstance()->SetSceneTransition(transition_.get());
@@ -195,5 +195,8 @@ void GameScene::LoadTextureFile()
 	TextureManager::Load("resources/UI/s.png");
 	TextureManager::Load("resources/UI/num.png");
 	TextureManager::Load("resources/UI/yazirusi.png");
+	TextureManager::Load("resources/UI/retry.png");
+	TextureManager::Load("resources/UI/next.png");
+	TextureManager::Load("resources/UI/backSelect.png");
 }
 
