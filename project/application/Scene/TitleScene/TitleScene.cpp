@@ -67,8 +67,8 @@ void TitleScene::Draw()
 void TitleScene::PostProcessDraw()
 {
 	postEffect_->PreDraw();
-	titleSprite_->Draw();
 	ObjectManager::GetInstance()->Draw(gameCamera_->GetCamera());
+	titleSprite_->Draw();
 	postEffect_->PostDraw();
 }
 

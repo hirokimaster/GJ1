@@ -93,11 +93,11 @@ void SelectScene::Draw()
 void SelectScene::PostProcessDraw()
 {
 	postEffect_->PreDraw();
+	ObjectManager::GetInstance()->Draw(camera_);
 	for (auto& selectStage : selectStages_) {
 		selectStage->Draw();
 	}
 	selectSprite_->Draw();
-	ObjectManager::GetInstance()->Draw(camera_);
 	postEffect_->PostDraw();
 }
 
