@@ -48,6 +48,12 @@ public:
 	void CreateParticle(const string& particleName);
 
 	/// <summary>
+	/// 新しいのを作る
+	/// </summary>
+	/// <param name="particleName"></param>
+	void CreateNewParticle(const string& particleName);
+
+	/// <summary>
 	/// 更新
 	/// </summary>
 	void Update();
