@@ -221,8 +221,6 @@
     <None Include="resources\ShaderFile\PostProcess.hlsli" />
     <None Include="resources\ShaderFile\SkyBox.hlsli" />
     <None Include="resources\ShaderFile\SkyBox.VS.hlsl" />
-    <None Include="resources\Stage\csv\stage1.csv" />
-    <None Include="resources\Stage\csv\stage2.csv" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="externals\imgui\LICENSE.txt" />
