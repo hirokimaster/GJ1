@@ -64,3 +64,16 @@ void BaseUnit::Update() {
 	}
 	BaseInstancingObject::Update(); // object共通の更新処理
 }
+
+void BaseUnit::SnapToGrid()
+{
+	const float tileSize = 2.0f;
+	if (object_.lock()) {
+		object_.lock()->worldTransform.translate.x = static_cast<float>(gridPosition_.x) * tileSize;
+		object_.lock()->worldTransform.translate.z = static_cast<float>(gridPosition_.z) * tileSize;
+		object_.lock()->worldTransform.translate.y = 1.0f; // 必要なら固定
+	}
+	
+	moveTimer_ = 0;
+	isMoving_ = false;
+}

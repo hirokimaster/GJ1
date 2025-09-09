@@ -37,7 +37,7 @@ void Warrior::Update()
 #endif // _DEBUG
 
 	if (CanAttackInFront()) {
-		attackVelocity_.z = 1.1f;
+		attackVelocity_.z = 0.1f;
 		Attack();
 		moveTimer_ = 0;
 	}
@@ -76,14 +76,25 @@ void Warrior::Attack()
 		if (baseShield) {
 			Shield* shield = dynamic_cast<Shield*>(baseShield);
 			shield->Activate(); // アクティブにする
-			shield->SetPosition({
+			
+			if (teamId_ == TileMode::BLUE) {
+				shield->SetPosition({
 				object_.lock()->worldTransform.translate.x,
 				object_.lock()->worldTransform.translate.y + 1.0f,
 				object_.lock()->worldTransform.translate.z + 0.5f }); // 位置
+			}
+			else if (teamId_ == TileMode::RED) {
+				shield->SetPosition({
+				object_.lock()->worldTransform.translate.x,
+				object_.lock()->worldTransform.translate.y + 1.0f,
+				object_.lock()->worldTransform.translate.z - 0.5f }); // 位置
+				shield->SetRotate({ 0.0f,3.1415f,0.0f });
+			}
 			shield->SetColor(object_.lock()->color); // 色
 			shield->SetTeamId(teamId_); // チームID
 			shield->SetRoleId(roleId_); // 役職ID
 			shield->SetVelocity(attackVelocity_); // 速度
+	
 		}
 		attackTimer_ = 0;
 	}

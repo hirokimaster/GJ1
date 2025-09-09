@@ -46,6 +46,14 @@ void SelectScene::Initialize()
 	transition_->Initialize();
 	GameManager::GetInstance()->SetSceneTransition(transition_.get());
 	isTransition_ = false;
+
+	// particle
+	particleManager_ = ParticleManager::GetInstance();
+	particleManager_->Initialize();
+
+	// エフェクト
+	sceneEffect_ = std::make_unique<SceneEffect>();
+	sceneEffect_->Initialize();
 }
 
 void SelectScene::Update()
@@ -82,6 +90,9 @@ void SelectScene::Update()
 
 	skydome_->Update();
 	ObjectManager::GetInstance()->Update();
+
+	sceneEffect_->Update();
+	particleManager_->Update();
 }
 
 void SelectScene::Draw()
@@ -97,7 +108,12 @@ void SelectScene::PostProcessDraw()
 	for (auto& selectStage : selectStages_) {
 		selectStage->Draw();
 	}
+	particleManager_->Draw(camera_);
+#ifdef _DEBUG
+	ParticleEditor::GetInstance()->Draw(camera_);
+#endif // _DEBUG
 	selectSprite_->Draw();
+
 	postEffect_->PostDraw();
 }
 

@@ -21,6 +21,7 @@ public: // Setter
 private:
 	
 	void SelectUnit(); // unit選択
+	void ChageRole();
 
 private:
 	int teamId_ = TileMode::RED;

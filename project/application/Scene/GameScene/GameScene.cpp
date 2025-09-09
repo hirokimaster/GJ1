@@ -77,6 +77,14 @@ void GameScene::Initialize()
 	transition_ = std::make_unique<FadeOut>();
 	transition_->Initialize();
 	GameManager::GetInstance()->SetSceneTransition(transition_.get());
+
+	// particle
+	particleManager_ = ParticleManager::GetInstance();
+	particleManager_->Initialize();
+
+	// エフェクト
+	sceneEffect_ = std::make_unique<SceneEffect>();
+	sceneEffect_->Initialize();
 }
 
 void GameScene::Update()
@@ -144,6 +152,9 @@ void GameScene::Update()
 
 	ObjectManager::GetInstance()->Update();
 
+	sceneEffect_->Update();
+	particleManager_->Update();
+
 }
 
 void GameScene::Draw()
@@ -155,7 +166,10 @@ void GameScene::PostProcessDraw()
 {
 	postEffect_->PreDraw();
 	ObjectManager::GetInstance()->Draw(gameCamera_->GetCamera());
-
+	particleManager_->Draw(gameCamera_->GetCamera());
+#ifdef _DEBUG
+	ParticleEditor::GetInstance()->Draw(gameCamera_->GetCamera());
+#endif // _DEBUG
 	if (isGameClear) {
 		gameSprite_->ClearDraw();
 	}

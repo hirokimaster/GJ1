@@ -17,6 +17,7 @@ void Enemy::Update() {
 		return !unit->GetIsAlive();
 		});
 	DebugDraw();
+	ChageRole();
 	SelectUnit();
 	for (auto& unit : units_) {
 		unit->Update();
@@ -56,7 +57,7 @@ void Enemy::SpawnUnit() {
 					// ユニット
 					roleId_ = TileMode::RED_WARRIOR;
 					std::unique_ptr<BaseUnit> unit;
-					unit = UnitFactory::Create("archer");
+					unit = UnitFactory::Create("warrior");
 					unit->Initialize({ (float)x * 2.0f,(float)reversedY * 2.0f });
 					unit->SetRotate({ 0.0f,3.1415f,0.0f });
 					unit->SetTileMap(tileMap_);
@@ -127,4 +128,17 @@ void Enemy::SelectUnit()
 	}
 
 	selectNum_ = std::clamp(selectNum_, -1, 1); // 制限しとく
+}
+
+void Enemy::ChageRole()
+{
+	// ロールチェンジ
+	for (auto& spTile : tileMap_->GetSpecialTile()) {
+		for (auto& unit : units_) {
+			if (spTile->GetGridPosition().x == unit->GetGridPosition().x &&
+				spTile->GetGridPosition().z == unit->GetGridPosition().z) {
+				spTile->OnUnitEnter(unit);
+			}
+		}
+	}
 }
