@@ -25,6 +25,8 @@ public:
 public:
 	bool CanSpawnHere(int x, int y);
 
+	uint32_t GetMaxUnitCount() { return maxUnitCount_ - currentUnitCount_; }
+
 public: // Setter
 	void SetTileMap(TileMap* tileMap) { tileMap_ = tileMap; }
 

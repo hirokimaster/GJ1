@@ -106,6 +106,7 @@ void GameScene::Update()
 	tileMap_->Update();
 
 	player_->Update();
+	gameSprite_->SetNumber(player_->GetMaxUnitCount());
 
 	enemy_->Update();
 	// プール
@@ -148,7 +149,8 @@ void GameScene::Collision()
 void GameScene::LoadTextureFile()
 {
 	TextureManager::Load("resources/TempTexture/white.png");
-	TextureManager::Load("resources/UI/ui.png");
+	TextureManager::Load("resources/UI/haiti.png");
 	TextureManager::Load("resources/UI/s.png");
+	TextureManager::Load("resources/UI/num.png");
 }
 

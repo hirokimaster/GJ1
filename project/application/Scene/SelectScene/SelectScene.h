@@ -67,7 +67,7 @@ private:
 	// padの入力待機時間
 	float inputWaitTime_ = 0.0f; // 入力待機時間
 	// padの入力待機時間の最大値
-	const float maxInputWaitTime_ = 0.5f; // 入力待機時間の最大値
+	const float maxInputWaitTime_ = 0.1f; // 入力待機時間の最大値
 	// シーン遷移用
 	bool isTransition_ = false;
 	std::unique_ptr<ISceneTransition> transition_ = nullptr;
