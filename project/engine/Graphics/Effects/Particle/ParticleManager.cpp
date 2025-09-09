@@ -19,7 +19,7 @@ void ParticleManager::Initialize()
 	particles_.clear();
 	while (!pool_.empty()) pool_.pop();
 
-	ModelManager::GetInstance()->LoadObjModel("Player/plane.obj");
+	ModelManager::GetInstance()->LoadObjModel("TempModel/board.obj");
 	// パラメーター読み込み
 	ParticleEditor::GetInstance()->LoadFiles();
 
@@ -114,7 +114,7 @@ void ParticleManager::Create()
 	// 最大を越えないようにする
 	if (kPoolSize > particles_.size()) {
 		unique_ptr<GPUParticle> particle = make_unique<GPUParticle>();
-		particle->SetModel("Player/plane.obj");
+		particle->SetModel("TempModel/board.obj");
 		particle->Initialize();
 
 		// キューに入れる

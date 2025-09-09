@@ -190,6 +190,7 @@ copy "$(WindowsSdkdir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="application\GameObject\Unit\Projectile\Sword\Sword.cpp" />
     <ClCompile Include="application\GameObject\Unit\Projectile\Shield\Shield.cpp" />
     <ClCompile Include="application\GameObject\SharedGameData\SharedGameData.cpp" />
+    <ClCompile Include="application\GameObject\GameParticle\SceneEffect\SceneEffect.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="application\AdjustmentVariables\AdjustmentVariables.h" />
@@ -287,6 +288,7 @@ copy "$(WindowsSdkdir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="application\GameObject\Unit\Projectile\Sword\Sword.h" />
     <ClInclude Include="application\GameObject\Unit\Projectile\Shield\Shield.h" />
     <ClInclude Include="application\GameObject\SharedGameData\SharedGameData.h" />
+    <ClInclude Include="application\GameObject\GameParticle\SceneEffect\SceneEffect.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="engine\3d\BaseObject\BaseIndividualObject.cpp" />

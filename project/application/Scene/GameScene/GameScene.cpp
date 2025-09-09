@@ -17,7 +17,6 @@ GameScene::~GameScene()
 
 void GameScene::Initialize()
 {
-
 	// モデル、テクスチャのロード
 	ModelManager::LoadObjModel("Unit/sword/blue_ken.obj");
 	TextureManager::Load("resources/Unit/sword/ken.png");

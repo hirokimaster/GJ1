@@ -13,6 +13,7 @@
 #include "application/SceneTransition/FadeIn/FadeIn.h"
 #include "application/GameObject/Skydome/Skydome.h"
 #include "application/GameObject/GameCamera/GameCamera.h"
+#include "application/GameObject/GameParticle/SceneEffect/SceneEffect.h"
 
 class TitleScene : public IScene {
 public:
@@ -54,6 +55,8 @@ private:
 
 private:
 	std::unique_ptr<PostProcess> postEffect_ = nullptr;
+	ParticleManager* particleManager_ = nullptr; // particle
+
 	std::unique_ptr<TitleSprite> titleSprite_ = nullptr;
 	std::unique_ptr<GameCamera> gameCamera_; // ゲームカメラ
 	// スカイドーム
@@ -62,4 +65,7 @@ private:
 	// シーン遷移用
 	bool isTransition_ = false;
 	std::unique_ptr<ISceneTransition> transition_ = nullptr;
+
+	// シーンエフェクト
+	std::unique_ptr<SceneEffect> sceneEffect_ = nullptr;
 };

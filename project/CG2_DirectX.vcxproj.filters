@@ -117,6 +117,7 @@
     <ClCompile Include="application\GameObject\Unit\Projectile\Sword\Sword.cpp" />
     <ClCompile Include="application\GameObject\Unit\Projectile\Shield\Shield.cpp" />
     <ClCompile Include="application\GameObject\SharedGameData\SharedGameData.cpp" />
+    <ClCompile Include="application\GameObject\GameParticle\SceneEffect\SceneEffect.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="application\AdjustmentVariables\AdjustmentVariables.h" />
@@ -214,6 +215,7 @@
     <ClInclude Include="application\GameObject\GridPosition\GridPosition.h" />
     <ClInclude Include="application\GameObject\Unit\Projectile\Shield\Shield.h" />
     <ClInclude Include="application\GameObject\SharedGameData\SharedGameData.h" />
+    <ClInclude Include="application\GameObject\GameParticle\SceneEffect\SceneEffect.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\ShaderFile\Object3d.hlsli" />

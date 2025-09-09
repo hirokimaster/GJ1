@@ -176,9 +176,9 @@ void ParticleEditor::Update()
             // プレビュー機能
             // プレビュー用パーティクルがなければ生成
             if (!previewParticle_) {
-                ModelManager::LoadObjModel("TempModel/cube.obj");
+                ModelManager::LoadObjModel("TempModel/board.obj");
                 previewParticle_ = std::make_unique<GPUParticle>();
-                previewParticle_->SetModel("TempModel/cube.obj");
+                previewParticle_->SetModel("TempModel/board.obj");
                 previewParticle_->Initialize();
                 previewParticle_->SetIsActive(true);
             }

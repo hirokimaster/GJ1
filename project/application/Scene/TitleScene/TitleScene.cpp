@@ -18,6 +18,10 @@ TitleScene::~TitleScene()
 
 void TitleScene::Initialize()
 {
+	// particle
+	particleManager_ = ParticleManager::GetInstance();
+	particleManager_->Initialize();
+	ModelManager::LoadObjModel("TempModel/board.obj");
 
 	gameCamera_ = std::make_unique<GameCamera>();
 	gameCamera_->Init();
@@ -38,6 +42,11 @@ void TitleScene::Initialize()
 	GameManager::GetInstance()->SetSceneTransition(transition_.get());
 	isTransition_ = false;
 
+
+	// エフェクト
+	sceneEffect_ = std::make_unique<SceneEffect>();
+	sceneEffect_->Initialize();
+
 	// スカイドーム
 	skydome_ = std::make_unique<Skydome>();
 	skydome_->Init();
@@ -57,6 +66,9 @@ void TitleScene::Update()
 	}
 	skydome_->Update();
 	ObjectManager::GetInstance()->Update();
+	sceneEffect_->Update();
+	particleManager_->Update();
+	
 }
 
 void TitleScene::Draw()
@@ -68,7 +80,13 @@ void TitleScene::PostProcessDraw()
 {
 	postEffect_->PreDraw();
 	ObjectManager::GetInstance()->Draw(gameCamera_->GetCamera());
+
+#ifdef _DEBUG
+	//ParticleEditor::GetInstance()->Draw(gameCamera_->GetCamera());
+#endif // _DEBUG
+	particleManager_->Draw(gameCamera_->GetCamera());
 	titleSprite_->Draw();
+
 	postEffect_->PostDraw();
 }
 

@@ -1,0 +1,60 @@
+{
+    "sceneEffectParticleBlue": {
+        "count": 1,
+        "emit": 1,
+        "frequency": 0.009999999776482582,
+        "frequencyTime": 100.0,
+        "radius": 1.0,
+        "rangeAlpha_max": 1.0,
+        "rangeAlpha_min": 1.0,
+        "rangeColor_max": [
+            0.4000000059604645,
+            0.4000000059604645,
+            1.0
+        ],
+        "rangeColor_min": [
+            0.4000000059604645,
+            0.4000000059604645,
+            1.0
+        ],
+        "rangeCurrentTime_max": 0.0,
+        "rangeCurrentTime_min": 0.0,
+        "rangeLifeTime_max": 2.4000000953674316,
+        "rangeLifeTime_min": 1.0,
+        "rangeScale_max": [
+            1.0,
+            1.0,
+            1.0
+        ],
+        "rangeScale_min": [
+            1.0,
+            1.0,
+            1.0
+        ],
+        "rangeTranslate_max": [
+            25.100000381469727,
+            14.5,
+            15.100000381469727
+        ],
+        "rangeTranslate_min": [
+            -25.799999237060547,
+            -13.399999618530273,
+            -20.5
+        ],
+        "rangeVelocity_max": [
+            0.0,
+            0.009999999776482582,
+            0.0
+        ],
+        "rangeVelocity_min": [
+            0.0,
+            0.0,
+            0.0
+        ],
+        "translate": [
+            0.0,
+            0.0,
+            0.0
+        ]
+    }
+}
