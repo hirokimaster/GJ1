@@ -16,6 +16,7 @@ void Swordsman::Initialize(Vector2 pos) {
 	weaponObject_ = ObjectManager::GetInstance()->CreateInstancingObject("Unit/sword/kendake.obj", TextureManager::GetTexHandle("Unit/sword/ken.png"));
 	weaponObject_.lock()->worldTransform.parent = &object_.lock()->worldTransform;
 	weaponObject_.lock()->worldTransform.translate = { 2.0f,2.0f,1.0f };
+	moveVelo = 1;
 	
 }
 
@@ -159,8 +160,8 @@ void Swordsman::Move()
 {
 	int selfY = static_cast<int>(object_.lock()->worldTransform.translate.z / 2);
 	int targetY = tileMap_->GetMaxRow() - 1 - selfY; // CSVの可読性を上げるために奥が0行目のため修正
-	moveTimer_++;
-	if (moveTimer_ >= 240) {
+	moveTimer_ += moveVelo;
+	if (moveTimer_ >= 360) {
 		if (targetY < tileMap_->GetMaxRow() - 1 && teamId_ == TileMode::RED) {
 			object_.lock()->worldTransform.translate.z += velocity_.y;
 		}
@@ -168,6 +169,7 @@ void Swordsman::Move()
 			object_.lock()->worldTransform.translate.z += velocity_.y;
 		}
 		moveTimer_ = 0;
+		moveVelo = 4;
 	}
 }
 void Swordsman::CheckAttackHit()

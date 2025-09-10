@@ -153,6 +153,7 @@ protected:
 	bool isAttack_ = false; // 攻撃中かどうか
 	bool isMoving_ = false;
 
+	int moveVelo = 1; // 移動速度調整用
 	// 攻撃関連
 	Vector3 attackVelocity_ = { 0.0f,0.1f }; // 攻撃の速度
 
