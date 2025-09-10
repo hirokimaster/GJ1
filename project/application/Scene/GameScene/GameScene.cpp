@@ -228,5 +228,6 @@ void GameScene::LoadTextureFile()
 	TextureManager::Load("resources/UI/over.png");
 	TextureManager::Load("resources/UI/clear.png");
 	TextureManager::Load("resources/UI/sousa.png");
+	TextureManager::Load("resources/UI/change.png");
 }
 

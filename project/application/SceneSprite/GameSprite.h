@@ -70,6 +70,9 @@ private:
 	std::unique_ptr<Sprite> spriteSousa_ = nullptr;
 	Vector2 spriteSousaPositionGame_{};
 
+	std::unique_ptr<Sprite> spriteChange_ = nullptr;
+	Vector2 spriteChangePositionGame_{};
+
 	uint32_t numHandle_ = 0;
 };
 
