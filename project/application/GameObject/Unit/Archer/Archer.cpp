@@ -195,19 +195,34 @@ void Archer::CheckAttackHit()
 			case BLUE:
 				if (projectile->GetRoleId() == TileMode::RED_ARCHER) {
 					// 死亡処理
-					hp_ -= 50;
+					if (hp_ <= 50) {
+						hp_ = 0;
+					}
+					else {
+						hp_ -= 50;
+					}
 					projectile->Deactivate();
 
 				}
 				else if (projectile->GetRoleId() == TileMode::RED_SWORDSMAN) {
 					// 死亡処理
-					hp_ -= 50;
+					if (hp_ <= 50) {
+						hp_ = 0;
+					}
+					else {
+						hp_ -= 50;
+					}
 					projectile->Deactivate();
 
 				}
 				else if (projectile->GetRoleId() == TileMode::RED_WARRIOR) {
 					// 死亡処理
-					hp_ -= 50;
+					if (hp_ <= 50) {
+						hp_ = 0;
+					}
+					else {
+						hp_ -= 50;
+					}
 					projectile->Deactivate();
 
 				}
@@ -215,23 +230,41 @@ void Archer::CheckAttackHit()
 			case RED:
 				if (projectile->GetRoleId() == TileMode::BLUE_ARCHER) {
 					// 死亡処理
-					hp_ -= 50;
+					if (hp_ <= 50) {
+						hp_ = 0;
+					}
+					else {
+						hp_ -= 50;
+					}
 					projectile->Deactivate();
 
 				}
 				else if (projectile->GetRoleId() == TileMode::BLUE_SWORDSMAN) {
 					// 死亡処理
-					hp_ -= 50;
+					if (hp_ <= 50) {
+						hp_ = 0;
+					}
+					else {
+						hp_ -= 50;
+					}
 					projectile->Deactivate();
 
 				}
 				else if (projectile->GetRoleId() == TileMode::BLUE_WARRIOR) {
 					// 死亡処理
-					hp_ -= 50;
+					if (hp_ <= 50) {
+						hp_ = 0;
+					}
+					else {
+						hp_ -= 50;
+					}
 					projectile->Deactivate();
 
 				}
 				break;
+			}
+			if (hp_ <= 0) {
+				hp_ = 0;
 			}
 		}
 	}

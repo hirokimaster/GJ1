@@ -60,6 +60,7 @@ void GameScene::Initialize()
 	player_ = std::make_unique<Player>();
 	player_->Init();
 	player_->SetTileMap(tileMap_.get());
+	player_->SetCamera(&gameCamera_->GetCamera());
 	player_->SetProjectilePool(projectilePool_.get());
 	player_->SetSelectTile({ 0,static_cast<float>(tileMap_->GetMaxRow()) - 1 });
 	player_->SetMaxUnitCount(SharedGameData::GetInstance()->GetMaxUnitCount());
