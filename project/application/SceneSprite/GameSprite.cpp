@@ -42,6 +42,12 @@ void GameSprite::Initialize()
 	spriteSousa_->SetColor({ 1.0f,1.0f,1.0f,1.0f });
 	spriteSousa_->SetScale({ 0.6f, 0.6f });
 
+	spriteChangePositionGame_ = { 1105, 175 };
+	spriteChange_.reset(Sprite::Create(TextureManager::GetTexHandle("UI/change.png"), spriteChangePositionGame_));
+	spriteChange_->SetAnchorPoint({ 0.5f,0.5f });
+	spriteChange_->SetColor({ 1.0f,1.0f,1.0f,1.0f });
+	spriteChange_->SetScale({ 0.5f, 0.5f });
+
 	// 初期値は「0」
 	SetNumber(4);
 }
@@ -56,6 +62,7 @@ void GameSprite::Draw()
 	spriteNumGame_->Draw();
 	spriteYajirusi_->Draw();
 	spriteSousa_->Draw();
+	spriteChange_->Draw();
 }
 
 void GameSprite::ClearDraw()
