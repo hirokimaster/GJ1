@@ -93,6 +93,23 @@ void GameScene::Initialize()
 
 void GameScene::Update()
 {
+	// カメラの切り替え
+	if (Input::GetInstance()->PressedKey(DIK_RETURN) || Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_START)) {
+
+		switch (gameCamera_->GetCameraMode())
+		{
+		case CameraMode::FRONT:
+			gameCamera_->SetCameraMode(CameraMode::HIGH);
+			break;
+		case CameraMode::HIGH:
+			gameCamera_->SetCameraMode(CameraMode::SIDE);
+			break;
+		case CameraMode::SIDE:
+			gameCamera_->SetCameraMode(CameraMode::FRONT);
+			break;
+		}
+	}
+
 	gameCamera_->Update();
 #ifdef _DEBUG
 	if (tileMap_->IsEnemyAtFrontLine() || Input::GetInstance()->PressedKey(DIK_G)) {
@@ -189,7 +206,7 @@ void GameScene::PostProcessDraw()
 		gameSprite_->Draw();
 	}
 
-	player_->DrawUI(gameCamera_->GetCamera());
+	player_->DrawUI(gameCamera_->GetFrontCamera());
 	postEffect_->PostDraw();
 }
 
