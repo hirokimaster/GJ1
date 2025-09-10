@@ -42,4 +42,7 @@ private:
 
 	std::unique_ptr<Sprite> spriteNextStage_ = nullptr;
 	Vector2 spritePositionNextStage_{};
+
+	std::unique_ptr<Sprite> spriteClear_ = nullptr;
+	Vector2 spritePositionClear_{};
 };

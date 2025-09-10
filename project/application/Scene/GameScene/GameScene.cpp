@@ -198,5 +198,8 @@ void GameScene::LoadTextureFile()
 	TextureManager::Load("resources/UI/retry.png");
 	TextureManager::Load("resources/UI/next.png");
 	TextureManager::Load("resources/UI/backSelect.png");
+	TextureManager::Load("resources/UI/over.png");
+	TextureManager::Load("resources/UI/clear.png");
+	TextureManager::Load("resources/UI/sousa.png");
 }
 
