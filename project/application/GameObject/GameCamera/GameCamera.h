@@ -13,7 +13,7 @@ class GameCamera
 public:
 		void Init();
 		void Update();
-
+  
 		/// <summary>
 		/// カメラモードによって取ってくるカメラを変える
 		/// </summary>

@@ -3,7 +3,7 @@
 #include <string>
 #include <application/GameObject/Unit/Projectile/ProjectilePool.h>
 #include <application/GameObject/GridPosition/GridPosition.h>
-
+#include "application/GameObject/GameParticle/UnitDead/UnitDead.h"
 class TileMap;
 
 class BaseUnit : public BaseInstancingObject {
@@ -95,9 +95,14 @@ public:
 
 	TileMap* GetTileMap()const { return tileMap_; }
 
+	Vector3 GetPosition() const { return object_.lock()->worldTransform.translate; }
+
 	uint32_t GetTeamId() { return teamId_; }
 
 	uint32_t GetRoleId() { return roleId_; }
+
+	// 生きているか
+	bool IsAlive() { return isAlive_; }
 #pragma endregion
 
 #pragma region setter
@@ -129,6 +134,7 @@ public:
 		hpObject_.lock()->isAlive = false;
 	}
 
+	void SetIsAlive(const bool& isAlive) { isAlive_ = isAlive; }
 #pragma endregion
 
 protected:
@@ -153,4 +159,5 @@ protected:
 	// 参照用
 	TileMap* tileMap_ = nullptr; // マップ参照
 	ProjectilePool* projectilePool_ = nullptr; // 弾のプール
+	bool isAlive_ = true;
 };

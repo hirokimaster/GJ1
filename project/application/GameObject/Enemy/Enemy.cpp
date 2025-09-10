@@ -21,6 +21,29 @@ void Enemy::Update() {
 	SelectUnit();
 	for (auto& unit : units_) {
 		unit->Update();
+		if (!unit->IsAlive()) {
+			GPUParticle* particle = ParticleManager::GetInstance()->GetParticle("unitDeadParticle");
+			particle->SetPosition({
+				unit->GetPosition().x,
+				unit->GetPosition().y + 1.0f,
+				unit->GetPosition().z }
+				);
+			particle->SetColor(color_);
+			particle->SetIsActive(true);
+			particle->SetLifeTime(60);
+			deadUnits_.push_back(particle);
+		}
+	}
+
+	for (auto& deadUnit : deadUnits_) {
+		// particleの位置
+		if (deadUnit->GetIsDead()) {
+			deadUnit->SetIsActive(false);
+			deadUnit = nullptr;
+		}
+		else if (!deadUnit->GetIsDead()) {
+
+		}
 	}
 }
 
