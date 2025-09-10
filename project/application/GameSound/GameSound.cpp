@@ -24,7 +24,6 @@ void GameSound::Initialize()
 			}
 		}
 	}
-
 }
 
 void GameSound::SoundPlayBGM(std::string& name)
