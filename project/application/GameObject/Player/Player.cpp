@@ -38,7 +38,7 @@ void Player::Update() {
 	RoleChange();
 	selectObjectPosition_.x = camera_->translate.x - 4.0f;
 	selectObject_->SetPosition(selectObjectPosition_ );
-	if (Input::GetInstance()->PressedKey(DIK_P)) {
+	if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_A) || Input::GetInstance()->PressedKey(DIK_SPACE)) {
 		SpawnUnit();
 	}
 	for (auto& unit : units_) {
@@ -78,25 +78,25 @@ void Player::Update() {
 }
 
 void Player::SelectTile() {
-	if (Input::GetInstance()->PressedKey(DIK_D)) {
+	if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_DPAD_RIGHT) || Input::GetInstance()->PressedKey(DIK_D)) {		
 		// 参照の外じゃなかったら
 		if (tileMap_->GetMaxCol() - 1 > selectedTile_.x) {
 			selectedTile_.x += 1;
 		}
 	}
-	else if (Input::GetInstance()->PressedKey(DIK_A)) {
+	else if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_DPAD_LEFT) || Input::GetInstance()->PressedKey(DIK_A)) {
 		// 参照の外じゃなかったら
 		if (selectedTile_.x > 0) {
 			selectedTile_.x -= 1;
 		}
 	}
-	else if (Input::GetInstance()->PressedKey(DIK_W)) {
+	else if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_DPAD_UP) || Input::GetInstance()->PressedKey(DIK_W)) {
 		// 参照の外じゃなかったら
 		if (selectedTile_.y > 0) {
 			selectedTile_.y -= 1;
 		}
 	}
-	else if (Input::GetInstance()->PressedKey(DIK_S)) {
+	else if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_DPAD_DOWN) || Input::GetInstance()->PressedKey(DIK_S)) {
 		// 参照の外じゃなかったら
 		if (tileMap_->GetMaxRow() - 1 > selectedTile_.y) {
 			selectedTile_.y += 1;
@@ -182,14 +182,14 @@ bool Player::CanSpawnHere(int x, int y)
 
 void Player::SelectUnit()
 {
-	if (Input::GetInstance()->PressedKey(DIK_LEFT)) {
+	if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_LEFT_SHOULDER) || Input::GetInstance()->PressedKey(DIK_LEFT)) {
 		selectNum_ -= 1;
 		if (selectNum_ < -1) {
 			selectNum_ = 1; // 左端を超えたら右端へ
 		}
 		rotateY_ = std::numbers::pi_v<float>;
 	}
-	else if (Input::GetInstance()->PressedKey(DIK_RIGHT)) {
+	else if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_RIGHT_SHOULDER) || Input::GetInstance()->PressedKey(DIK_RIGHT)) {
 		selectNum_ += 1;
 		if (selectNum_ > 1) {
 			selectNum_ = -1; // 右端を超えたら左端へ
