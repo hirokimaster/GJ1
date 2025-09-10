@@ -31,6 +31,8 @@ private:
 
 	// 後で書き換えて
 	std::vector<std::unique_ptr<BaseUnit>> units_;
+	std::vector<GPUParticle*> deadUnits_; // 死亡ユニット
+	Vector4 color_{ 100.0f,0.0f,0.0f,1.0f }; // 選択タイルの色
 	ProjectilePool* projectilePool_ = nullptr;
 
 	int32_t selectNum_ = 0; // unit洗濯用の番号

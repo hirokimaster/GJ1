@@ -39,6 +39,8 @@ public: // Setter
 
 	void SetCamera(Camera* camera) { camera_ = camera; }
 
+public: // Getter
+	Vector4 GetColor() { return color_; }
 private:
 
 	/// <summary>
@@ -69,9 +71,10 @@ private:
 	TileMap* tileMap_;    // マップ参照
 	Camera* camera_;  // カメラ参照
 	Vector2 selectedTile_; // 現在選択中タイル
-
+	Vector4 color_{ 0.0f,0.0f,100.0f,1.0f }; // 選択タイルの色
 	// 後で書き換えて
 	std::vector<std::unique_ptr<BaseUnit>> units_;
+	std::vector<GPUParticle*> deadUnits_; // 死亡ユニット
 	int32_t selectNum_ = 0; // unit洗濯用の番号
 	ProjectilePool* projectilePool_ = nullptr;
 	std::unique_ptr<Object3dPlacer> selectObject_;
