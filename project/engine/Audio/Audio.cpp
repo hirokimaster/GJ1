@@ -104,6 +104,8 @@ void Audio::SoundPlayWave(uint32_t soundDataIndex)
 	buf.Flags = XAUDIO2_END_OF_STREAM;
 
 	result = pSourcevoice_[soundDataIndex]->SubmitSourceBuffer(&buf);
+	// ここで音量を 50% に固定
+	pSourcevoice_[soundDataIndex]->SetVolume(0.8f);
 	result = pSourcevoice_[soundDataIndex]->Start();
 
 	assert(SUCCEEDED(result));
@@ -120,13 +122,16 @@ void Audio::SoundPlayLoop(uint32_t soundDataIndex)
 	buf.pAudioData = soundData_[soundDataIndex].pBuffer;
 	buf.AudioBytes = soundData_[soundDataIndex].bufferSize;
 	buf.Flags = XAUDIO2_END_OF_STREAM;
-
+	
 	// ループできるように設定
 	buf.LoopBegin = 0;
 	buf.LoopLength = 0;
 	buf.LoopCount = XAUDIO2_LOOP_INFINITE;
 
 	result = pSourcevoice_[soundDataIndex]->SubmitSourceBuffer(&buf);
+
+	// ここで音量を 50% に固定
+	pSourcevoice_[soundDataIndex]->SetVolume(0.5f);
 	result = pSourcevoice_[soundDataIndex]->Start();
 
 	assert(SUCCEEDED(result));
