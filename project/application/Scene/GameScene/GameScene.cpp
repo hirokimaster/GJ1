@@ -191,6 +191,7 @@ void GameScene::Draw()
 {
 	postEffect_->Draw();
 	particleManager_->Draw(gameCamera_->GetCamera());
+	player_->DrawUI(gameCamera_->GetFrontCamera());
 }
 
 void GameScene::PostProcessDraw()
@@ -211,7 +212,7 @@ void GameScene::PostProcessDraw()
 		gameSprite_->Draw();
 	}
 
-	player_->DrawUI(gameCamera_->GetFrontCamera());
+	
 	postEffect_->PostDraw();
 }
 
