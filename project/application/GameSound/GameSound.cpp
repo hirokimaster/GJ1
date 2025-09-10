@@ -3,8 +3,6 @@
 
 void GameSound::Initialize()
 {
-	// audioの初期化
-	GameSound::GetInstance()->audio_->Initialize();
 	// Soundフォルダ内全てのデータを読む
 	std::filesystem::path dir("resources/Sound/");
 	if (std::filesystem::exists(dir)) {
