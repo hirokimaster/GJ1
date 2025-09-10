@@ -1,7 +1,7 @@
 #include "BaseUnit.h"
 #include "application/GameObject/TileMap/TileMap.h"
 #include "engine/Graphics/Effects/Particle/ParticleManager.h"
-
+#include "application/GameSound/GameSound.h"
 
 void BaseUnit::CreateObject(const std::string& modelName, const std::string& textureName)
 {
@@ -56,6 +56,7 @@ void BaseUnit::Update() {
 		hpObject_.lock()->isAlive = false;
 		weaponObject_.lock()->isAlive = false;
 		isAlive_ = false;
+		GameSound::SoundPlaySE("dead2");
 		// 前フレームにとったタイルの色を役職ではなく自チームにする
 		if (tileMap_->GetTileMap(gridPosition_.x, gridPosition_.z) == roleId_) {
 			tileMap_->SetTileMap(gridPosition_.x, gridPosition_.z, teamId_);
