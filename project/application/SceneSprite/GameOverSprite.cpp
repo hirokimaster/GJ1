@@ -19,11 +19,6 @@ void GameOverSprite::Initialize()
 	spriteRetry_->SetAnchorPoint({ 0.5f,0.5f });
 	spriteRetry_->SetColor({ 1.0f,0.3f,1.0f,1.0f });
 
-	spritePositionOver_ = { 640, 360 };
-	spriteOver_.reset(Sprite::Create(TextureManager::GetTexHandle("UI/over.png"), spritePositionOver_));
-	spriteOver_->SetAnchorPoint({ 0.5f,0.5f });
-	spriteOver_->SetColor({ 1.0f,1.0f,1.0f,1.0f });
-
 }
 
 void GameOverSprite::Update()
@@ -34,7 +29,6 @@ void GameOverSprite::Draw()
 {
 	spriteReturnSelect_->Draw();
 	spriteRetry_->Draw();
-	spriteOver_->Draw();
 }
 
 void GameOverSprite::AddAdjustmentVariables()

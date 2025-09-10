@@ -67,9 +67,6 @@ private:
 	std::unique_ptr<Sprite> spriteYajirusi_ = nullptr;
 	Vector2 spriteYajirusiPositionGame_{};
 
-	std::unique_ptr<Sprite> spriteSousa_ = nullptr;
-	Vector2 spriteSousaPositionGame_{};
-
 	uint32_t numHandle_ = 0;
 };
 

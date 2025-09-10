@@ -61,7 +61,7 @@ void SelectScene::Update()
 	camera_.UpdateMatrix();
 
 	// SPACEボタンが押されたらシーン遷移処理を開始する
-	if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_A) || Input::GetInstance()->PressedKey(DIK_SPACE)) {
+	if (Input::GetInstance()->PressedKey(DIK_SPACE)) {
 		if (!isTransition_) {// シーン遷移がまだ始まっていない場合のみ
 			isTransition_ = true;
 			transition_ = std::make_unique<FadeIn>();
@@ -72,7 +72,7 @@ void SelectScene::Update()
 		}
 	}
 	// RETURNボタンが押されたらシーン遷移処理を開始する
-	else if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_B) || Input::GetInstance()->PressedKey(DIK_RETURN)) {
+	else if (Input::GetInstance()->PressedKey(DIK_RETURN)) {
 		if (!isTransition_) {// シーン遷移がまだ始まっていない場合のみ
 			isTransition_ = true;
 			transition_ = std::make_unique<FadeIn>();
@@ -130,7 +130,7 @@ void SelectScene::StageSelect()
 	if (inputWaitTime_ >= maxInputWaitTime_) {
 		inputWaitTime_ = maxInputWaitTime_; // 入力待機時間の上限を設定
 	}
-	if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_DPAD_RIGHT) || Input::GetInstance()->PressedKey(DIK_RIGHT) && inputWaitTime_ >= maxInputWaitTime_) {
+	if (Input::GetInstance()->PressedKey(DIK_RIGHT) && inputWaitTime_ >= maxInputWaitTime_) {
 		inputWaitTime_ = 0.0f; // 入力待機時間をリセット
 		selectedStageNum_++; // ステージ番号をインクリメント
 		// ステージ番号の上限をチェック
@@ -138,7 +138,7 @@ void SelectScene::StageSelect()
 			selectedStageNum_--; // ステージ番号が最大値を超えないようにする
 		}
 	}
-	else if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_DPAD_LEFT) || Input::GetInstance()->PressedKey(DIK_LEFT) && inputWaitTime_ >= maxInputWaitTime_) {
+	else if (Input::GetInstance()->PressedKey(DIK_LEFT) && inputWaitTime_ >= maxInputWaitTime_) {
 		inputWaitTime_ = 0.0f; // 入力待機時間をリセット
 		selectedStageNum_--; // ステージ番号をデクリメント
 		// ステージ番号の下限をチェック

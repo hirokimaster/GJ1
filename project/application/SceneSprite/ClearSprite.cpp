@@ -23,11 +23,6 @@ void ClearSprite::Initialize()
 	spriteNextStage_.reset(Sprite::Create(TextureManager::GetTexHandle("UI/next.png"), spritePositionNextStage_));
 	spriteNextStage_->SetAnchorPoint({ 0.5f,0.5f });
 	spriteNextStage_->SetColor({ 1.0f,1.0f,0.3f,1.0f });
-
-	spritePositionClear_ = { 640, 360 };
-	spriteClear_.reset(Sprite::Create(TextureManager::GetTexHandle("UI/clear.png"), spritePositionClear_));
-	spriteClear_->SetAnchorPoint({ 0.5f,0.5f });
-	spriteClear_->SetColor({ 1.0f,1.0f,1.0f,1.0f });
 }
 
 void ClearSprite::Update()
@@ -38,7 +33,6 @@ void ClearSprite::Draw()
 {
 	spriteReturnSelect_->Draw();
 	spriteNextStage_->Draw();
-	spriteClear_->Draw();
 }
 
 void ClearSprite::AddAdjustmentVariables()

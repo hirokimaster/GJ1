@@ -38,7 +38,4 @@ private:
 
 	std::unique_ptr<Sprite> spriteRetry_ = nullptr;
 	Vector2 spritePositionRetry_{};
-
-	std::unique_ptr<Sprite> spriteOver_ = nullptr;
-	Vector2 spritePositionOver_{};
 };
