@@ -1,7 +1,7 @@
 #include "Swordsman.h"
 #include "engine/Input/Input.h"
 #include "application/GameObject/TileMap/TileMap.h"
-
+#include "application/GameSound/GameSound.h"
 void Swordsman::Initialize(Vector2 pos) {
 	// 本体のmodel、テクスチャのロード
 	TextureManager::Load("resources/Unit/sword/ken.png");
@@ -91,6 +91,7 @@ void Swordsman::Attack()
 			sword->SetRoleId(roleId_); // 役職ID
 			sword->SetColor(object_.lock()->color); // 色
 			sword->SetVelocity(attackVelocity_); // 速度
+			GameSound::SoundPlaySE("sword2");
 		}
 		attackTimer_ = 0;
 	}
@@ -196,6 +197,7 @@ void Swordsman::CheckAttackHit()
 					else {
 						hp_ -= 50;
 					}
+					GameSound::SoundPlaySE("shotHit");
 					projectile->Deactivate();
 	
 				}
@@ -231,6 +233,7 @@ void Swordsman::CheckAttackHit()
 					else {
 						hp_ -= 50;
 					}
+					GameSound::SoundPlaySE("shotHit");
 					projectile->Deactivate();
 
 				}
@@ -242,6 +245,7 @@ void Swordsman::CheckAttackHit()
 					else {
 						hp_ -= 50;
 					}
+
 					projectile->Deactivate();
 
 				}

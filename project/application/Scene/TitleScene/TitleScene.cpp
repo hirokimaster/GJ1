@@ -64,6 +64,7 @@ void TitleScene::Update()
 			transition_->Initialize();
 			GameManager::GetInstance()->SetSceneTransition(transition_.get());
 			GameManager::GetInstance()->ChangeScene("SELECT");
+			GameSound::SoundPlaySE("push");
 		}
 	}
 	skydome_->Update();

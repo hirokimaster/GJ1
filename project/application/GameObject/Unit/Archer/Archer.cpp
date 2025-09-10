@@ -1,6 +1,6 @@
 #include "Archer.h"
 #include "application/GameObject/TileMap/TileMap.h"
-
+#include "application/GameSound/GameSound.h"
 void Archer::Initialize(Vector2 pos) {
 
 	// object生成
@@ -83,6 +83,7 @@ void Archer::Attack()
 			arrow->SetTeamId(teamId_); // チームID
 			arrow->SetRoleId(roleId_); // 役職ID
 			arrow->SetVelocity(attackVelocity_); // 速度
+			GameSound::SoundPlaySE("shot");
 		}
 		shotTimer_ = 0;
 
@@ -201,6 +202,7 @@ void Archer::CheckAttackHit()
 					else {
 						hp_ -= 50;
 					}
+					GameSound::SoundPlaySE("shotHit");
 					projectile->Deactivate();
 
 				}
@@ -236,6 +238,7 @@ void Archer::CheckAttackHit()
 					else {
 						hp_ -= 50;
 					}
+					GameSound::SoundPlaySE("shotHit");
 					projectile->Deactivate();
 
 				}

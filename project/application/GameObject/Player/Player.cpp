@@ -5,6 +5,7 @@
 #include "engine/Graphics/TextureManager/TextureManager.h"
 #include <application/GameObject/Unit/Projectile/ProjectilePool.h>
 #include <application/GameObject/Unit/Archer/Archer.h>
+#include "application/GameSound/GameSound.h"
 void Player::Init() {
 	// 調整項目
 	AddAdjustmentVariables();
@@ -94,6 +95,7 @@ void Player::SelectTile() {
 		// 参照の外じゃなかったら
 		if (selectedTile_.y > 0) {
 			selectedTile_.y -= 1;
+
 		}
 	}
 	else if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_DPAD_DOWN) || Input::GetInstance()->PressedKey(DIK_S)) {
