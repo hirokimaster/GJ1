@@ -17,4 +17,5 @@ void SharedGameData::LoadFromJson(const std::string& filePath) {
 
     stageId = j.value("stageId", 0);
     maxUnitCount = j.value("maxUnitCount", 0);
+    bgmFile = j.value("bgmFile", ""); // ← 読み込み
 }

@@ -21,19 +21,19 @@ public:
 	/// bgm再生
 	/// </summary>
 	/// <param name="name"></param>
-	static void SoundPlayBGM(std::string& name);
+	static void SoundPlayBGM(const std::string& name);
 
 	/// <summary>
 	/// se再生
 	/// </summary>
 	/// <param name="name"></param>
-	static void SoundPlaySE(std::string& name);
+	static void SoundPlaySE(const std::string& name);
 
 	/// <summary>
 	/// 消す
 	/// </summary>
 	/// <param name="name"></param>
-	static void SoundStop(std::string& name);
+	static void SoundStop(const std::string& name);
 
 private:
 
@@ -41,7 +41,7 @@ private:
 #pragma region getter
 
 	static uint32_t GetHandle(const std::string& name) {
-		std::string path = "resources/Sound/" + name;
+		std::string path = name;
 		auto it = GameSound::GetInstance()->handleMap_.find(path);
 		if (it == GameSound::GetInstance()->handleMap_.end()) {
 			// ファイル名が存在しない場合

@@ -1,5 +1,6 @@
 {
   "stageId": 2,
-  "maxUnitCount": 2
+  "maxUnitCount": 2,
+  "bgmFile": "arashinokoukai"
 }
 

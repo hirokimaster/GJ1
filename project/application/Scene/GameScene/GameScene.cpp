@@ -7,6 +7,7 @@
 #include "GameScene.h"
 #include "engine/3d/ObjectManager/ObjectManager.h"
 #include "application/GameObject/SharedGameData/SharedGameData.h"
+#include "application/GameSound/GameSound.h"
 GameScene::GameScene()
 {
 }
@@ -86,6 +87,8 @@ void GameScene::Initialize()
 	// エフェクト
 	sceneEffect_ = std::make_unique<SceneEffect>();
 	sceneEffect_->Initialize();
+
+	
 }
 
 void GameScene::Update()
@@ -105,6 +108,8 @@ void GameScene::Update()
 		transition_ = std::make_unique<FadeIn>();
 		transition_->Initialize();
 		GameManager::GetInstance()->SetSceneTransition(transition_.get());
+		GameSound::SoundStop(SharedGameData::GetInstance()->GetBGMFile());
+		GameSound::SoundPlayBGM("tittle");
 		GameManager::GetInstance()->ChangeScene("SELECT");
 	}
 	else if (isGameClear && (!isTransitionClear_)) {
@@ -113,7 +118,8 @@ void GameScene::Update()
 			transition_ = std::make_unique<FadeIn>();
 			transition_->Initialize();
 			GameManager::GetInstance()->SetSceneTransition(transition_.get());
-
+			// 次のステージへいく前にBGM止める
+			GameSound::SoundStop(SharedGameData::GetInstance()->GetBGMFile());
 			int nextStage = SharedGameData::GetInstance()->GetStageId() + 1;
 			SharedGameData::GetInstance()->LoadFromJson(
 				"Resources/stage/json/stage" + std::to_string(nextStage) + ".json"
@@ -128,6 +134,7 @@ void GameScene::Update()
 			transition_->Initialize();
 			GameManager::GetInstance()->SetSceneTransition(transition_.get());
 			GameManager::GetInstance()->ChangeScene("SELECT");
+			GameSound::SoundStop(SharedGameData::GetInstance()->GetBGMFile());
 		}
 
 	}
@@ -161,13 +168,14 @@ void GameScene::Update()
 void GameScene::Draw()
 {
 	postEffect_->Draw();
+	particleManager_->Draw(gameCamera_->GetCamera());
 }
 
 void GameScene::PostProcessDraw()
 {
 	postEffect_->PreDraw();
 	ObjectManager::GetInstance()->Draw(gameCamera_->GetCamera());
-	particleManager_->Draw(gameCamera_->GetCamera());
+	
 #ifdef _DEBUG
 	ParticleEditor::GetInstance()->Draw(gameCamera_->GetCamera());
 #endif // _DEBUG

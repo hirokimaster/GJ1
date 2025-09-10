@@ -1,6 +1,7 @@
 #include "SelectScene.h"
 
 #include "application/GameObject/SharedGameData/SharedGameData.h"
+#include "application/GameSound/GameSound.h"
 SelectScene::SelectScene()
 {
 }
@@ -54,6 +55,8 @@ void SelectScene::Initialize()
 	// エフェクト
 	sceneEffect_ = std::make_unique<SceneEffect>();
 	sceneEffect_->Initialize();
+
+	
 }
 
 void SelectScene::Update()
@@ -69,6 +72,8 @@ void SelectScene::Update()
 			SharedGameData::GetInstance()->LoadFromJson("Resources/stage/json/stage" + std::to_string(selectedStageNum_ + 1) + ".json");
 			GameManager::GetInstance()->SetSceneTransition(transition_.get());
 			GameManager::GetInstance()->ChangeScene("GAME");
+			GameSound::SoundStop("tittle");
+			GameSound::SoundPlayBGM(SharedGameData::GetInstance()->GetBGMFile());
 		}
 	}
 	// RETURNボタンが押されたらシーン遷移処理を開始する
@@ -79,6 +84,7 @@ void SelectScene::Update()
 			transition_->Initialize();
 			GameManager::GetInstance()->SetSceneTransition(transition_.get());
 			GameManager::GetInstance()->ChangeScene("TITLE");
+			GameSound::SoundStop("tittle");
 		}
 	}
 
@@ -99,6 +105,7 @@ void SelectScene::Draw()
 {
 
 	postEffect_->Draw();
+	particleManager_->Draw(camera_);
 }
 
 void SelectScene::PostProcessDraw()
@@ -108,7 +115,7 @@ void SelectScene::PostProcessDraw()
 	for (auto& selectStage : selectStages_) {
 		selectStage->Draw();
 	}
-	particleManager_->Draw(camera_);
+	
 #ifdef _DEBUG
 	ParticleEditor::GetInstance()->Draw(camera_);
 #endif // _DEBUG

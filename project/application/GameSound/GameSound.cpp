@@ -17,26 +17,27 @@ void GameSound::Initialize()
 				}
 				else {
 					// 新しくロード
-					GameSound::GetInstance()->handleMap_[name] = GameSound::GetInstance()->audio_->SoundLoadWave(name.c_str());
+					std::string fullpath = entry.path().string();
+					GameSound::GetInstance()->handleMap_[name] = GameSound::GetInstance()->audio_->SoundLoadWave(fullpath.c_str());
 				}
 			}
 		}
 	}
 }
 
-void GameSound::SoundPlayBGM(std::string& name)
+void GameSound::SoundPlayBGM(const std::string& name)
 {
 	// ループ再生
 	GameSound::GetInstance()->audio_->SoundPlayLoop(GetHandle(name));
 }
 
-void GameSound::SoundPlaySE(std::string& name)
+void GameSound::SoundPlaySE(const std::string& name)
 {
 	// 一度再生
 	GameSound::GetInstance()->audio_->SoundPlayWave(GetHandle(name));
 }
 
-void GameSound::SoundStop(std::string& name)
+void GameSound::SoundStop(const std::string& name)
 {
 	// 止める
 	GameSound::GetInstance()->audio_->SoundPlayStop(GetHandle(name));

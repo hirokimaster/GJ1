@@ -18,6 +18,8 @@ public: // Getter
 	void SetStageId(uint32_t id) { stageId = id; }
 	uint32_t GetMaxUnitCount() const { return maxUnitCount; } // 最大配置可能ユニット数取得
 
+	std::string GetBGMFile() const { return bgmFile; } // ← 追加
+
 	// JSONからロード
 	void LoadFromJson(const std::string& filePath);
 private:
@@ -26,5 +28,6 @@ private:
 	// ステージ番号やプレイヤー共通データ
 	uint32_t stageId = 0; // ステージ番号
 	uint32_t maxUnitCount = 0; /// 最大配置可能ユニット数
+	std::string bgmFile;   // ← 追加
 
 };

@@ -13,7 +13,7 @@ void Skydome::Init()
 	BaseIndividualObject::Initialize("Skydome/skydome.obj", "TempTexture/white2.png", ColliderType::AABB);
 	object_.lock()->SetEnableLighting(false);
 	object_.lock()->SetScale({ 150.0f,150.0f,150.0f });
-	object_.lock()->SetColor({0.6f,0.6f,0.6f,1.0f});
+	object_.lock()->SetColor({0.55f,0.55f,0.55f,1.0f});
 
 }
 

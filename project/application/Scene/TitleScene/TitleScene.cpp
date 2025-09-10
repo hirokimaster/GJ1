@@ -6,6 +6,7 @@
 
 #include "TitleScene.h"
 #include "engine/3d/ObjectManager/ObjectManager.h"
+#include "application/GameSound/GameSound.h"
 TitleScene::TitleScene()
 {
 
@@ -50,6 +51,7 @@ void TitleScene::Initialize()
 	// スカイドーム
 	skydome_ = std::make_unique<Skydome>();
 	skydome_->Init();
+	GameSound::SoundPlayBGM("tittle");
 }
 
 void TitleScene::Update()
@@ -74,13 +76,14 @@ void TitleScene::Update()
 void TitleScene::Draw()
 {
 	postEffect_->Draw();
+	particleManager_->Draw(gameCamera_->GetCamera());
 }
 
 void TitleScene::PostProcessDraw()
 {
 	postEffect_->PreDraw();
 	ObjectManager::GetInstance()->Draw(gameCamera_->GetCamera());
-	particleManager_->Draw(gameCamera_->GetCamera());
+
 	titleSprite_->Draw();
 #ifdef _DEBUG
 	ParticleEditor::GetInstance()->Draw(gameCamera_->GetCamera());
@@ -88,6 +91,7 @@ void TitleScene::PostProcessDraw()
 	
 
 	postEffect_->PostDraw();
+	
 }
 
 void TitleScene::LoadTextureFile()
