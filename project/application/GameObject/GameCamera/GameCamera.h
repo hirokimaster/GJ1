@@ -1,18 +1,41 @@
 #pragma once
 #include "engine/Graphics/Camera/Camera.h"
 #include "application/GameObject/TileMap/TileMap.h"
+
+enum class CameraMode {
+	FRONT,
+	HIGH,
+	SIDE
+};
+
 class GameCamera
 {
 public:
 		void Init();
 		void Update();
-		Camera &GetCamera() { return camera_; }
+  
+		/// <summary>
+		/// カメラモードによって取ってくるカメラを変える
+		/// </summary>
+		/// <returns></returns>
+		Camera& GetCamera() { 
+			switch (mode_) {
+			case CameraMode::FRONT: return frontCamera_;
+			case CameraMode::HIGH:  return highCamera_;
+			case CameraMode::SIDE:  return sideCamera_;
+			}
+			return frontCamera_;
+		}
 
 		void DebugCamera();
 public:
 	void SetTileMap(TileMap* tileMap) { tileMap_ = tileMap; }
+	void SetCameraMode(CameraMode mode) { mode_ = mode; }
 private:
-	Camera camera_;
+	Camera frontCamera_; // 正面
+	Camera highCamera_;	 // 真上
+	Camera sideCamera_;	 // 横
 	TileMap* tileMap_ = nullptr;
+	CameraMode mode_ = CameraMode::FRONT; // 初期は正面
 };
 
