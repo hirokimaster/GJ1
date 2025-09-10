@@ -61,7 +61,7 @@ void SelectScene::Update()
 	camera_.UpdateMatrix();
 
 	// SPACEボタンが押されたらシーン遷移処理を開始する
-	if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_A) || Input::GetInstance()->PressedKey(DIK_SPACE)) {
+	if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_A) || Input::GetInstance()->PressedKey(DIK_A)) {
 		if (!isTransition_) {// シーン遷移がまだ始まっていない場合のみ
 			isTransition_ = true;
 			transition_ = std::make_unique<FadeIn>();
