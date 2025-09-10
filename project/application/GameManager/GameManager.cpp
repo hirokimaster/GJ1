@@ -7,6 +7,7 @@
 #include "GameManager.h"
 #include "application/Scene/GameScene/GameScene.h"
 #include <cassert>
+#include <application/GameSound/GameSound.h>
 
 GameManager* GameManager::GetInstance()
 {
@@ -28,6 +29,7 @@ void GameManager::Update() {
 		AdjustmentVariables::GetInstance()->LoadFiles();
 		ObjectManager::GetInstance()->Initialize();
 		ParticleEditor::GetInstance()->LoadFiles();
+		GameSound::Initialize();
 
 		scene_->Initialize();
 

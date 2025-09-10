@@ -119,6 +119,7 @@ copy "$(WindowsSdkdir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="application\GameObject\Unit\Projectile\Projectile.cpp" />
     <ClCompile Include="application\GameObject\Unit\Projectile\ProjectilePool.cpp" />
     <ClCompile Include="application\GameObject\Unit\Warrior\Warrior.cpp" />
+    <ClCompile Include="application\GameSound\GameSound.cpp" />
     <ClCompile Include="application\SceneSprite\ClearSprite.cpp" />
     <ClCompile Include="application\SceneSprite\GameOverSprite.cpp" />
     <ClCompile Include="application\SceneSprite\GameSprite.cpp" />
@@ -205,6 +206,7 @@ copy "$(WindowsSdkdir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="application\GameObject\Unit\Projectile\ProjectilePool.h" />
     <ClInclude Include="application\GameObject\Unit\UnitFactory.h" />
     <ClInclude Include="application\GameObject\Unit\Warrior\Warrior.h" />
+    <ClInclude Include="application\GameSound\GameSound.h" />
     <ClInclude Include="application\SceneSprite\ClearSprite.h" />
     <ClInclude Include="application\SceneSprite\GameOverSprite.h" />
     <ClInclude Include="application\SceneSprite\GameSprite.h" />
