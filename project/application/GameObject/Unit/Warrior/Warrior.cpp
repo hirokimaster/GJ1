@@ -13,7 +13,7 @@ void Warrior::Initialize(Vector2 pos) {
 	attackVelocity_ = { 0.0f,0.1f,0.1f };
 
 	// weponのmodel、テクスチャのロード
-
+	moveVelo = 1;
 	// weapon生成
 	weaponObject_ = ObjectManager::GetInstance()->CreateInstancingObject("Unit/gardian/tatedake.obj", TextureManager::GetTexHandle("Unit/sword/ken.png"));
 	weaponObject_.lock()->worldTransform.parent = &object_.lock()->worldTransform;
@@ -165,14 +165,15 @@ void Warrior::Move()
 {
 	int selfY = static_cast<int>(object_.lock()->worldTransform.translate.z / 2);
 	int targetY = tileMap_->GetMaxRow() - 1 - selfY; // CSVの可読性を上げるために奥が0行目のため修正
-	moveTimer_++;
-	if (moveTimer_ >= 240) {
+	moveTimer_+= moveVelo;
+	if (moveTimer_ >= 360) {
 		if (targetY < tileMap_->GetMaxRow() - 1 && teamId_ == TileMode::RED) {
 			object_.lock()->worldTransform.translate.z += velocity_.y;
 		}
 		else if (targetY > 0 && teamId_ == TileMode::BLUE) {
 			object_.lock()->worldTransform.translate.z += velocity_.y;
 		}
+		moveVelo = 4 ;
 		moveTimer_ = 0;
 	}
 }

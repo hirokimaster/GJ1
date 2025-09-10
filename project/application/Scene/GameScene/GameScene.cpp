@@ -128,6 +128,7 @@ void GameScene::Update()
 		GameSound::SoundStop(SharedGameData::GetInstance()->GetBGMFile());
 		GameSound::SoundPlayBGM("tittle");
 		GameManager::GetInstance()->ChangeScene("SELECT");
+		GameSound::SoundPlaySE("push");
 	}
 	else if (isGameClear && (!isTransitionClear_)) {
 		if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_Y) || Input::GetInstance()->PressedKey(DIK_B)) {
@@ -144,6 +145,7 @@ void GameScene::Update()
 			SharedGameData::GetInstance()->SetStageId(nextStage); // 管理用に更新
 			GameSound::SoundPlayBGM(SharedGameData::GetInstance()->GetBGMFile());
 			GameManager::GetInstance()->ChangeScene("GAME");
+			GameSound::SoundPlaySE("push");
 		}
 		else if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_X) || Input::GetInstance()->PressedKey(DIK_S)) {
 			// Bキーでセレクトに戻る (あとで変えて)
@@ -153,6 +155,7 @@ void GameScene::Update()
 			GameManager::GetInstance()->SetSceneTransition(transition_.get());
 			GameManager::GetInstance()->ChangeScene("SELECT");
 			GameSound::SoundStop(SharedGameData::GetInstance()->GetBGMFile());
+			GameSound::SoundPlaySE("push");
 		}
 
 	}
@@ -162,6 +165,7 @@ void GameScene::Update()
 		transition_->Initialize();
 		GameManager::GetInstance()->SetSceneTransition(transition_.get());
 		GameManager::GetInstance()->ChangeScene("GAME");
+		GameSound::SoundPlaySE("push");
 		return;
 	}
 
