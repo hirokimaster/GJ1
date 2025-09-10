@@ -6,7 +6,7 @@ class GameCamera
 public:
 		void Init();
 		void Update();
-		Camera GetCamera() { return camera_; }
+		Camera &GetCamera() { return camera_; }
 
 		void DebugCamera();
 public:

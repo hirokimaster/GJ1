@@ -36,6 +36,8 @@ void Player::Update() {
 	DebugDraw();
 	SelectUnit();
 	RoleChange();
+	selectObjectPosition_.x = camera_->translate.x - 4.0f;
+	selectObject_->SetPosition(selectObjectPosition_ );
 	if (Input::GetInstance()->PressedKey(DIK_P)) {
 		SpawnUnit();
 	}

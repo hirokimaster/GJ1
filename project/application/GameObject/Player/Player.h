@@ -4,6 +4,7 @@
 #include "application/GameObject/Unit/BaseUnit.h"
 #include <application/GameObject/Unit/UnitFactory.h>
 #include <application/AdjustmentVariables/AdjustmentVariables.h>
+#include "engine/Graphics/Camera/Camera.h"
 
 class Player : BaseIndividualObject
 {
@@ -36,6 +37,8 @@ public: // Setter
 
 	void SetSelectTile(const Vector2& pos) { selectedTile_ = pos; MoveSelectTile(); }
 
+	void SetCamera(Camera* camera) { camera_ = camera; }
+
 private:
 
 	/// <summary>
@@ -64,6 +67,7 @@ private:
 	int roleId_ = TileMode::BLUE_ARCHER;
 
 	TileMap* tileMap_;    // マップ参照
+	Camera* camera_;  // カメラ参照
 	Vector2 selectedTile_; // 現在選択中タイル
 
 	// 後で書き換えて
