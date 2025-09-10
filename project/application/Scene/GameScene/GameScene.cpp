@@ -142,6 +142,7 @@ void GameScene::Update()
 				"Resources/stage/json/stage" + std::to_string(nextStage) + ".json"
 			);
 			SharedGameData::GetInstance()->SetStageId(nextStage); // 管理用に更新
+			GameSound::SoundPlayBGM(SharedGameData::GetInstance()->GetBGMFile());
 			GameManager::GetInstance()->ChangeScene("GAME");
 		}
 		else if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_X) || Input::GetInstance()->PressedKey(DIK_S)) {
