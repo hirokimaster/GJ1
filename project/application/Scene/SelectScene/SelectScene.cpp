@@ -73,6 +73,7 @@ void SelectScene::Update()
 			GameManager::GetInstance()->SetSceneTransition(transition_.get());
 			GameManager::GetInstance()->ChangeScene("GAME");
 			GameSound::SoundStop("tittle");
+			GameSound::SoundPlaySE("push");
 			GameSound::SoundPlayBGM(SharedGameData::GetInstance()->GetBGMFile());
 		}
 	}
@@ -85,6 +86,7 @@ void SelectScene::Update()
 			GameManager::GetInstance()->SetSceneTransition(transition_.get());
 			GameManager::GetInstance()->ChangeScene("TITLE");
 			GameSound::SoundStop("tittle");
+			GameSound::SoundPlaySE("push");
 		}
 	}
 
@@ -144,6 +146,7 @@ void SelectScene::StageSelect()
 		if (selectedStageNum_ == maxStageNum_) {
 			selectedStageNum_--; // ステージ番号が最大値を超えないようにする
 		}
+		GameSound::SoundPlaySE("select");
 	}
 	else if (Input::GetInstance()->PressedKey(DIK_LEFT) && inputWaitTime_ >= maxInputWaitTime_) {
 		inputWaitTime_ = 0.0f; // 入力待機時間をリセット
@@ -152,5 +155,6 @@ void SelectScene::StageSelect()
 		if (selectedStageNum_ < 0) {
 			selectedStageNum_ = 0; // ステージ番号が負にならないようにする
 		}
+		GameSound::SoundPlaySE("select");
 	}
 }

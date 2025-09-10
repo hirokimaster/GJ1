@@ -1,7 +1,7 @@
 #include "Warrior.h"
 #include "application/GameObject/TileMap/TileMap.h"
 #include "engine/Input/Input.h"
-
+#include "application/GameSound/GameSound.h"
 void Warrior::Initialize(Vector2 pos) {
 	TextureManager::Load("resources/Unit/Archer/ken.png");
 	// object生成
@@ -94,6 +94,7 @@ void Warrior::Attack()
 			shield->SetTeamId(teamId_); // チームID
 			shield->SetRoleId(roleId_); // 役職ID
 			shield->SetVelocity(attackVelocity_); // 速度
+			GameSound::SoundPlaySE("shield");
 	
 		}
 		attackTimer_ = 0;
@@ -202,6 +203,7 @@ void Warrior::CheckAttackHit()
 					else {
 						hp_ -= 10;
 					}
+					GameSound::SoundPlaySE("shotHit");
 					projectile->Deactivate();
 
 				}
@@ -214,6 +216,7 @@ void Warrior::CheckAttackHit()
 					else {
 						hp_ -= 50;
 					}
+
 					projectile->Deactivate();
 
 				}
@@ -238,7 +241,7 @@ void Warrior::CheckAttackHit()
 					else {
 						hp_ -= 10;
 					}
-					
+					GameSound::SoundPlaySE("shotHit");
 					projectile->Deactivate();
 
 				}
