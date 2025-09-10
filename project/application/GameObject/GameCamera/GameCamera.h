@@ -27,6 +27,12 @@ public:
 			return frontCamera_;
 		}
 
+		Camera& GetFrontCamera() {
+			return frontCamera_;
+		}
+
+		const CameraMode& GetCameraMode()const { return mode_; }
+
 		void DebugCamera();
 public:
 	void SetTileMap(TileMap* tileMap) { tileMap_ = tileMap; }
