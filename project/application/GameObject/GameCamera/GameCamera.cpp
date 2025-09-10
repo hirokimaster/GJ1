@@ -14,7 +14,7 @@ void GameCamera::Init()
 
 	// 横
 	sideCamera_.Initialize();
-	sideCamera_.translate = { 20.0f, 5.0f, 0.0f };
+	sideCamera_.translate = { -25.0f, 11.0f, 0.0f };
 	sideCamera_.rotate = { 0.3f, std::numbers::pi_v<float> /2.0f, 0.0f };
 }
 
@@ -23,8 +23,6 @@ void GameCamera::Update()
 	// デバッグカメラ
 
 	DebugCamera();
-
-	float centerPosX = tileMap_->GetMaxCol() * 2.0f / 2.0f - 1.0f;
 
 	// マップサイズ
 	float tileWidth = 2.0f; // タイル1枚の幅
@@ -42,7 +40,7 @@ void GameCamera::Update()
 	switch (mode_)
 	{
 	case CameraMode::FRONT:
-		frontCamera_.translate.x = centerPosX;
+		frontCamera_.translate.x = centerX;
 		frontCamera_.UpdateMatrix();
 		break;
 	case CameraMode::HIGH:
@@ -51,7 +49,7 @@ void GameCamera::Update()
 		break;
 									    
 	case CameraMode::SIDE:
-		sideCamera_.translate = { -mapWidth - 15.0f, mapWidth + 2.2f, centerZ }; // X負側に離す、Y少し高め
+		sideCamera_.translate.z = centerZ;
 		sideCamera_.UpdateMatrix();
 		break;
 
