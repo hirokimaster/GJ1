@@ -118,6 +118,8 @@
     <ClCompile Include="application\GameObject\Unit\Projectile\Shield\Shield.cpp" />
     <ClCompile Include="application\GameObject\SharedGameData\SharedGameData.cpp" />
     <ClCompile Include="application\GameObject\GameParticle\SceneEffect\SceneEffect.cpp" />
+    <ClCompile Include="application\GameObject\GameParticle\UnitDead\UnitDead.cpp" />
+    <ClCompile Include="application\GameSound\GameSound.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="application\AdjustmentVariables\AdjustmentVariables.h" />
@@ -216,6 +218,8 @@
     <ClInclude Include="application\GameObject\Unit\Projectile\Shield\Shield.h" />
     <ClInclude Include="application\GameObject\SharedGameData\SharedGameData.h" />
     <ClInclude Include="application\GameObject\GameParticle\SceneEffect\SceneEffect.h" />
+    <ClInclude Include="application\GameObject\GameParticle\UnitDead\UnitDead.h" />
+    <ClInclude Include="application\GameSound\GameSound.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\ShaderFile\Object3d.hlsli" />
